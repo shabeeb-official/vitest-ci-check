@@ -1,0 +1,162 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Chat Interface",
+  "description": "A chat interface layout with header, message list, and input section.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "name": "Chat Wrapper",
+      "configurable": false,
+      "component": "ChatWrapper",
+      "children": [
+        {
+          "$ref": "#/definitions/components/chatHeader"
+        },
+        {
+          "$ref": "#/definitions/components/chatList"
+        },
+        {
+          "$ref": "#/definitions/components/chatInputSection"
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "content": {
+      "chatList": {
+        "initialMessage": "Hi, I’m Sunny, your personal shopping assistant. Here to help you find what you’re looking for, whether it’s the latest trends, new products or styling tips",
+        "inititalChips": [
+          "Shop Men's Clothing",
+          "Shop Women's Clothing",
+          "Shop Kid's Clothing"
+        ]
+      }
+    },
+    "theme": {
+      "styles": {
+        "messageBubble": {
+          "base": "rounded-2xl px-4 py-2 shadow-sm",
+          "lastMessageWidth": "w-100",
+          "user": {
+            "background": "bg-[#002b7e]",
+            "text": "text-white"
+          },
+          "bot": {
+            "background": "bg-[#EDEDED]",
+            "text": "text-black"
+          }
+        },
+        "chatInput": {
+          "backgroundColor": "bg-[#F3F3F3]",
+          "base": "rounded-lg h-fit p-3 px-5",
+          "mobile": {
+            "outerWrapper": "p-3 flex gap-2 items-center w-full",
+            "innerWrapper": "flex gap-2 h-fit p-3 px-5 rounded-2xl w-full bg-[#F3F3F3] [&_textarea]:bg-[#F3F3F3]"
+          }
+        }
+      }
+    },
+    "components": {
+      "chatList": {
+        "name": "Chat List",
+        "component": "ChatList",
+        "props": {
+          "handleChangeView": "handleChangeView",
+          "handleSendTrend": "handleSendTrend",
+          "handleSend": "handleSend",
+          "messages": "messages"
+        },
+        "nested": [
+          {
+            "$ref": "#/definitions/components/messageBubble"
+          },
+          {
+            "$ref": "#/definitions/components/chipsSection"
+          },
+          {
+            "$ref": "#/definitions/components/productList"
+          }
+        ]
+      },
+      "chatHeader": {
+        "name": "Chat Header",
+        "component": "ChatHeader",
+        "props": {
+          "label": "Sunny",
+          "avatar": "https://storage.googleapis.com/city-beach-prod/sunny.png"
+        }
+      },
+      "messageBubble": {
+        "name": "Message Bubble",
+        "component": "Bubble",
+        "props": {
+          "message": "message",
+          "isLast": "isLast",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/messageBubble"
+          }
+        }
+      },
+      "chipsSection": {
+        "name": "Chips Section",
+        "component": "Chips",
+        "props": {
+          "message": "message",
+          "handleSend": "handleSend"
+        }
+      },
+      "productList": {
+        "name": "Product List",
+        "component": "ProductList",
+        "props": {
+          "handleChangeView": "handleChangeView",
+          "message": "message",
+          "isLast": "isLast"
+        }
+      },
+      "chatInputSection": {
+        "name": "Chat Input Section",
+        "component": "ChatInputSection",
+        "props": {
+          "chatWindow": true,
+          "onSearch": "handleSend"
+        },
+        "nested": [
+          {
+            "name": "Chat Input Wrapper",
+            "component": "ChatInputWrapper",
+            "props": {
+              "chatWindow": "chatWindow",
+              "styles": {
+                "$ref": "#/definitions/theme/styles/chatInput"
+              }
+            },
+            "children": [
+              {
+                "name": "Chat Input Text Area",
+                "component": "ChatInputTextArea",
+                "props": {
+                  "value": "searchTerm",
+                  "chatWindow": "chatWindow",
+                  "onSearch": "onSearch",
+                  "onChange": "onTextChange",
+                  "placeholder": "Ask Sunny..."
+                }
+              },
+              {
+                "name": "Chat Input Actions",
+                "component": "ChatInputActions",
+                "props": {
+                  "searchTerm": "searchTerm",
+                  "chatWindow": "chatWindow",
+                  "onClick": "onClick",
+                  "align": "right"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

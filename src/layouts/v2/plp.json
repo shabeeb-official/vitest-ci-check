@@ -1,0 +1,1826 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Product Listing Page",
+  "description": "PLP layout converted from TOML to JSON schema style.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "element": "PageWrapper",
+      "slots": {
+        "chat": [
+          {
+            "name": "Sunny Header",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "flex mb-2 flex-row flex-none items-center"
+            },
+            "children": [
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "w-[100%] flex items-center justify-center"
+                },
+                "children": [
+                  {
+                    "name": "Mascot Image",
+                    "element": "Image",
+                    "props": {
+                      "className": "w-[50px] h-[45px]",
+                      "src": "https://storage.googleapis.com/city-beach-prod/sunny.png",
+                      "alt": "avatar"
+                    }
+                  },
+                  {
+                    "name": "Label",
+                    "element": "Text",
+                    "props": {
+                      "as": "h2",
+                      "className": "font-bold text-lg"
+                    },
+                    "children": [
+                      {
+                        "element": "Value",
+                        "props": {
+                          "value": "Sunny"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Toggle Chat Window",
+                "element": "HideSm",
+                "children": [
+                  {
+                    "element": "ToggleChatWindow",
+                    "props": {
+                      "className": "h-fit bg-[#F8E300] hover:bg-[#F8E300] rounded-[50%] hidden cursor-pointer sm:flex p-1"
+                    },
+                    "children": [{ "element": "ChevronsLeft" }]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Chat List",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "chat-list flex-1 overflow-y-auto"
+            },
+            "children": [
+              {
+                "name": "chat list items",
+                "element": "RenderList",
+                "list": "messages",
+                "listFields": [
+                  {
+                    "key": "content",
+                    "value": "message"
+                  },
+                  {
+                    "key": "type",
+                    "value": "message_type"
+                  }
+                ],
+                "render": [
+                  {
+                    "element": "ChatBubble",
+                    "props": {
+                      "message": "message",
+                      "message_type": "message_type",
+                      "style": {
+                        "user": {
+                          "foreground": "#ffffff",
+                          "background": "#002b7e"
+                        },
+                        "agent": {
+                          "foreground": "#00000",
+                          "background": "#EDEDED"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "rounded-lg h-fit p-3 px-5 bg-[#F3F3F3] w-full flex-none"
+            },
+            "children": [
+              {
+                "name": "Chat Text Input",
+                "element": "ChatInputTextArea",
+                "props": {
+                  "chatWindow": true,
+                  "placeholder": "Ask Sunny..."
+                }
+              },
+
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "flex items-center gap-4 justify-end"
+                },
+                "children": [
+                  {
+                    "name": "Chat Action",
+                    "element": "ChatInputActions",
+                    "props": {
+                      "chatWindow": "true",
+                      "placeholder": "Ask Sunny..."
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "content": [
+          {
+            "element": "Box",
+            "props": { "as": "div", "className": "fw-full mb-4" },
+            "children": [
+              { "element": "ClearFilterButton" },
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "flex items-center justify-between gap-2 w-full"
+                },
+                "children": [
+                  {
+                    "element": "ExpandeSunny"
+                  },
+                  {
+                    "element": "SortPopup",
+                    "props": { "label": "sort" }
+                  },
+                  {
+                    "element": "Box",
+                    "props": {
+                      "as": "div",
+                      "className": "md:flex items-center gap-4 hidden w-full justify-end py-5"
+                    },
+                    "children": [
+                      {
+                        "name": "Brand Filter",
+                        "element": "FilterItemRoot",
+                        "props": {
+                          "label": "Brand",
+                          "type": "brand",
+                          "selectedFilter": "selectedFilter"
+                        }
+                      },
+                      {
+                        "name": "Color Filter",
+                        "element": "FilterItemRoot",
+                        "props": {
+                          "label": "Color",
+                          "type": "color",
+                          "selectedFilter": "selectedFilter"
+                        }
+                      },
+                      {
+                        "name": "Price Filter",
+                        "element": "FilterItemRoot",
+                        "props": {
+                          "label": "Price",
+                          "type": "price",
+                          "selectedFilter": "selectedFilter"
+                        }
+                      },
+                      {
+                        "name": "Size Filter",
+                        "element": "FilterItemRoot",
+                        "props": {
+                          "label": "Size",
+                          "type": "size",
+                          "selectedFilter": "selectedFilter"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "element": "If",
+                "when": {
+                  "operator": "is",
+                  "lhs": "selectedFilter",
+                  "rhs": "brand"
+                },
+                "then": [
+                  {
+                    "name": "Brand Filter",
+                    "element": "Box",
+                    "props": {
+                      "as": "div",
+                      "className": "flex gap-2 cursor-pointer items-center"
+                    },
+                    "children": [
+                      {
+                        "element": "RenderList",
+                        "list": "brandFilerList",
+                        "listFields": [{ "key": "name", "value": "name" }],
+                        "render": [
+                          {
+                            "element": "FilterItem",
+                            "props": {
+                              "type": "brand",
+                              "filters": "filters",
+                              "current": "name"
+                            },
+                            "children": [
+                              {
+                                "element": "Text",
+                                "props": { "as": "p" },
+                                "children": [
+                                  {
+                                    "element": "Value",
+                                    "props": { "value": "name" }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "element": "If",
+                "when": {
+                  "operator": "is",
+                  "lhs": "selectedFilter",
+                  "rhs": "color"
+                },
+                "then": [
+                  {
+                    "name": "Color Filter",
+                    "element": "Box",
+                    "props": {
+                      "as": "div"
+                    },
+                    "children": [
+                      {
+                        "element": "Box",
+                        "props": {
+                          "as": "div",
+                          "className": "flex gap-2 cursor-pointer items-center"
+                        },
+                        "children": [
+                          {
+                            "element": "RenderList",
+                            "list": "colorFilterList",
+                            "listFields": [
+                              { "key": "colorName", "value": "colorName" },
+                              { "key": "src", "value": "src" }
+                            ],
+                            "render": [
+                              {
+                                "element": "FilterItem",
+                                "props": {
+                                  "current": "colorName",
+                                  "src": "src",
+                                  "type": "color",
+                                  "filters": "filters"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Box",
+                                    "props": { "as": "Box" },
+                                    "children": [
+                                      {
+                                        "element": "Image",
+                                        "props": {
+                                          "src": "src",
+                                          "className": "h-5 w-5"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "element": "Text",
+                                    "props": { "as": "p" },
+                                    "children": [
+                                      {
+                                        "element": "Value",
+                                        "props": { "value": "colorName" }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "element": "If",
+                "when": {
+                  "operator": "is",
+                  "lhs": "selectedFilter",
+                  "rhs": "size"
+                },
+                "then": [
+                  {
+                    "name": "Size Filter",
+                    "element": "Box",
+                    "props": {
+                      "as": "div",
+                      "className": "flex gap-2 cursor-pointer items-center"
+                    },
+
+                    "children": [
+                      {
+                        "element": "RenderList",
+                        "list": "sizeFilterList",
+                        "listFields": [{ "key": "name", "value": "name" }],
+                        "render": [
+                          {
+                            "element": "FilterItem",
+                            "props": {
+                              "type": "size",
+                              "filters": "filters",
+                              "current": "name"
+                            },
+                            "children": [
+                              {
+                                "element": "Text",
+                                "props": { "as": "p" },
+                                "children": [
+                                  {
+                                    "element": "Value",
+                                    "props": { "value": "name" }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "element": "If",
+                "when": {
+                  "operator": "is",
+                  "lhs": "selectedFilter",
+                  "rhs": "price"
+                },
+                "then": [
+                  {
+                    "name": "Price Filter",
+                    "element": "Box",
+                    "props": {
+                      "as": "div",
+                      "className": "flex gap-2 cursor-pointer items-center"
+                    },
+                    "children": [
+                      {
+                        "element": "Box",
+                        "props": {
+                          "as": "div",
+                          "className": "mb-8 w-full flex justify-center"
+                        },
+                        "children": [
+                          {
+                            "element": "Box",
+                            "props": {
+                              "as": "div",
+                              "className": "w-[50%]"
+                            },
+                            "children": [
+                              {
+                                "element": "Box",
+                                "props": {
+                                  "as": "div",
+                                  "className": "flex gap-2 font-light"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Text",
+                                    "props": { "as": "p" },
+                                    "children": [
+                                      {
+                                        "element": "Currency",
+                                        "children": [
+                                          {
+                                            "element": "Value",
+                                            "props": {
+                                              "value": "startPriceRange"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "element": "GenericSlider",
+                                    "props": {
+                                      "start": "startPriceRange",
+                                      "end": "endPriceRange",
+                                      "mid": "midPriceRange",
+                                      "eventName": "filter:price"
+                                    }
+                                  },
+                                  {
+                                    "element": "Text",
+                                    "props": { "as": "p" },
+                                    "children": [
+                                      {
+                                        "element": "Currency",
+                                        "children": [
+                                          {
+                                            "element": "Value",
+                                            "props": {
+                                              "value": "endPriceRange"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "elementt": "FilterItem",
+                        "props": {
+                          "type": "size",
+                          "filters": "filters",
+                          "current": "name"
+                        },
+                        "children": [
+                          {
+                            "element": "Box",
+                            "props": {
+                              "as": "div",
+                              "className": "mb-8 w-full flex justify-center"
+                            },
+                            "children": [
+                              {
+                                "element": "Box",
+                                "props": {
+                                  "as": "div",
+                                  "className": "w-[50%]"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Box",
+                                    "props": {
+                                      "as": "div",
+                                      "className": "flex gap-2 font-light"
+                                    },
+                                    "children": [
+                                      {
+                                        "element": "Text",
+                                        "props": { "as": "p" },
+                                        "children": [
+                                          {
+                                            "element": "Currency",
+                                            "children": [
+                                              {
+                                                "element": "Value",
+                                                "props": {
+                                                  "value": "startPriceRange"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "element": "GenericPriceSlider",
+                                        "props": {
+                                          "startPriceRange": "startPriceRange",
+                                          "endPriceRange": "endPriceRange",
+                                          "midPriceRange": "midPriceRange"
+                                        }
+                                      },
+                                      {
+                                        "element": "Text",
+                                        "props": { "as": "p" },
+                                        "children": [
+                                          {
+                                            "element": "Currency",
+                                            "children": [
+                                              {
+                                                "element": "Value",
+                                                "props": {
+                                                  "value": "endPriceRange"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-6 md:gap-3 xl:grid-cols-4"
+            },
+            "children": [
+              {
+                "name": "product list",
+                "element": "RenderList",
+                "list": "products",
+                "listFields": [
+                  { "key": "imageUrl", "value": "imageUrl" },
+                  { "key": "id", "value": "id" },
+                  { "key": "sku", "value": "sku" },
+                  { "key": "title", "value": "title" },
+                  { "key": "brand", "value": "brand" },
+                  { "key": "price", "value": "price" }
+                ],
+                "render": [
+                  {
+                    "element": "GenericProductCard",
+                    "props": {
+                      "imageUrl": "imageUrl",
+                      "title": "title",
+                      "brand": "brand",
+                      "price": "price",
+                      "id": "id",
+                      "sku": "sku"
+                    },
+                    "children": [
+                      {
+                        "element": "Box",
+                        "props": {
+                          "as": "div",
+                          "className": "bg-white overflow-hidden transition-all duration-200 cursor-pointer hover:shadow-md flex flex-col"
+                        },
+                        "children": [
+                          {
+                            "element": "Box",
+                            "props": { "as": "div", "className": "relative" },
+                            "children": [
+                              {
+                                "element": "Image",
+                                "props": {
+                                  "src": "imageUrl",
+                                  "className": "w-full h-full transition-transform duration-300"
+                                }
+                              }
+                            ]
+                          },
+
+                          {
+                            "element": "Box",
+                            "props": {
+                              "as": "div",
+                              "className": "pt-4 pb-4"
+                            },
+                            "children": [
+                              {
+                                "element": "Text",
+                                "props": {
+                                  "as": "h3",
+                                  "className": "text-balance font-bold line-clamp-1 cursor-text px-4 w-fit"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Value",
+                                    "props": { "value": "title" }
+                                  }
+                                ]
+                              },
+                              {
+                                "element": "Text",
+                                "props": {
+                                  "as": "p",
+                                  "className": "font-light text-gray-500 line-clamp-2 cursor-text px-4 w-fit"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Value",
+                                    "props": { "value": "brand" }
+                                  }
+                                ]
+                              },
+                              {
+                                "element": "Text",
+                                "props": {
+                                  "as": "p",
+                                  "className": "font-semibold text-gray-900 text-nowrap cursor-text px-4 w-fit"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Currency",
+                                    "children": [
+                                      {
+                                        "element": "Value",
+                                        "props": { "value": "price" }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "gridCols": "grid-cols-12",
+        "gap": "gap-4"
+      },
+      "stylesd": {
+        "headerWrapper": "flex mb-2 items-center",
+        "backToProductsButton": "capitalize bg-accent font-white hover:bg-accent",
+        "loadingTextStyle": "text-2xl font-medium capitalize",
+        "imageGridStyle": "w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8",
+        "productBrand": "text-xl font-medium text-gray-900 mb-2",
+        "productTitleWrapper": "flex justify-between w-full items-center gap-4",
+        "productTitle": "font-light",
+        "favorite": "cursor-pointer right-2 top-2 z-1 rounded-[50%] p-1",
+        "favoriteIcon": "text-[#242321] font-light h-[25px] w-[25px]",
+        "favoriteIconChecked": "fill-[#242321]",
+        "colorSection": "mb-6 mt-3",
+        "colorLabel": "capitalize font-normal block text-md text-[#1A1A1A] mb-2",
+        "colorLabelBold": "font-bold",
+        "colorWrapper": "flex flex-wrap gap-2 justify-start",
+        "colorPill": "flex justify-center items-center cursor-pointer",
+        "colorPillSelected": "p-[3px] border-black border-2",
+        "colorPillImage": "h-5 w-5",
+        "sizeItem": "rounded-none hover:bg-none col-span-1 text-center cursor-pointer",
+        "sizeItemSelected": "border-black border-b-2",
+        "buyButtonWrapper": "mb-5",
+        "buttonStyle": "capitalize  rounded-full  px-[20px] py-[15px] w-full",
+        "buttonIsPendingStyle": "cursor-progress bg-gray-400 text-gray-500",
+        "buttonNormalStyle": "bg-accent text-white",
+        "infoSection": "mt-5",
+        "infoText": "capitalize font-light text-sm",
+        "recommendedProductsLabel": "text-2xl font-medium mb-6",
+        "buyNowPayLaterLabel": "capitalize font-semibold mb-2",
+        "productDescriptionText": "text-[#585858] text-[0.875rem]",
+        "moreDetails": {
+          "moreDetailsAccordionWrapper": "w-full border-b border-gray-200",
+          "moreDetailsText": "capitalize font-semibold w-full text-left p-3 flex justify-between  !no-underline hover:!no-underline",
+          "moreDetailsItem": "capitalize col-span-6 text-[0.875rem]",
+          "moreDetailsValue": "col-span-6 text-[0.875rem]",
+          "iconType": "chevron"
+        },
+        "additionalDetails": {
+          "accordionWrapperStyle": "w-full border-b border-gray-200",
+          "accordionTriggerStyle": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline",
+          "accordionContentStyle": "p-3 font-light",
+          "iconType": "chevron",
+          "deliveryTableStyle": "w-full max-w-4xl overflow-hidden bg-white border",
+          "deliveryTableRowStyle": "w-full text-left text-gray-700 overflow-scroll",
+          "deliveryTableHeadStyle": "text-xs text-gray-600 capitalize bg-gray-100",
+          "deliveryTableHeaderCellStyle": "font-medium border-r p-2",
+          "deliveryTableDataCellStyle": "p-2"
+        },
+        "productImages": {
+          "mobileCarouselStyle": "",
+          "mobileCarouselWrapperStyle": "flex",
+          "mobileImageContainerStyle": "flex-shrink-0 flex-grow-0 basis-[80%] min-w-0 relative h-full w-full px-2",
+          "mobileImageStyle": "object-contain w-full",
+          "desktopGridStyle": "grid grid-cols-2 gap-2",
+          "desktopImageContainerStyle": "",
+          "desktopImageStyle": "object-contain"
+        }
+      }
+    },
+    "eslements": {
+      "headerBar": {
+        "name": "Header Bar",
+        "element": "HeaderBar",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/headerWrapper"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/elements/expandSunny"
+          },
+          {
+            "$ref": "#/definitions/elements/backToProducts"
+          }
+        ]
+      },
+      "expandSunny": {
+        "name": "Expand Sunny",
+        "element": "ExpandeSunny",
+        "props": {}
+      },
+      "backToProducts": {
+        "name": "Back To Products",
+        "element": "BackToProducts",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/backToProductsButton"
+          }
+        }
+      },
+      "productInformation": {
+        "name": "Main Grid",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "cclassName": "grid grid-cols-12 gap-4",
+          "className": "flex gap-4 flex-col md:flex-row"
+        },
+        "properties": {
+          "isMobileView": { "type": "boolean" }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/elements/productImage"
+          },
+          {
+            "$ref": "#/definitions/elements/productDetail"
+          }
+        ]
+      },
+      "productImage": {
+        "name": "Image Grid",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "className": "flex-[7] w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8"
+        },
+        "children": [
+          {
+            "element": "HideSm",
+            "children": [
+              {
+                "element": "FavoriteButton",
+                "props": {
+                  "sku": "sku"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "productDetail": {
+        "name": "Product Detail",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "className": "flex-[3] w-full col-span-12 lg:col-span-6 xl:col-span-4 2xl:col-span-4"
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/elements/productBrand"
+          },
+          {
+            "$ref": "#/definitions/elements/productTitle"
+          },
+          {
+            "$ref": "#/definitions/elements/productPrice"
+          },
+          {
+            "name": "Color Selector",
+            "element": "Box",
+            "props": { "as": "div", "className": "mb-6 mt-3" },
+            "children": [
+              {
+                "name": "Color Selector Value",
+                "element": "Text",
+                "props": {
+                  "as": "span",
+                  "className": "capitalize font-normal block text-md text-[#1A1A1A] mb-2"
+                },
+                "children": [
+                  {
+                    "element": "Text",
+                    "props": { "as": "span", "className": "font-bold" },
+                    "children": [
+                      {
+                        "element": "Value",
+                        "props": {
+                          "value": "Colour "
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "element": "Value",
+                    "props": {
+                      "value": "swatchName"
+                    }
+                  }
+                ]
+              },
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "flex flex-wrap gap-2 justify-start"
+                },
+                "children": [
+                  {
+                    "name": "Color Selector",
+                    "element": "ColorSelector",
+                    "props": {
+                      "swatchName": "swatchName",
+                      "sizeObject": "sizeObject",
+                      "label": "Colour",
+                      "colorPillStyle": {
+                        "$ref": "#/definitions/theme/styles/colorPill"
+                      },
+                      "colorPillSelectedStyle": {
+                        "$ref": "#/definitions/theme/styles/colorPillSelected"
+                      },
+                      "colorPillImageStyle": {
+                        "$ref": "#/definitions/theme/styles/colorPillImage"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Size Selector",
+            "element": "Box",
+            "props": { "as": "div", "className": "mb-6" },
+            "children": [
+              {
+                "name": "Size Selector Value",
+                "element": "Text",
+                "props": {
+                  "as": "span",
+                  "className": "capitalize font-bold block text-md text-[#1A1A1A] mb-2"
+                },
+                "children": [
+                  {
+                    "element": "Value",
+                    "props": {
+                      "value": "Available Size"
+                    }
+                  }
+                ]
+              },
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "grid grid-cols-4 gap-2 justify-start text-nowrap"
+                },
+                "children": [
+                  {
+                    "element": "SizeSelector",
+                    "props": {
+                      "sizeObject": "sizeObject",
+                      "sizeItemStyle": {
+                        "$ref": "#/definitions/theme/styles/sizeItem"
+                      },
+                      "sizeItemSelectedStyle": {
+                        "$ref": "#/definitions/theme/styles/sizeItemSelected"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Buy Now Button",
+            "element": "Box",
+            "props": { "as": "div", "className": "mb-5" },
+            "children": [
+              {
+                "element": "BuyNowButtonComponent",
+                "props": {
+                  "label": "Add to Bag",
+                  "buttonWrapperStyle": {
+                    "$ref": "#/definitions/theme/styles/buyButtonWrapper"
+                  },
+                  "buttonStyle": {
+                    "$ref": "#/definitions/theme/styles/buttonStyle"
+                  },
+                  "buttonIsPendingStyle": {
+                    "$ref": "#/definitions/theme/styles/buttonIsPendingStyle"
+                  },
+                  "buttonNormalStyle": {
+                    "$ref": "#/definitions/theme/styles/buttonNormalStyle"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "$ref": "#/definitions/elements/pointsAccordion"
+          },
+          {
+            "$ref": "#/definitions/elements/refundidAccordion"
+          },
+          {
+            "name": "Buy Now Pay Later",
+            "element": "Box",
+            "props": { "as": "div", "className": "my-3" },
+            "children": [
+              {
+                "element": "Text",
+                "props": {
+                  "as": "p",
+                  "className": "capitalize font-semibold mb-2"
+                },
+                "children": [
+                  {
+                    "element": "Value",
+                    "props": { "value": "buy now pay later" }
+                  }
+                ]
+              },
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "w-full flex flex-wrap gap-2"
+                },
+                "children": [
+                  {
+                    "element": "Image",
+                    "props": {
+                      "alt": "Afterpay",
+                      "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw11e6f463/images/contentpages/payment-types/aftrpay_80x35.svg",
+                      "className": "w-[80px] h-[35px]"
+                    }
+                  },
+                  {
+                    "element": "Image",
+                    "props": {
+                      "alt": "Zip",
+                      "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20b2e1a6/images/contentpages/payment-types/zip_80x35.svg",
+
+                      "className": "w-[80px] h-[35px]"
+                    }
+                  },
+                  {
+                    "element": "Image",
+                    "props": {
+                      "alt": "Klarna",
+                      "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw43a6dfe9/images/contentpages/payment-types/klarna_80x35.svg",
+                      "className": "w-[80px] h-[35px]"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Product Description",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "inline"
+            },
+            "children": [
+              {
+                "element": "Text",
+                "props": {
+                  "as": "p",
+                  "className": "text-[#585858] text-[0.875rem]"
+                },
+                "children": [
+                  {
+                    "element": "ExpandableText",
+                    "props": {
+                      "openLabel": "less",
+                      "closeLabel": "read more"
+                    },
+                    "children": [
+                      {
+                        "element": "Value",
+                        "props": { "value": "description" }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Product Details",
+            "element": "Accordion",
+            "props": {
+              "type": "single",
+              "collapsible": true,
+              "className": "w-full border-b border-gray-200"
+            },
+            "slots": {
+              "items": [
+                {
+                  "name": "Additional Details",
+                  "element": "AccordionItem",
+                  "props": {
+                    "value": "detail",
+                    "className": "border-b-0 w-full"
+                  },
+                  "slots": {
+                    "trigger": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Details"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "content": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "p-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "grid grid-cols-12 gap-y-3"
+                          },
+                          "children": [
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": { "value": "brand:" }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": { "value": "brand" }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": { "value": "product:" }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": { "value": "title" }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": { "value": "pattern:" }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": { "value": "pattern" }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Size & Fit",
+                  "element": "AccordionItem",
+                  "props": {
+                    "value": "size-fit",
+                    "className": "border-b-0 w-full"
+                  },
+                  "slots": {
+                    "trigger": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "size & fit"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "content": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "p-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p",
+                            "className": "font-light text-sm"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Please refer to our size guide to see what size is right for you! Keep in mind, sizes between brands are likely to vary, so please use the measurements as a guide only."
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Link",
+                          "props": {
+                            "href": "https://www.citybeach.com/au/size-guide-make-selection.html",
+                            "target": "_blank",
+                            "className": "font-light text-sm capitalize underline underline-offset-1 cursor-pointer"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": { "value": "view size guide" }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Size & Fit",
+                  "element": "AccordionItem",
+                  "props": {
+                    "value": "delivery-return",
+                    "className": "border-b-0 w-full"
+                  },
+                  "slots": {
+                    "trigger": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Delivery & Return"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "content": {
+                      "element": "Box",
+                      "props": { "as": "div" },
+                      "children": [
+                        {
+                          "element": "DeliveryAndReturn",
+                          "props": {
+                            "item": {
+                              "tableData": {
+                                "headers": [
+                                  "Shipping Methods",
+                                  "Shipping Times",
+                                  "Cost"
+                                ],
+                                "rows": [
+                                  {
+                                    "method": "Express",
+                                    "times": [
+                                      {
+                                        "region": "Metro",
+                                        "days": "1-4 business days"
+                                      },
+                                      {
+                                        "region": "Regional/Rural",
+                                        "days": "1-7 business days"
+                                      }
+                                    ],
+                                    "cost": "$13.99"
+                                  },
+                                  {
+                                    "method": "Standard",
+                                    "times": [
+                                      {
+                                        "region": "Metro",
+                                        "days": "2-10 business days"
+                                      },
+                                      {
+                                        "region": "Regional/Rural",
+                                        "days": "2-13 business days"
+                                      }
+                                    ],
+                                    "cost": "$10.99 or $2\nFree for orders over $100"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "font-light text-sm"
+                          },
+                          "children": [
+                            {
+                              "element": "Text",
+                              "props": { "as": "p" },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "For other delivery methods, "
+                                  }
+                                },
+                                {
+                                  "element": "Link",
+                                  "props": {
+                                    "href": "https://www.citybeach.com/au/shipping-and-handling.html?_gl=1*1r191ee*_gcl_au*NDg2MDAwMTA2LjE3NjY5OTkxMTk.",
+                                    "target": "_blank",
+                                    "className": "font-light text-sm capitalize underline underline-offset-1 cursor-pointer"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": { "value": "click here" }
+                                    }
+                                  ]
+                                },
+
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": " for shipping and delivery times."
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": { "as": "p" },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "Not 100% happy with your purchase? We offer online and in-store returns within 30 days of delivery*. For more information, please "
+                                  }
+                                },
+                                {
+                                  "element": "Link",
+                                  "props": {
+                                    "href": "https://www.citybeach.com/au/returns-and-exchanges.html?_gl=1*8xhvdp*_gcl_au*NDg2MDAwMTA2LjE3NjY5OTkxMTk.",
+                                    "target": "_blank",
+                                    "className": "font-light text-sm capitalize underline underline-offset-1 cursor-pointer"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": { "value": "click here" }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/definitions/elements/productNumber"
+          }
+        ]
+      },
+      "productBrand": {
+        "name": "Product Brand",
+        "element": "Text",
+        "props": {
+          "as": "h2",
+          "className": {
+            "$ref": "#/definitions/theme/styles/productBrand"
+          }
+        },
+        "children": [
+          {
+            "name": "Product Brand Value",
+            "element": "Value",
+            "props": {
+              "value": "brand"
+            }
+          }
+        ]
+      },
+
+      "productTitle": {
+        "name": "Product Title",
+        "element": "Box",
+        "props": {
+          "as": "div"
+        },
+        "children": [
+          {
+            "element": "Text",
+            "props": {
+              "as": "h2"
+            },
+            "children": [
+              {
+                "name": "Product Title Value",
+                "element": "Value",
+                "props": {
+                  "value": "title"
+                }
+              }
+            ]
+          }
+        ]
+      },
+
+      "productPrice": {
+        "name": "Product Price",
+        "element": "ProductPriceComponent",
+        "slots": {
+          "salePrice": {},
+          "regularPrice": {
+            "element": "Text",
+            "props": {
+              "as": "p",
+              "className": "text-lg font-light text-gray-900 mb-4"
+            },
+            "children": [
+              {
+                "element": "Currency",
+                "children": [
+                  {
+                    "element": "Value",
+                    "props": {
+                      "value": "price"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "additionalDetails": {
+        "name": "Additional Details",
+        "element": "AdditionalDetailsComponent",
+        "props": {
+          "items": {
+            "$ref": "#/definitions/content/additionalDetailsItems"
+          },
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionWrapperStyle"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionTriggerStyle"
+          },
+          "accordionContentStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionContentStyle"
+          },
+          "iconType": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/iconType"
+          },
+          "deliveryTableStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableStyle"
+          },
+          "deliveryTableRowStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableRowStyle"
+          },
+          "deliveryTableHeadStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeadStyle"
+          },
+          "deliveryTableHeaderCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeaderCellStyle"
+          },
+          "deliveryTableDataCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableDataCellStyle"
+          }
+        }
+      },
+      "productNumber": {
+        "name": "Product Number",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "className": {
+            "$ref": "#/definitions/theme/styles/infoSection"
+          }
+        },
+        "children": [
+          {
+            "name": "Product Number Text",
+            "element": "Text",
+            "props": {
+              "as": "p",
+              "className": {
+                "$ref": "#/definitions/theme/styles/infoText"
+              }
+            },
+            "children": [
+              {
+                "name": "Product Number Value",
+                "element": "Value",
+                "props": {
+                  "value": "Product Number: "
+                }
+              },
+              {
+                "name": "Product Number SKU",
+                "element": "Value",
+                "props": {
+                  "value": "sku"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "recommendedProducts": {
+        "name": "Recommended Products",
+        "element": "RecommendedProductsComponent",
+        "props": {
+          "sku": "sku",
+          "recommendedProductsLabel": "You might also like",
+          "recommendedProductsLabelStyle": {
+            "$ref": "#/definitions/theme/styles/recommendedProductsLabel"
+          }
+        }
+      },
+      "refundidAccordion": {
+        "name": "Refundid Accordion",
+        "element": "Accordion",
+        "props": {
+          "type": "single",
+          "collapsible": true,
+          "className": "w-full border-b border-gray-200"
+        },
+        "slots": {
+          "items": [
+            {
+              "element": "AccordionItem",
+              "props": {
+                "value": "refundid",
+                "className": "border-b-0 w-full p-4"
+              },
+              "slots": {
+                "trigger": {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "col-span-11"
+                  },
+                  "children": [
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "text-xs md:text-sm lg:text-md flex flex-wrap gap-1"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "span",
+                            "className": "font-semibold capitalize"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": { "value": "instant refunds" }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": { "value": "when you return using" }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Image",
+                          "props": {
+                            "className": "h-[23px] pl-[5px]",
+                            "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw0e536788/images/homepage/_04-Content_Asset-Assets/Refundid/refundid_logo.png"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "content": {
+                  "element": "Image",
+                  "props": {
+                    "className": "p-3 font-light",
+                    "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dwc601aec8/images/homepage/_04-Content_Asset-Assets/Refundid/refundid_Instant-refunds.png"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "pointsAccordion": {
+        "name": "Points Accordion",
+        "element": "Accordion",
+        "props": {
+          "type": "single",
+          "collapsible": true,
+          "className": "w-full border-b border-gray-200"
+        },
+        "slots": {
+          "items": [
+            {
+              "element": "AccordionItem",
+              "props": {
+                "value": "points",
+                "className": "border-b-0 w-full p-4"
+              },
+              "slots": {
+                "trigger": {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "col-span-11 flex items-center whitespace-nowrap"
+                  },
+                  "children": [
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "span",
+                        "className": "whitespace-nowrap font-semibold capitalize mr-[8px]"
+                      },
+                      "children": [
+                        {
+                          "element": "Image",
+                          "props": {
+                            "className": "w-[35px]",
+                            "src": "https://www.citybeach.com/on/demandware.static/Sites-CityBeachAustralia-Site/-/en_AU/v1755029288227/images/citybeach-rewards_icon.png"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": { "value": "Earn points on the shop" }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "content": {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "flex flex-col gap-3 mt-[1.5rem]"
+                  },
+                  "children": [
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "font-light flex flex-col gap-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": { "value": "20% off* on first order" }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "font-light flex flex-col gap-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": { "value": "Earn points while you shop" }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "font-light flex flex-col gap-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": {
+                            "value": "$1 = 10 points, 1000 points = $10 voucher"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "content": {
+      "additionalDetailsItems": [
+        {
+          "id": "size-fit",
+          "title": "size & fit",
+          "contentType": "text",
+          "content": "Please refer to our size guide to see what size is right for you! Keep in mind, sizes between brands are likely to vary, so please use the measurements as a guide only.",
+          "linkLabel": "view size guide",
+          "linkURL": "https://www.citybeach.com/au/size-guide-make-selection.html"
+        },
+        {
+          "id": "delivery-return",
+          "title": "delivery & return",
+          "contentType": "table",
+          "tableData": {
+            "headers": ["Shipping Methods", "Shipping Times", "Cost"],
+            "rows": [
+              {
+                "method": "Express",
+                "times": [
+                  {
+                    "region": "Metro",
+                    "days": "1-4 business days"
+                  },
+                  {
+                    "region": "Regional/Rural",
+                    "days": "1-7 business days"
+                  }
+                ],
+                "cost": "$13.99"
+              },
+              {
+                "method": "Standard",
+                "times": [
+                  {
+                    "region": "Metro",
+                    "days": "2-10 business days"
+                  },
+                  {
+                    "region": "Regional/Rural",
+                    "days": "2-13 business days"
+                  }
+                ],
+                "cost": "$10.99 or $2\nFree for orders over $100"
+              }
+            ]
+          },
+          "additionalInfo": [
+            {
+              "text": "For other delivery methods, ",
+              "link": "https://www.citybeach.com/au/shipping-and-handling.html",
+              "linkText": "click here",
+              "suffix": " for shipping and delivery times."
+            },
+            {
+              "text": "Not 100% happy with your purchase? We offer online and in-store returns within 30 days of delivery*. For more information, please ",
+              "link": "https://www.citybeach.com/au/returns-and-exchanges.html",
+              "linkText": "click here"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

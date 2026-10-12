@@ -1,0 +1,170 @@
+name: Deploy to GCP VM
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: react-app
+  CONTAINER_PORT: 3000
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    # Required for Workload Identity Federation
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set environment based on branch
+        id: set-env
+        run: |
+          BRANCH_NAME="${{ github.ref_name }}"
+          BRANCH_PREFIX=$(echo "${BRANCH_NAME}" | tr '[:lower:]' '[:upper:]')
+          
+          echo "branch_name=${BRANCH_NAME}" >> $GITHUB_OUTPUT
+          echo "branch_prefix=${BRANCH_PREFIX}" >> $GITHUB_OUTPUT
+          
+          echo "🌿 Branch: ${BRANCH_NAME}"
+          echo "🏷️  Prefix: ${BRANCH_PREFIX}_"
+
+      - name: Create .env file from branch-prefixed variables
+        env:
+          VARIABLES_CONTEXT: ${{ toJson(vars) }}
+          BRANCH_PREFIX: ${{ steps.set-env.outputs.branch_prefix }}
+        run: |
+          echo "🔧 Creating .env file from ${BRANCH_PREFIX}_VITE_* variables..."
+          
+          # Filter variables that start with BRANCH_PREFIX_VITE_ and create .env
+          # Strip the branch prefix, keep VITE_ prefix
+          echo "$VARIABLES_CONTEXT" | jq -r --arg prefix "${BRANCH_PREFIX}_" '
+            to_entries | 
+            map(select(.key | startswith($prefix))) | 
+            map({
+              key: (.key | sub($prefix; "")),
+              value: .value
+            }) |
+            map("\(.key)=\(.value)") | 
+            .[]
+          ' > .env
+          
+          # Verify .env file was created
+          if [ ! -f .env ]; then
+            echo "❌ Error: .env file was not created"
+            echo "❌ No variables found with prefix: ${BRANCH_PREFIX}_VITE_"
+            exit 1
+          fi
+          
+          # Check if .env is empty
+          if [ ! -s .env ]; then
+            echo "❌ Error: .env file is empty"
+            echo "❌ No variables found with prefix: ${BRANCH_PREFIX}_VITE_"
+            exit 1
+          fi
+          
+          # Show what was created (without values for security)
+          echo "✅ .env file created with $(wc -l < .env) variables:"
+          cat .env | cut -d'=' -f1 | sed 's/^/  - /'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:ci
+
+      - name: Upload coverage artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: |
+            coverage/lcov-report
+            coverage/lcov.info
+          if-no-files-found: warn
+
+      - name: Authenticate to Google Cloud (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: |
+          # Configure for Artifact Registry
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+          
+          echo "✅ Docker authenticated for Artifact Registry"
+
+      - name: Build Docker image
+        run: |
+          echo "🔨 Building Docker image for ${{ steps.set-env.outputs.branch_name }}..."
+          docker build \
+            -t us-central1-docker.pkg.dev/bayezon-demo/react-app/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            -t us-central1-docker.pkg.dev/bayezon-demo/react-app/${{ env.IMAGE_NAME }}:${{ steps.set-env.outputs.branch_name }}-latest \
+            .
+          echo "✅ Build complete"
+
+      - name: Push image to Artifact Registry
+        run: |
+          echo "📤 Pushing to Artifact Registry..."
+          docker push us-central1-docker.pkg.dev/bayezon-demo/react-app/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          docker push us-central1-docker.pkg.dev/bayezon-demo/react-app/${{ env.IMAGE_NAME }}:${{ steps.set-env.outputs.branch_name }}-latest
+          echo "✅ Push complete"
+
+      - name: Deploy to GCP VM
+        run: |
+          echo "🚀 Deploying to GCP VM..."
+          
+          gcloud compute ssh ${{ secrets.VM_NAME }} \
+            --zone=${{ secrets.VM_ZONE }} \
+            --command="
+              echo '🔐 Authenticating Docker for Artifact Registry...'
+              gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+              
+              echo '🛑 Stopping old container...'
+              docker stop react-app 2>/dev/null || true
+              docker rm react-app 2>/dev/null || true
+              
+              echo '📥 Pulling latest image...'
+              docker pull us-central1-docker.pkg.dev/bayezon-demo/react-app/${{ env.IMAGE_NAME }}:${{ steps.set-env.outputs.branch_name }}-latest
+              
+              echo '▶️  Starting container...'
+              docker run -d \
+                --name react-app \
+                --restart unless-stopped \
+                -p 127.0.0.1:${{ env.CONTAINER_PORT }}:3000 \
+                us-central1-docker.pkg.dev/bayezon-demo/react-app/${{ env.IMAGE_NAME }}:${{ steps.set-env.outputs.branch_name }}-latest
+              
+              echo '⏳ Waiting for health check...'
+              sleep 10
+              
+              echo '✅ Verifying deployment...'
+              docker ps | grep react-app
+              curl -f http://localhost:${{ env.CONTAINER_PORT }}/health || echo '⚠️  Health check pending...'
+              
+              echo '🧹 Cleaning up old images...'
+              docker image prune -af --filter 'until=24h'
+            "
+
+      - name: Deployment Summary
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo ""
+          echo "📦 Image: us-central1-docker.pkg.dev/bayezon-demo/react-app/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+          echo "🚀 Container: react-app"
+          echo "🔌 Port: ${{ env.CONTAINER_PORT }}"
+          echo "🌿 Branch: ${{ steps.set-env.outputs.branch_name }}"
+          echo "🏷️  Environment: ${{ steps.set-env.outputs.branch_prefix }}"
+          echo "📝 Commit: ${{ github.sha }}"
+          echo "🔐 Auth: Workload Identity Federation (Keyless)"

@@ -1,0 +1,974 @@
+{
+  "$schema": "../layout-schema.json",
+  "name": "Product Detail Page",
+  "description": "PDP layout with fully modularized elements",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "element": "PageWrapper",
+      "slots": {
+        "chat": [
+          {
+            "name": "Gunner Header",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "flex mb-2 flex-row flex-none items-center"
+            },
+            "children": [
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "w-[100%] flex items-center justify-center"
+                },
+                "children": [
+                  {
+                    "name": "Mascot Image",
+                    "element": "Image",
+                    "props": {
+                      "className": "w-[50px] h-[45px]",
+                      "src": "https://storage.googleapis.com/city-beach-prod/sunny.png",
+                      "alt": "avatar"
+                    }
+                  },
+                  {
+                    "name": "Label",
+                    "element": "Text",
+                    "props": {
+                      "as": "h2",
+                      "className": "font-bold text-lg"
+                    },
+                    "children": [
+                      {
+                        "element": "Value",
+                        "props": {
+                          "value": "Gunner"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Toggle Chat Window",
+                "element": "HideSm",
+                "children": [
+                  {
+                    "element": "ToggleChatWindow",
+                    "props": {
+                      "className": "h-fit bg-[#F8E300] hover:bg-[#F8E300] rounded-[50%] hidden cursor-pointer sm:flex p-1"
+                    },
+                    "children": [{ "element": "ChevronsLeft" }]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Chat List",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "chat-list flex-1 overflow-y-auto"
+            },
+            "children": [
+              {
+                "name": "chat list items",
+                "element": "RenderList",
+                "list": "messages",
+                "listFields": [
+                  {
+                    "key": "content",
+                    "value": "message"
+                  },
+                  {
+                    "key": "type",
+                    "value": "message_type"
+                  }
+                ],
+                "render": [
+                  {
+                    "element": "ChatBubble",
+                    "props": {
+                      "message": "message",
+                      "message_type": "message_type",
+                      "style": {
+                        "user": {
+                          "foreground": "white",
+                          "background": "#002716"
+                        },
+                        "agent": {
+                          "foreground": "black",
+                          "background": "#EAE9E8"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "rounded-lg h-fit p-3 px-5 bg-[#F3F3F3] w-full flex-none"
+            },
+            "children": [
+              {
+                "name": "Chat Text Input",
+                "element": "ChatInputTextArea",
+                "props": {
+                  "chatWindow": true,
+                  "placeholder": "Ask Gunner..."
+                }
+              },
+
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "flex items-center gap-4 justify-end"
+                },
+                "children": [
+                  {
+                    "name": "Chat Action",
+                    "element": "ChatInputActions",
+                    "props": {
+                      "chatWindow": "true",
+                      "placeholder": "Ask Gunner..."
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "content": [
+          {
+            "element": "Box",
+            "props": { "as": "div", "className": "p-3 flex-1 min-h-0 overflow-y-auto" },
+            "children": [
+              {
+                "name": "Header Bar",
+                "element": "HeaderBar",
+                "props": {
+                  "styles": "flex mb-2 items-center"
+                },
+                "children": [
+                  {
+                    "name": "Expand Gunner",
+                    "element": "ExpandeSunny",
+                    "props": {}
+                  },
+                  {
+                    "name": "Back To Products",
+                    "element": "BackToProducts",
+                    "props": {
+                      "styles": "capitalize bg-accent font-white hover:bg-accent"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "Main Grid",
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "cclassName": "grid grid-cols-12 gap-4",
+                  "className": "flex gap-4 flex-col md:flex-row"
+                },
+                "properties": {
+                  "isMobileView": { "type": "boolean" }
+                },
+                "children": [
+                  {
+                    "name": "Image Grid",
+                    "element": "Box",
+                    "props": {
+                      "as": "div",
+                      "className": "flex-[7] w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8"
+                    },
+                    "children": [
+                      {
+                        "element": "HideSm",
+                        "children": [
+                          {
+                            "element": "FavoriteButton",
+                            "props": {
+                              "sku": "sku"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "element": "ProductImages",
+                        "props": {
+                          "images": "images",
+                          "loadingTextStyle": "text-2xl font-medium capitalize",
+                          "imageGridStyle": "w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8",
+                          "mobileCarouselStyle": "",
+                          "mobileCarouselWrapperStyle": "flex",
+                          "mobileImageContainerStyle": "flex-shrink-0 flex-grow-0 basis-[80%] min-w-0 relative h-full w-full px-2",
+                          "mobileImageStyle": "object-contain w-full",
+                          "desktopGridStyle": "grid grid-cols-2 gap-2",
+                          "desktopImageContainerStyle": "",
+                          "desktopImageStyle": "object-contain"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Product Detail",
+                    "element": "Box",
+                    "props": {
+                      "as": "div",
+                      "className": "flex-[3] w-full col-span-12 lg:col-span-6 xl:col-span-4 2xl:col-span-4"
+                    },
+                    "children": [
+                      {
+                        "name": "Product Title",
+                        "element": "Text",
+                        "props": {
+                          "as": "h2",
+                          "className": "text-[25px] text-[#363536] tracking-[0.08em] pb-2"
+                        },
+                        "children": [
+                          {
+                            "name": "Product Brand Value",
+                            "element": "Value",
+                            "props": {
+                              "value": "title"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Product Price",
+                        "element": "ProductPriceComponent",
+                        "slots": {
+                          "salePrice": {},
+                          "regularPrice": {
+                            "element": "Text",
+                            "props": {
+                              "as": "p",
+                              "className": "text-[22px] font-light text-[#363536]"
+                            },
+                            "children": [
+                              {
+                                "element": "Currency",
+                                "children": [
+                                  {
+                                    "element": "Value",
+                                    "props": {
+                                      "value": "price"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "Color Selector",
+                        "element": "Box",
+                        "props": { "as": "div", "className": "mb-6 mt-3" },
+                        "children": [
+                          {
+                            "name": "Color Selector Value",
+                            "element": "Text",
+                            "props": {
+                              "as": "span",
+                              "className": "capitalize font-normal block text-md text-[#1A1A1A] mb-2"
+                            },
+                            "children": [
+                              {
+                                "element": "Text",
+                                "props": {
+                                  "as": "span",
+                                  "className": "font-bold"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Value",
+                                    "props": {
+                                      "value": "Colour "
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "element": "Value",
+                                "props": {
+                                  "value": "swatchName"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "Box",
+                            "props": {
+                              "as": "div",
+                              "className": "flex flex-wrap gap-2 justify-start"
+                            },
+                            "children": [
+                              {
+                                "name": "Color Selector",
+                                "element": "ColorSelector",
+                                "props": {
+                                  "swatchName": "swatchName",
+                                  "sizeObject": "sizeObject",
+                                  "label": "Colour",
+                                  "colorPillStyle": "flex justify-center items-center cursor-pointer rounded-full",
+                                  "colorPillSelectedStyle": "p-[3px] border-black border-2 rounded-full",
+                                  "colorPillImageStyle": "h-5 w-5 rounded-full"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Size Selector",
+                        "element": "Box",
+                        "props": { "as": "div", "className": "mb-6" },
+                        "children": [
+                          {
+                            "name": "Size Selector Value",
+                            "element": "Text",
+                            "props": {
+                              "as": "span",
+                              "className": "capitalize font-bold block text-md text-[#1A1A1A] mb-2"
+                            },
+                            "children": [
+                              {
+                                "element": "Value",
+                                "props": {
+                                  "value": "Size"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "Box",
+                            "props": {
+                              "as": "div",
+                              "className": "grid grid-cols-4 gap-2 justify-start"
+                            },
+                            "children": [
+                              {
+                                "element": "SizeSelector",
+                                "props": {
+                                  "sizeObject": "sizeObject",
+                                  "sizeItemStyle": "col-span-1 border border-black text-black text-center py-0 px-0 cursor-pointer transition-all duration-200 hover:bg-black hover:text-white",
+                                  "sizeItemSelectedStyle": "bg-black text-white"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Buy Now Button",
+                        "element": "Box",
+                        "props": { "as": "div", "className": "mb-5" },
+                        "children": [
+                          {
+                            "element": "BuyNowButtonComponent",
+                            "props": {
+                              "label": "Add to Bag",
+                              "buttonWrapperStyle": "mb-5",
+                              "buttonStyle": "uppercase px-[20px] py-[15px] font-[700] w-full hover:bg-[#7B726B] transition-colors duration-200",
+                              "buttonIsPendingStyle": "uppercase px-[20px] py-[15px] font-[700] w-full hover:bg-[#7B726B] transition-colors duration-200",
+                              "buttonNormalStyle": "bg-black text-white"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "name": "After Pay",
+                        "element": "Box",
+                        "props": {
+                          "as": "div",
+                          "className": "flex w-full justify-center gap-2"
+                        },
+                        "children": [
+                          {
+                            "element": "Text",
+                            "props": {
+                              "as": "p",
+                              "className": "text-sm lg:text-md flex flex-wrap"
+                            },
+                            "children": [
+                              {
+                                "element": "Value",
+                                "props": {
+                                  "value": "Or 4 payments of $32.00 with"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "element": "Image",
+                            "props": {
+                              "src": "https://content.roddandgunn.com/afterpay/afterpay-logolockup-black-transparent72x15_2x.png",
+                              "className": "h-[18.5px] pl-[5px] w-auto object-contain"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "element": "Box",
+                        "props": {
+                          "as": "div",
+                          "className": "mt-[20px] w-full p-1 border flex justify-evenly items-center"
+                        },
+                        "children": [
+                          {
+                            "element": "Image",
+                            "props": {
+                              "src": "https://www.roddandgunn.com/on/demandware.static/-/Library-Sites-rodd-shared-library/default/dwc70b0fd4/02%20GLOBAL/HFH%20Content/Free-shipping-icon.png",
+                              "className": "w-[40px] h-[35px]"
+                            }
+                          },
+                          {
+                            "element": "Image",
+                            "props": {
+                              "src": "https://www.roddandgunn.com/on/demandware.static/-/Library-Sites-rodd-shared-library/default/dw96dc1e12/02%20GLOBAL/HFH%20Content/RG_ICONS_RETURNS_BLACK.png",
+                              "className": "w-[40px] h-[35px]"
+                            }
+                          },
+                          {
+                            "element": "Image",
+                            "props": {
+                              "src": "https://www.roddandgunn.com/on/demandware.static/-/Library-Sites-rodd-shared-library/default/dw65f74969/02%20GLOBAL/HFH%20Content/RG_ICONS_CLICK&COLLECT_BLACK.png",
+                              "className": "w-[40px] h-[35px]"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Product Description",
+                        "element": "Box",
+                        "props": {
+                          "as": "div",
+                          "className": "mt-[20px]"
+                        },
+                        "children": [
+                          {
+                            "element": "Text",
+                            "props": {
+                              "as": "p",
+                              "className": "text-[#585858] text-[0.875rem]"
+                            },
+                            "children": [
+                              {
+                                "element": "ExpandableText",
+                                "props": {
+                                  "openLabel": "less",
+                                  "closeLabel": "read more"
+                                },
+                                "children": [
+                                  {
+                                    "element": "Value",
+                                    "props": { "value": "description" }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "name": "Product Details",
+                        "element": "Accordion",
+                        "props": {
+                          "type": "single",
+                          "collapsible": true,
+                          "className": "w-full border-b border-gray-200"
+                        },
+                        "slots": {
+                          "items": [
+                            {
+                              "name": "Size & Fit",
+                              "element": "AccordionItem",
+                              "props": {
+                                "value": "size-fit",
+                                "className": "border-b-0 w-full"
+                              },
+                              "slots": {
+                                "trigger": {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "size & fit"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "content": {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "p-3"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p",
+                                        "className": "font-light text-sm"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "Please refer to our size guide to see what size is right for you! Keep in mind, sizes between brands are likely to vary, so please use the measurements as a guide only."
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "element": "Link",
+                                      "props": {
+                                        "href": "https://www.roddandgunn.com/au/sizeguide_full.html",
+                                        "target": "_blank",
+                                        "className": "font-light text-sm capitalize underline underline-offset-1 cursor-pointer"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "view size guide"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "name": "Designer Notes",
+                              "element": "AccordionItem",
+                              "props": {
+                                "value": "detail",
+                                "className": "border-b-0 w-full"
+                              },
+                              "slots": {
+                                "trigger": {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "Designer Notes"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "content": {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "p-3"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Option",
+                                      "props": {
+                                        "as": "ol",
+                                        "className": "list-disc list-outside pl-3 space-y-2 text-sm"
+                                      },
+                                      "children": [
+                                        {
+                                          "name": "chat list items",
+                                          "element": "RenderList",
+                                          "list": "designDetails",
+                                          "listType": "string",
+                                          "render": [
+                                            {
+                                              "element": "OptionItem",
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "className": "text-gray-600 marker:text-gray-400",
+                                                    "value": "value"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "name": "Click & Collect",
+                              "element": "AccordionItem",
+                              "props": {
+                                "value": "click-collect",
+                                "className": "border-b-0 w-full"
+                              },
+                              "slots": {
+                                "trigger": {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "Click & Collect"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "content": {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "p-3"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Option",
+                                      "props": {
+                                        "as": "ol",
+                                        "className": "list-disc list-outside pl-3 space-y-2 text-sm"
+                                      },
+                                      "children": [
+                                        {
+                                          "name": "chat list items",
+                                          "element": "RenderList",
+                                          "list": [
+                                            "Need it now? Collect online orders at your local Rodd & Gunn store with our FREE same day Click & Collect service.",
+                                            "Place your order with Click & Collect and pick up within 2 hours, for styles in-stock at your chosen store. Available at select Rodd & Gunn stores and during store trading hours only."
+                                          ],
+                                          "listType": "string",
+                                          "render": [
+                                            {
+                                              "element": "OptionItem",
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "className": "text-gray-600 marker:text-gray-400",
+                                                    "value": "value"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "name": "Delivery Return",
+                              "element": "AccordionItem",
+                              "props": {
+                                "value": "delivery-return",
+                                "className": "border-b-0 w-full"
+                              },
+                              "slots": {
+                                "trigger": {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "Delivery & Return"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "content": {
+                                  "element": "Box",
+                                  "props": { "as": "div" },
+                                  "children": [
+                                    {
+                                      "element": "Box",
+                                      "props": { "as": "div" },
+                                      "children": [
+                                        {
+                                          "element": "Text",
+                                          "props": {
+                                            "as": "h2",
+                                            "className": "uppercase"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "shipping"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "Option",
+                                          "props": {
+                                            "as": "ol",
+                                            "className": "list-disc list-outside pl-3 space-y-2 text-sm"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "chat list items",
+                                              "element": "RenderList",
+                                              "list": [
+                                                "Free Standard Shipping for all domestic orders, delivered within Australia.",
+                                                "We aim to dispatch all orders within 3 business days of the order being placed. Orders that include any 'Personalised' products may take up to 1 day extra to be dispatched."
+                                              ],
+                                              "listType": "string",
+                                              "render": [
+                                                {
+                                                  "element": "OptionItem",
+                                                  "children": [
+                                                    {
+                                                      "element": "Value",
+                                                      "props": {
+                                                        "className": "text-gray-600 marker:text-gray-400",
+                                                        "value": "value"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "element": "Box",
+                                      "props": { "as": "div" },
+                                      "children": [
+                                        {
+                                          "element": "Text",
+                                          "props": {
+                                            "as": "h2",
+                                            "className": "uppercase"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "online returns policy"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "Option",
+                                          "props": {
+                                            "as": "ol",
+                                            "className": "list-disc list-outside pl-3 space-y-2 text-sm"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "chat list items",
+                                              "element": "RenderList",
+                                              "list": [
+                                                "Items must be returned within 30 days of purchase. All items must be in original condition with the tags attached. Place include your packing slip as proof of purchase.",
+                                                "All returns are assessed in store to determine whether a refund/exchange can be honoured.",
+                                                "To action your return or exchange, please complete the returns section on the packing slip provided within your order and post to the mentioned address.",
+                                                "The cost of shipping returns is the responsibility of the customer and is not covered by Rodd & Gunn. Rodd & Gunn is not liable for any parcels lost in transit.",
+                                                "In the rare occasion that you have received either a faulty or damaged item please contact us at online@roddandgunn.com to arrange a replacement free of charge.",
+                                                "'Personalised' items cannot be returned or exchanged."
+                                              ],
+                                              "listType": "string",
+                                              "render": [
+                                                {
+                                                  "element": "OptionItem",
+                                                  "children": [
+                                                    {
+                                                      "element": "Value",
+                                                      "props": {
+                                                        "className": "text-gray-600 marker:text-gray-400",
+                                                        "value": "value"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "element": "Box",
+                                      "props": { "as": "div" },
+                                      "children": [
+                                        {
+                                          "element": "Text",
+                                          "props": {
+                                            "as": "h2",
+                                            "className": "uppercase"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "instore returns & exchanges"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "Option",
+                                          "props": {
+                                            "as": "ol",
+                                            "className": "list-disc list-outside pl-3 space-y-2 text-sm"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "chat list items",
+                                              "element": "RenderList",
+                                              "list": [
+                                                "You may return or exchange product purchased from http://www.roddandgunn.com to any of our retail stores (excluding Myer & David Jones concessions) within 30 days of receipt.",
+                                                "All goods must be returned in original condition with tags attached. Please take a digital or printed copy of your Tax Invoice that was emailed to you when your order was initially dispatched, as proof of purchase.",
+                                                "For refunds, you will be required to present the same credit card that was used to make the purchase online. If you are not the card holder yourself. you will need to have the card holder present when the item(s) are being returned.",
+                                                "'Personalised' items cannot be returned or exchanged"
+                                              ],
+                                              "listType": "string",
+                                              "render": [
+                                                {
+                                                  "element": "OptionItem",
+                                                  "children": [
+                                                    {
+                                                      "element": "Value",
+                                                      "props": {
+                                                        "className": "text-gray-600 marker:text-gray-400",
+                                                        "value": "value"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "name": "Product Number",
+                        "element": "Box",
+                        "props": {
+                          "as": "div",
+                          "className": "mt-5"
+                        },
+                        "children": [
+                          {
+                            "name": "Product Number Text",
+                            "element": "Text",
+                            "props": {
+                              "as": "p",
+                              "className": "capitalize font-light text-sm"
+                            },
+                            "children": [
+                              {
+                                "name": "Product Number Value",
+                                "element": "Value",
+                                "props": {
+                                  "value": "Product Number: "
+                                }
+                              },
+                              {
+                                "name": "Product Number SKU",
+                                "element": "Value",
+                                "props": {
+                                  "value": "sku"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$ref": "#/definitions/elements/rrecommendedProducts"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "gridCols": "grid-cols-12",
+        "gap": "gap-4"
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+deploy-to-development:
+  stage: deploy
+  only:
+    - development
+  script:
+    - 'which ssh-agent || (apt-get update -y && apt-get install openssh-client -y)'
+    - eval "$(ssh-agent -s)"
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H 88.222.244.184 >> ~/.ssh/known_hosts
+    - >
+      ssh root@88.222.244.184 "
+        cd /root/git/ai-shopping-chat &&
+        git fetch origin &&
+        git checkout development || git checkout -b development origin/development &&
+        git pull origin development &&
+        npm ci &&
+        npm run test:ci &&
+        npm run build &&
+        rm -rf /var/www/html/pipeline/ai-shopping-chat/* &&
+        cp -r build/* /var/www/html/pipeline/ai-shopping-chat/
+      "

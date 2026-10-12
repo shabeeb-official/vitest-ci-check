@@ -1,0 +1,144 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Chat Interface",
+  "description": "A chat interface layout with header, message list, and input section.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "name": "Gunner Header",
+      "element": "Box",
+      "props": {
+        "as": "div",
+        "className": "flex mb-2 flex-row flex-none items-center"
+      },
+      "children": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "w-[100%] flex items-center justify-center"
+          },
+          "children": [
+            {
+              "name": "Mascot Image",
+              "element": "Image",
+              "props": {
+                "className": "w-[50px] h-[45px]",
+                "src": "https://storage.googleapis.com/city-beach-prod/sunny.png",
+                "alt": "avatar"
+              }
+            },
+            {
+              "name": "Label",
+              "element": "Text",
+              "props": {
+                "as": "h2",
+                "className": "font-bold text-lg"
+              },
+              "children": [
+                {
+                  "element": "Value",
+                  "props": {
+                    "value": "Gunner"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Toggle Chat Window",
+          "element": "HideSm",
+          "children": [
+            {
+              "element": "ToggleChatWindow",
+              "props": {
+                "className": "h-fit bg-[#F8E300] hover:bg-[#F8E300] rounded-[50%] hidden cursor-pointer sm:flex p-1"
+              },
+              "children": [{ "element": "ChevronsLeft" }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chat List",
+      "element": "Box",
+      "props": {
+        "as": "div",
+        "className": "chat-list flex-1 overflow-y-auto"
+      },
+      "children": [
+        {
+          "name": "chat list items",
+          "element": "RenderList",
+          "list": "messages",
+          "listFields": [
+            {
+              "key": "content",
+              "value": "message"
+            },
+            {
+              "key": "type",
+              "value": "message_type"
+            }
+          ],
+          "render": [
+            {
+              "element": "ChatBubble",
+              "props": {
+                "message": "message",
+                "message_type": "message_type",
+                "style": {
+                  "user": {
+                    "foreground": "white",
+                    "background": "#002716"
+                  },
+                  "agent": {
+                    "foreground": "black",
+                    "background": "#EAE9E8"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "Box",
+      "props": {
+        "as": "div",
+        "className": "rounded-lg h-fit p-3 px-5 bg-[#F3F3F3] w-full flex-none"
+      },
+      "children": [
+        {
+          "name": "Chat Text Input",
+          "element": "ChatInputTextArea",
+          "props": {
+            "chatWindow": true,
+            "placeholder": "Ask Gunner..."
+          }
+        },
+
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "flex items-center gap-4 justify-end"
+          },
+          "children": [
+            {
+              "name": "Chat Action",
+              "element": "ChatInputActions",
+              "props": {
+                "chatWindow": "true",
+                "placeholder": "Ask Gunner..."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

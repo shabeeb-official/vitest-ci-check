@@ -1,0 +1,246 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Chat Interface",
+  "description": "A chat interface layout with header, message list, and input section.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "name": "Chat Wrapper",
+      "configurable": false,
+      "component": "ChatWrapper",
+      "children": [
+        {
+          "$ref": "#/definitions/components/chatHeader"
+        },
+        {
+          "$ref": "#/definitions/components/chatList"
+        },
+        {
+          "$ref": "#/definitions/components/chatInputSection"
+        },
+        {
+          "$ref": "#/definitions/components/chatFooter"
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "content": {
+      "chatList": {
+        "initialMessage": "Gunner here—Let me know what you’re looking for and I’ll point you in the right direction.",
+        "inititalChips": [
+          "Shop Best Sellers",
+          "Shop New Arrivals",
+          "Shop Clothing",
+          "Shop Footwear"
+        ]
+      }
+    },
+    "theme": {
+      "styles": {
+        "messageBubble": {
+          "base": "rounded-2xl px-4 py-2 shadow-sm",
+          "lastMessageWidth": "w-100",
+          "user": {
+            "background": "bg-[#EAE9E8]",
+            "text": "text-black"
+          },
+          "textStyle": "text-[14px] tracking-wide",
+          "bot": {
+            "background": "bg-[#002716]",
+            "text": "text-white"
+          },
+          "chips": {
+            "chipsFullWrap": "flex flex-wrap gap-2 w-full min-w-0",
+            "chipsSection": "inline-flex max-w-full flex-wrap mt-2 p-2 bg-white rounded-lg border cursor-pointer",
+            "chipText": "text-[12px] font-medium text-gray-700 break-words"
+          },
+          "loading": {
+            "wrapper": "flex items-end",
+            "textStyle": "capitalize animate-text bg-gradient-to-r from-white via-gray-200 to-gray-300 bg-clip-text text-transparent text-[14px]"
+          }
+        },
+        "chatInput": {
+          "placeholderStyle": "w-full rounded-lg p-2 pb-[0.8rem] resize-none outline-none text-[16px] font-copernicus",
+          "backgroundColor": "bg-[#F3F3F3]",
+          "base": "rounded-lg h-fit p-3 px-5",
+          "mobile": {
+            "outerWrapper": "p-3 flex gap-2 items-center w-full",
+            "innerWrapper": "flex gap-2 h-fit p-3 px-5 rounded-2xl w-full bg-[#F3F3F3] [&_textarea]:bg-[#F3F3F3]"
+          }
+        },
+        "productList": {
+          "cardWidth": "w-[180px] text-center",
+          "imageWrap": "w-[180px] h-[220px] flex items-center justify-center overflow-hidden gap-4",
+          "image": "object-cover w-full h-full transform transition-transform duration-300",
+          "brand": "font-copernicus text-balance font-bold line-clamp-1 cursor-text px-4 w-fit",
+          "title": "font-copernicus font-medium text-[#363536] line-clamp-2 cursor-text px-4 w-fit text-[17.5px] text-center pb-1 pt-2 tracking-[0.06em] w-full  min-h-[4rem]",
+          "price": "font-light text-[#363536] text-nowrap cursor-text px-4 text-[15px] text-center mx-auto",
+          "sale": "text-[15px] font-medium sale-item-color cursor-text px-4 text-center mx-auto",
+          "strike": "text-[15px] font-light line-through cursor-text px-4 text-center mx-auto",
+          "viewAllMobileWrapper": "w-full mt-5 justify-end  flex gap-1  items-center overflow-hidden capitalize",
+          "viewAllMobileBtn": "whitespace-nowrap text-xs bg-black rounded-lg text-white px-3 py-2"
+        },
+        "sendIcon": {
+          "width": "35",
+          "height": "35",
+          "enabledFill": "#002616",
+          "disabledFill": "#002616",
+          "arrowEnabledColor": "#ffffff",
+          "arrowDisabledColor": "#ffffff",
+          "cursorEnabled": "cursor-pointer",
+          "cursorDisabled": "cursor-not-allowed",
+          "imageWidth": "min-w-[30px]"
+        }
+      }
+    },
+    "components": {
+      "chatList": {
+        "name": "Chat List",
+        "component": "ChatList",
+        "props": {
+          "handleChangeView": "handleChangeView",
+          "handleSendTrend": "handleSendTrend",
+          "handleSend": "handleSend",
+          "messages": "messages"
+        },
+        "nested": [
+          {
+            "$ref": "#/definitions/components/messageBubble"
+          },
+          {
+            "$ref": "#/definitions/components/chipsSection"
+          },
+          {
+            "$ref": "#/definitions/components/productList"
+          }
+        ]
+      },
+      "chatHeader": {
+        "name": "Chat Header",
+        "component": "ChatHeader",
+        "props": {
+          "avatar": "https://content.roddandgunn.com/Gunner_Shopping_Assistant/Header_V1.jpg",
+          "chatHeaderToggleIcon": "https://content.roddandgunn.com/Gunner_Shopping_Assistant/Close_button_left.svg",
+          "styles": {
+            "toggle": "cursor-pointer border rounded-full border-transparent hover:border-white mr-3",
+            "avatarDesktop": "w-[80%] h-[40px]",
+            "avatarMobile": "w-[80%] h-[40px]",
+            "title": "font-bold text-[19px]",
+            "toggleImageWidth": "30",
+            "image": "w-full",
+            "wrapper": "bg-[#002715] flex justify-between items-center mb-2"
+          }
+        }
+      },
+      "messageBubble": {
+        "name": "Message Bubble",
+        "component": "Bubble",
+        "props": {
+          "message": "message",
+          "isLast": "isLast",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/messageBubble"
+          }
+        }
+      },
+      "chipsSection": {
+        "name": "Chips Section",
+        "component": "Chips",
+        "props": {
+          "message": "message",
+          "handleSend": "handleSend",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/messageBubble/chips"
+          }
+        }
+      },
+      "productList": {
+        "name": "Product List",
+        "component": "ProductList",
+        "props": {
+          "handleChangeView": "handleChangeView",
+          "message": "message",
+          "isLast": "isLast",
+          "showBrand": false,
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productList"
+          }
+        }
+      },
+      "chatFooter": {
+        "name": "Chat Footer",
+        "component": "ChatFooter",
+        "props": {
+          "url": "https://www.roddandgunn.com/:region/contact",
+          "prefix": "Need help?",
+          "linkText": "Click here",
+          "linkStyle": "text-[12px] text-gray-500 hover:text-gray-800 underline cursor-pointer",
+          "suffix": "to speak to our customer service team.",
+          "wrapperStyle": "p-3 flex items-center justify-center md:hidden block",
+          "textStyle": "text-[12px] text-gray-500 "
+        }
+      },
+      "chatInputSection": {
+        "name": "Chat Input Section",
+        "component": "ChatInputSection",
+        "props": {
+          "chatWindow": true,
+          "onSearch": "handleSend"
+        },
+        "nested": [
+          {
+            "name": "Chat Input Wrapper",
+            "component": "ChatInputWrapper",
+            "props": {
+              "chatWindow": "chatWindow",
+              "styles": {
+                "$ref": "#/definitions/theme/styles/chatInput"
+              }
+            },
+            "children": [
+              {
+                "name": "Chat Input Text Area",
+                "component": "ChatInputTextArea",
+                "props": {
+                  "value": "searchTerm",
+                  "chatWindow": "chatWindow",
+                  "onSearch": "onSearch",
+                  "onChange": "onTextChange",
+                  "placeholder": "Ask Gunner...",
+                  "placeholderStyle": {
+                    "$ref": "#/definitions/theme/styles/chatInput/placeholderStyle"
+                  }
+                }
+              },
+              {
+                "name": "Chat Input Actions",
+                "component": "ChatInputActions",
+                "props": {
+                  "searchTerm": "searchTerm",
+                  "chatWindow": "chatWindow",
+                  "onClick": "onClick",
+                  "align": "right",
+                  "chatButtonActionIcon": "https://content.roddandgunn.com/Gunner_Shopping_Assistant/Send_button.svg",
+                  "styles": {
+                    "$ref": "#/definitions/theme/styles/sendIcon"
+                  },
+                  "addFooter": true,
+                  "footerProps": {
+                    "url": "https://www.roddandgunn.com/:region/contact",
+                    "footerTextPrefix": "Need help?",
+                    "footerLinkText": "Click here",
+                    "footerLinkStyle": "text-[12px] text-gray-500 hover:text-gray-800 underline cursor-pointer",
+                    "footerTextSuffix": "to speak to our customer service team.",
+                    "footerWrapperStyle": "flex items-center justify-center hidden md:block",
+                    "footerTextStyle": "text-[12px] text-gray-500 "
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

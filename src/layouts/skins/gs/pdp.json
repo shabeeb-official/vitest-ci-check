@@ -1,0 +1,624 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Product Detail Page",
+  "description": "PDP layout with fully modularized components",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "$ref": "#/definitions/components/headerBar"
+    },
+    {
+      "$ref": "#/definitions/components/mainGrid"
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "gridCols": "grid-cols-12",
+        "gap": "gap-4",
+        "layoutClass": "border-r pr-1 border-gray-200/70"
+      },
+      "styles": {
+        "ChatToogleButton": "h-10 cursor-pointer object-contain",
+        "detailSection": "bg-white w-full p-3",
+        "headerWrapper": "flex mb-2 items-center",
+        "backToProductsButton": "capitalize bg-[#fed83f] text-black border border-transparent hover:border-black hover:bg-[#fed83f] hover:text-black rounded-none",
+        "detailGrid": "grid grid-cols-12 gap-4",
+        "loadingTextStyle": "text-2xl font-medium capitalize",
+        "imageGridStyle": "w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-7 2xl:col-span-7",
+        "detailColumn": "w-full col-span-12 lg:col-span-6 xl:col-span-5 2xl:col-span-5",
+        "productBrand": "text-[30px] font-medium text-[#363536] mb-2",
+        "productTitleWrapper": "flex justify-between w-full items-center gap-4",
+        "productTitle": "font-apercu text-[30px] pb-2",
+        "favorite": "cursor-pointer right-2 top-2 z-1 rounded-[50%] p-1",
+        "favoriteIcon": "text-[#242321] font-light h-[25px] w-[25px]",
+        "favoriteIconChecked": "fill-[#242321]",
+        "priceWrapper": "flex items-baseline gap-2 pl-2.5",
+        "priceSale": "font-apercu order-2 font-semibold text-[19px] text-[#1f1f1f] pl-2",
+        "priceStrike": "order-1 text-[18px] font-light text-gray-400 line-through",
+        "colorSection": "mt-3 mb-[50px]",
+        "colorLabel": "capitalize block mb-2",
+        "colorLabelBold": "uppercase text-[13px] text-[#454141] font-normal antialiased mr-1",
+        "colorValue": "capitalize text-[12px] text-gray-500 font-light antialiased border-l border-gray-300 pl-[8px]",
+        "colorWrapper": "flex flex-wrap gap-[30px] justify-start ml-2",
+        "colorPill": "flex justify-center items-center cursor-pointer",
+        "colorPillSelected": "p-[5px] border-[#ffe1ea] border-2",
+        "colorPillImage": "h-12 w-10",
+        "sizeSection": "mb-5",
+        "sizeLabel": "uppercase text-[13px] text-[#595454] mb-2",
+        "sizeGrid": "flex flex-wrap  text-nowrap gap-3 justify-start mt-2 mb-[40px]",
+        "sizeItem": "uppercase text-[13px] min-w-max col-span-1 border border-grey text-[#4d4d4d] text-center py-3 px-[13px] cursor-pointer transition-all duration-200 hover:bg-gray-100 hover:text-black",
+        "sizeItemSelected": "uppercase text-[13px] min-w-max col-span-1 text-center py-3 px-[13px] cursor-pointer transition-all duration-200 bg-[#ffe1ea] text-black border-0 hover:bg-[#ffe1ea] hover:text-black focus:bg-[#ffe1ea] focus:text-black",
+        "quantityWrapper": "flex items-center border border-gray-300 w-fit px-2 py-1",
+        "quantityButton": "w-8 h-8 flex items-center justify-center text-[13px]",
+        "quantityInput": "text-[13px] text-[#595454] w-10 h-8 text-center outline-none border-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0",
+        "quantityLabel": "block text-sm font-medium text-gray-700 mb-1",
+        "buyButtonWrapper": "mb-5",
+        "buttonStyle": "uppercase px-[19px] py-[10px] w-full mr-[150px] bg-[#fed83f] text-black font-bold hover:text-white transition-colors duration-200",
+        "buttonIsPendingStyle": "cursor-progress bg-gray-400 text-gray-900",
+        "buttonNormalStyle": "",
+        "infoSection": "mt-5 text-gray-600",
+        "infoText": "capitalize font-light text-[13px]",
+        "recommendedProductsLabel": "text-2xl font-medium mb-6 text-[#363536] text-center",
+        "accordionWrapper": "w-full border-b border-gray-200",
+        "accordionTrigger": "grid grid-cols-12 justify-between w-full text-left py-3 !no-underline hover:!no-underline",
+        "accordionTriggerContent": "p-3 font-light flex flex-col gap-3 ",
+        "accordionTriggerIcon": "col-span-1",
+        "pointItem": "font-light text-[16px] text-[#242321]",
+        "refundImageLabel": "",
+        "buyNowPayLaterLabel": "capitalize font-semibold mb-2",
+        "productDescriptionText": "font-light antialiased text-black text-[0.875rem] pt-[15px] pb-[10px]",
+        "moreDetails": {
+          "moreDetailsAccordionWrapper": "w-full border-b border-gray-200",
+          "moreDetailsText": "uppercase font-bold w-full text-left text-[1.4rem] leading-[1.2] py-[18px] px-0 m-0 border-t border-[#e7e7e4] text-[#2c180f] cursor-pointer flex justify-between !no-underline hover:!no-underline",
+          "moreDetailsItem": "text-gray-800 capitalize col-span-6",
+          "moreDetailsValue": "col-span-6 text-gray-800",
+          "iconType": "chevron"
+        },
+        "additionalDetails": {
+          "accordionWrapperStyle": "w-full border-b border-gray-200",
+          "accordionTriggerStyle": "font-apercu font-normal antialiased uppercase w-full text-left text-[16px] leading-[1.2] py-[18px] px-0 m-0 border-t border-[#e7e7e4] text-black cursor-pointer flex justify-between items-center !no-underline hover:!no-underline",
+          "accordionContentStyle": "pt-0 pb-3 font-normal antialiased tracking-[0.04em]",
+          "iconType": "chevron",
+          "deliveryTableStyle": "w-full max-w-4xl overflow-hidden bg-white border",
+          "deliveryTableRowStyle": "w-full text-left text-gray-700 overflow-scroll",
+          "deliveryTableHeadStyle": "text-xs text-gray-600 capitalize bg-gray-100",
+          "deliveryTableHeaderCellStyle": "font-medium border-r p-2",
+          "deliveryTableDataCellStyle": "p-2"
+        },
+        "productImages": {
+          "mobileCarouselStyle": "",
+          "mobileCarouselWrapperStyle": "flex",
+          "mobileImageContainerStyle": "flex-shrink-0 flex-grow-0 basis-[80%] min-w-0 relative h-full w-full px-2",
+          "mobileImageStyle": "object-contain w-full",
+          "desktopGridStyle": "grid grid-cols-2 gap-2",
+          "desktopImageContainerStyle": "",
+          "desktopImageStyle": "object-contain"
+        }
+      }
+    },
+    "components": {
+      "headerBar": {
+        "name": "Header Bar",
+        "component": "HeaderBar",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/headerWrapper"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/expandSunny"
+          },
+          {
+            "$ref": "#/definitions/components/backToProducts"
+          }
+        ]
+      },
+      "expandSunny": {
+        "name": "Expand Sunny",
+        "component": "ExpandeSunny",
+        "props": {
+          "imageURL": "https://cdn.shopify.com/s/files/1/0961/2772/files/Dewie_AI-14.png?v=1776935416",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/ChatToogleButton"
+          }
+        }
+      },
+      "backToProducts": {
+        "name": "Back To Products",
+        "component": "BackToProducts",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/backToProductsButton"
+          }
+        }
+      },
+      "mainGrid": {
+        "name": "Main Grid",
+        "component": "PDPWrapper",
+        "props": {
+          "style": {
+            "$ref": "#/definitions/theme/styles/detailGrid"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/imageThumbnailCarousel"
+          },
+          {
+            "$ref": "#/definitions/components/productDetail"
+          }
+        ]
+      },
+      "imageDisplay": {
+        "name": "Image Display",
+        "component": "ImageDisplay",
+        "props": {
+          "showFavorite": false,
+          "loadingText": "Assembling images",
+          "loadingTextStyle": {
+            "$ref": "#/definitions/theme/styles/loadingTextStyle"
+          },
+          "imageGridStyle": {
+            "$ref": "#/definitions/theme/styles/imageGridStyle"
+          },
+          "mobileCarouselStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselStyle"
+          },
+          "mobileCarouselWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselWrapperStyle"
+          },
+          "mobileImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageContainerStyle"
+          },
+          "mobileImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageStyle"
+          },
+          "desktopGridStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopGridStyle"
+          },
+          "desktopImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageContainerStyle"
+          },
+          "desktopImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageStyle"
+          }
+        }
+      },
+      "imageThumbnailCarousel": {
+        "name": "Image Thumbnail Carousel",
+        "component": "ImageThumbnailCarousel",
+        "props": {
+          "thumbnailPosition": "left",
+          "loadingText": "Loading images...",
+          "wrapperStyle": "w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-7 2xl:col-span-7",
+          "containerStyle": "gap-4 h-full",
+          "mainImageWrapperStyle": "flex-1 flex items-start",
+          "mainImageStyle": "w-full items-start object-contain",
+          "thumbnailWrapperStyle": "flex items-center",
+          "thumbnailListStyle": "gap-3",
+          "thumbnailItemStyle": "cursor-pointer p-1",
+          "thumbnailActiveStyle": "border-b-2 border-gray-400",
+          "thumbnailImageStyle": "w-full h-20 object-cover",
+          "arrowWrapperStyle": "cursor-pointer p-2 hover:bg-gray-100 rounded-md",
+          "arrowStyle": "w-5 h-5",
+          "imageGridStyle": {
+            "$ref": "#/definitions/theme/styles/imageGridStyle"
+          },
+          "mobileCarouselStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselStyle"
+          },
+          "mobileCarouselWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselWrapperStyle"
+          },
+          "mobileImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageContainerStyle"
+          },
+          "mobileImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageStyle"
+          },
+          "desktopGridStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopGridStyle"
+          },
+          "desktopImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageContainerStyle"
+          },
+          "desktopImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageStyle"
+          }
+        }
+      },
+      "productDetail": {
+        "name": "Product Detail",
+        "component": "ProductDetail",
+        "props": {
+          "detailColumnStyle": {
+            "$ref": "#/definitions/theme/styles/detailColumn"
+          }
+        },
+        "nested": [
+          {
+            "$ref": "#/definitions/components/productTitleWithFav"
+          },
+          {
+            "$ref": "#/definitions/components/productPrice"
+          },
+          {
+            "$ref": "#/definitions/components/productDescription"
+          },
+          {
+            "$ref": "#/definitions/components/dynamicSelector"
+          },
+          {
+            "$ref": "#/definitions/components/quantitySelector"
+          },
+          {
+            "$ref": "#/definitions/components/buyNowButton"
+          },
+          {
+            "$ref": "#/definitions/components/dynamicAdditionalDetails"
+          },
+          {
+            "$ref": "#/definitions/components/productNumber"
+          }
+        ]
+      },
+      "productBrand": {
+        "name": "Product Brand",
+        "component": "ProductBrandComponent",
+        "props": {
+          "brandStyle": {
+            "$ref": "#/definitions/theme/styles/productBrand"
+          }
+        }
+      },
+      "productTitleWithFav": {
+        "name": "Product Title With Favorite",
+        "component": "ProductTitleWithFav",
+        "props": {
+          "showFavorite": false,
+          "styles": {
+            "titleWrapperStyle": {
+              "$ref": "#/definitions/theme/styles/productTitleWrapper"
+            },
+            "titleStyle": {
+              "$ref": "#/definitions/theme/styles/productTitle"
+            },
+            "favoriteIcon": {
+              "$ref": "#/definitions/theme/styles/favoriteIcon"
+            },
+            "favoriteIconChecked": {
+              "$ref": "#/definitions/theme/styles/favoriteIconChecked"
+            },
+            "favorite": {
+              "$ref": "#/definitions/theme/styles/favorite"
+            }
+          }
+        }
+      },
+      "productPrice": {
+        "name": "Product Price",
+        "component": "ProductPriceComponent",
+        "props": {
+          "priceWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/priceWrapper"
+          },
+          "priceSaleStyle": {
+            "$ref": "#/definitions/theme/styles/priceSale"
+          },
+          "priceStrikeStyle": {
+            "$ref": "#/definitions/theme/styles/priceStrike"
+          }
+        }
+      },
+      "quantitySelector": {
+        "name": "Quantity Selector",
+        "component": "QuantitySelector",
+        "props": {
+          "label": "",
+          "styles": {
+            "wrapperStyle": {
+              "$ref": "#/definitions/theme/styles/quantityWrapper"
+            },
+            "buttonStyle": {
+              "$ref": "#/definitions/theme/styles/quantityButton"
+            },
+            "inputStyle": {
+              "$ref": "#/definitions/theme/styles/quantityInput"
+            },
+            "labelStyle": {
+              "$ref": "#/definitions/theme/styles/quantityLabel"
+            }
+          }
+        }
+      },
+      "dynamicSelector": {
+        "name": "Dynamic Variant Selector",
+        "component": "DynamicVariantSelector",
+        "props": {
+          "styles": {
+            "sectionStyle": {
+              "$ref": "#/definitions/theme/styles/colorSection"
+            },
+            "labelStyle": {
+              "$ref": "#/definitions/theme/styles/colorLabel"
+            },
+            "labelBoldStyle": {
+              "$ref": "#/definitions/theme/styles/colorLabelBold"
+            },
+            "valueStyle": {
+              "$ref": "#/definitions/theme/styles/colorValue"
+            },
+            "wrapperStyle": {
+              "$ref": "#/definitions/theme/styles/colorWrapper"
+            },
+            "pillStyle": {
+              "$ref": "#/definitions/theme/styles/colorPill"
+            },
+            "pillSelectedStyle": {
+              "$ref": "#/definitions/theme/styles/colorPillSelected"
+            },
+            "pillImageStyle": {
+              "$ref": "#/definitions/theme/styles/colorPillImage"
+            }
+          },
+          "optionStyles": {
+            "wrapperStyle": {
+              "$ref": "#/definitions/theme/styles/sizeGrid"
+            },
+            "itemStyle": {
+              "$ref": "#/definitions/theme/styles/sizeItem"
+            },
+            "itemSelectedStyle": {
+              "$ref": "#/definitions/theme/styles/sizeItemSelected"
+            },
+            "sectionStyle": {
+              "$ref": "#/definitions/theme/styles/sizeSection"
+            },
+            "labelStyle": {
+              "$ref": "#/definitions/theme/styles/sizeLabel"
+            }
+          }
+        }
+      },
+      "buyNowButton": {
+        "name": "Buy Now Button",
+        "component": "BuyNowButtonComponent",
+        "props": {
+          "label": "Add to Cart",
+          "buttonWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/buyButtonWrapper"
+          },
+          "buttonStyle": {
+            "$ref": "#/definitions/theme/styles/buttonStyle"
+          },
+          "buttonIsPendingStyle": {
+            "$ref": "#/definitions/theme/styles/buttonIsPendingStyle"
+          },
+          "buttonNormalStyle": {
+            "$ref": "#/definitions/theme/styles/buttonNormalStyle"
+          }
+        }
+      },
+      "pointsAccordion": {
+        "name": "Points Accordion",
+        "component": "PointsAccordionComponent",
+        "props": {
+          "imageUrl": "https://www.citybeach.com/on/demandware.static/Sites-CityBeachAustralia-Site/-/en_AU/v1755029288227/images/citybeach-rewards_icon.png",
+          "mainLabel": "Earn points on the shop",
+          "content1": "20% off* on first order",
+          "content2": "Earn points while you shop",
+          "content3": "$1 = 10 points, 1000 points = $10 voucher",
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/accordionWrapper"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/accordionTrigger"
+          },
+          "accordionTriggerContentStyle": {
+            "$ref": "#/definitions/theme/styles/accordionTriggerContent"
+          },
+          "pointItemStyle": {
+            "$ref": "#/definitions/theme/styles/pointItem"
+          },
+          "iconType": "plus"
+        }
+      },
+      "refundidAccordion": {
+        "name": "Refundid Accordion",
+        "component": "RefundidAccordionComponent",
+        "props": {
+          "mainLabel": "",
+          "subLabel": "TAKE THE SKINCARE QUIZ",
+          "imageLabel": "",
+          "accordionContentImage": "",
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/accordionWrapper"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/accordionTrigger"
+          },
+          "refundImageLabelStyle": {
+            "$ref": "#/definitions/theme/styles/refundImageLabel"
+          },
+          "iconType": "plus"
+        }
+      },
+      "buyNowPayLater": {
+        "name": "",
+        "component": "BuyNowPayLaterComponent",
+        "props": {
+          "label": "",
+          "buyNowPayLaterLabelStyle": {
+            "$ref": "#/definitions/theme/styles/buyNowPayLaterLabel"
+          },
+          "paymentMethods": {
+            "$ref": "#/definitions/content/paymentMethods"
+          },
+          "wrapperClassName": "w-full flex flex-wrap items-center justify-start gap-[20px] pb-[15px]"
+        }
+      },
+      "productDescription": {
+        "name": "Product Description",
+        "component": "ProductDescriptionComponent",
+        "props": {
+          "productDescriptionTextStyle": {
+            "$ref": "#/definitions/theme/styles/productDescriptionText"
+          }
+        }
+      },
+      "ProductMoreDetails": {
+        "name": "Product More Details",
+        "component": "ProductMoreDetailsComponent",
+        "props": {
+          "moreDetailsLabel": "details",
+          "moreDetailsStyle": {
+            "$ref": "#/definitions/theme/styles/moreDetails"
+          }
+        }
+      },
+      "additionalDetails": {
+        "name": "Additional Details",
+        "component": "AdditionalDetailsComponent",
+        "props": {
+          "items": {
+            "$ref": "#/definitions/content/additionalDetailsItems"
+          },
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionWrapperStyle"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionTriggerStyle"
+          },
+          "accordionContentStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionContentStyle"
+          },
+          "iconType": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/iconType"
+          },
+          "deliveryTableStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableStyle"
+          },
+          "deliveryTableRowStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableRowStyle"
+          },
+          "deliveryTableHeadStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeadStyle"
+          },
+          "deliveryTableHeaderCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeaderCellStyle"
+          },
+          "deliveryTableDataCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableDataCellStyle"
+          }
+        }
+      },
+      "productNumber": {
+        "name": "Product Number",
+        "component": "ProductNumberComponent",
+        "props": {
+          "infoSectionStyle": {
+            "$ref": "#/definitions/theme/styles/infoSection"
+          },
+          "infoTextStyle": {
+            "$ref": "#/definitions/theme/styles/infoText"
+          }
+        }
+      },
+      "recommendedProducts": {
+        "name": "Recommended Products",
+        "component": "RecommendedProductsComponent",
+        "props": {
+          "recommendedProductsLabel": "CUSTOMERS ALSO BOUGHT",
+          "recommendedProductsLabelStyle": {
+            "$ref": "#/definitions/theme/styles/recommendedProductsLabel"
+          }
+        }
+      },
+      "dynamicAdditionalDetails": {
+        "name": "Dynamic Additional Details",
+        "component": "DynamicAdditionalDetailsComponent",
+        "props": {
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionWrapperStyle"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionTriggerStyle"
+          },
+          "accordionContentStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionContentStyle"
+          },
+          "iconType": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/iconType"
+          }
+        }
+      }
+    },
+    "content": {
+      "paymentMethods": [
+        {
+          "name": "Hydrating",
+          "src": "https://www.graceandstella.com/cdn/shop/files/GS-Website-Icons-Hydrating_b012b060-92fb-40ab-b929-d5538f6bcbef_180x.png?v=1683039355",
+          "className": "w-[120px] h-[21px]"
+        },
+        {
+          "name": "Brightening",
+          "src": "https://www.graceandstella.com/cdn/shop/files/GS-Website-Icons-Brightening_4ea05f11-9703-4ba1-ab3c-330fcfd17e74_180x.png?v=1683039796",
+          "className": "w-[120px] h-[21px]"
+        },
+        {
+          "name": "Soothing",
+          "src": "https://www.graceandstella.com/cdn/shop/files/GS-Website-Icons-Soothing_f33c676d-8826-4d47-83bb-3b10d11646d4_180x.png?v=1683039286",
+          "className": "w-[120px] h-[21px]"
+        }
+      ],
+      "additionalDetailsItems": [
+        {
+          "id": "perfect-for",
+          "title": "What makes it magical",
+          "contentType": "list",
+          "listItems": [
+            "Give the delicate skin of your under-eyes a much needed hydration boost",
+            "Contain powerful cooling and soothing properties to visibly de-puff even the worst of eye bags",
+            "Counteract the visual effects of the sun, poor sleep, harsh makeup removal, and dry, ageing skin"
+          ]
+        },
+        {
+          "id": "how-to-use",
+          "title": "How To Use",
+          "contentType": "list",
+          "apidata": true,
+          "listItems": [
+            "Apply under eyes on makeup-free skin",
+            "Wear for 15-20 minutes (or however long feels nice!)",
+            "Discard and pat remaining essence into skin. No need to rinse."
+          ]
+        },
+        {
+          "id": "perfect-for",
+          "title": "Perfect For",
+          "contentType": "list",
+          "listItems": [
+            "Late nights & early mornings",
+            "Soothing puffy, irritated eyes",
+            "Combatting the appearance of dark circles",
+            "Minimizing visible fine lines & wrinkles"
+          ]
+        },
+        {
+          "id": "key-ingredients",
+          "title": "Key Ingredients",
+          "contentType": "list",
+          "apidata": false,
+          "listItems": [
+            "Niacinamide is known to support a healthy skin barrier, hydrating skin to make it feel firmer and to prevent premature signs of aging",
+            "Hyaluronic Acid deeply hydrates skin to refine the appearance of fine lines and wrinkles",
+            "Camellia Sinensis Leaf Extract is obtained from the leaves of tea plants and helps to soothe puffiness",
+            "Rosemary Leaf Extract helps to bring down puffiness puffiness, lighten the appearance of dark spots, and diminish visible blemishes"
+          ]
+        }
+      ]
+    }
+  }
+}

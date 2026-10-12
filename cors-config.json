@@ -1,0 +1,15 @@
+[
+  {
+    "origin": [
+      "https://cb.aventusinformatics.com",
+      "https://citybeach-demo.aventusinformatics.com",
+      "https://*.aventusinformatics.com",
+      "https://*.citybeach.com",
+      "https://dev-sunny.bayezon.ai",
+      "https://prod-sunny.bayezon.ai"
+    ],
+    "method": ["GET", "HEAD", "OPTIONS"],
+    "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"],
+    "maxAgeSeconds": 3600
+  }
+]

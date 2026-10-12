@@ -1,0 +1,85 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Home Interface",
+  "description": "A home interface layout with logo description and chat input section.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "name": "Home Wrapper",
+      "configurable": false,
+      "component": "HomeWrapper",
+      "props": {
+        "headerHeight": "headerHeight",
+        "styles": {
+          "$ref": "#/definitions/theme/styles/home-wrapper"
+        }
+      },
+      "children": [
+        {
+          "name": "Logo Section",
+          "component": "LogoSection",
+          "props": {
+            "logoImg": "https://roddandgunn-internal-assets.bayezon.com/avatar.png",
+            "titleText": "Shop With ",
+            "titleBold": "Gunner",
+            "styles": {
+              "$ref": "#/definitions/theme/styles/logo-section"
+            }
+          }
+        },
+        {
+          "name": "Search Section",
+          "component": "SearchSection",
+          "props": {
+            "value": "searchTerm",
+            "onSearch": "handleNavigate",
+            "onChange": "onTextChange",
+            "isMobileWidth": "isMobileWidth",
+            "placeholder": "Ask Gunner...",
+            "searchButtonActionIcon": "https://content.roddandgunn.com/Gunner_Shopping_Assistant/Send_button.svg",
+            "styles": {
+              "$ref": "#/definitions/theme/styles/search-section"
+            }
+          }
+        },
+        {
+          "name": "Trend Section",
+          "component": "TrendSection",
+          "props": {
+            "trends": "activeTrends"
+          }
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "styles": {
+        "home-wrapper": "w-full flex items-center justify-center flex-col",
+        "logo-section": {
+          "wrapper": "flex flex-col items-center gap-2 mb-4 max-w-[80%]",
+          "image": "w-[80px] h-[80px] md:w-[150px] md:h-[150px]",
+          "title": "text-2xl md:text-4xl text-[#202020] font-cormorant",
+          "titleBold": "font-bold"
+        },
+        "search-section": {
+          "textbox": "flex items-center justify-between gap-3 px-5 py-3 bg-white border border-gray-200 rounded-full shadow-sm transition-all focus-within:shadow-md",
+          "mobileWidth": "w-[90%]",
+          "desktopWidth": "w-[45%]",
+          "placeholderStyle": "flex-1 bg-transparent outline-none resize-none text-[16px] placeholder-gray-400 h-[44px] pt-[10px] flex items-center",
+          "sendIcon": {
+            "width": "47",
+            "height": "47",
+            "enabledFill": "#002616",
+            "disabledFill": "#002616",
+            "arrowEnabledColor": "#ffffff",
+            "arrowDisabledColor": "#ffffff",
+            "cursorEnabled": "cursor-pointer",
+            "cursorDisabled": "cursor-not-allowed"
+          }
+        }
+      }
+    },
+    "components": {}
+  }
+}

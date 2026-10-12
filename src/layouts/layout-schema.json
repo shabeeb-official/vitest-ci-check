@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/layout-schema.json",
+  "title": "UI Layout Configuration",
+  "description": "Schema for defining UI component layouts",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the layout"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the layout"
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the layout",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "layout": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/component"
+      }
+    },
+    "definitions": {
+      "type": "object",
+      "properties": {
+        "theme": {
+          "type": "object"
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/component"
+          }
+        }
+      }
+    }
+  },
+  "required": ["name", "layout"],
+  "definitions": {
+    "component": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "component": {
+          "type": "string"
+        },
+        "configurable": {
+          "type": "boolean",
+          "default": true
+        },
+        "props": {
+          "type": "object"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/component"
+          }
+        },
+        "nested": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/component"
+          }
+        }
+      },
+      "required": ["component"]
+    }
+  }
+}

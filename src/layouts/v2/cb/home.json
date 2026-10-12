@@ -1,0 +1,248 @@
+{
+    "$schema": "./layout-schema.json",
+    "name": "Home Interface",
+    "description": "A home interface layout with logo description and chat input section.",
+    "version": "1.0.0",
+    "layout": [
+        {
+            "name": "HomePage",
+            "element": "Box",
+            "props": {
+                "as": "div",
+                "className": "w-full flex flex-col items-center justify-center bg-top   bg-cover bg-no-repeat     bg-[url('https://prod-sunny.bayezon.ai/home-image-mobile.jpg')] xl:bg-[url('https://prod-sunny.bayezon.ai/home-image.jpg')] max-lg:h-[calc(100dvh-64px)]"
+            },
+            "children": [
+                {
+                    "element": "Box",
+                    "props": {
+                        "as": "div",
+                        "className": "w-full flex flex-col items-center justify-center backdrop-blur-[1px] h-full inset-0 bg-black/25"
+                    },
+                    "children": [
+                        {
+                            "element": "Box",
+                            "props": {
+                                "as": "div",
+                                "className": "flex flex-col items-center gap-2 mb-4 w-[80%] max-w-[80%]"
+                            },
+                            "children": [
+                                {
+                                    "element": "Box",
+                                    "props": {
+                                        "as": "div",
+                                        "className": "flex items-center justify-center h-full"
+                                    },
+                                    "children": [
+                                        {
+                                            "element": "Box",
+                                            "props": {
+                                                "as": "div",
+                                                "className": "flex items-center gap-2 text-white"
+                                            },
+                                            "children": [
+                                                {
+                                                    "element": "Image",
+                                                    "props": {
+                                                        "as": "img",
+                                                        "src": "https://prod-sunny.bayezon.ai/Sunny-AI-Stars.svg",
+                                                        "alt": "Logo",
+                                                        "className": "h-9 sm:h-10"
+                                                    }
+                                                },
+                                                {
+                                                    "element": "Text",
+                                                    "props": {
+                                                        "as": "h2",
+                                                        "className": "capitalize text-2xl sm:text-3xl md:text-4xl"
+                                                    },
+                                                    "children": [
+                                                        {
+                                                            "element": "Value",
+                                                            "props": {
+                                                                "value": "shop with "
+                                                            }
+                                                        },
+                                                        {
+                                                            "element": "Text",
+                                                            "props": {
+                                                                "as": "span",
+                                                                "className": "font-bold"
+                                                            },
+                                                            "children": [
+                                                                {
+                                                                    "element": "Value",
+                                                                    "props": {
+                                                                        "value": "sunny"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "element": "Box",
+                            "props": {
+                                "as": "div",
+                                "className": "flex items-center gap-2 p-3 border rounded-full w-[90%] md:w-[45%]"
+                            },
+                            "children": [
+                                {
+                                    "element": "Image",
+                                    "props": {
+                                        "as": "img",
+                                        "src": "https://prod-sunny.bayezon.ai/Sunny-AI-Stars.svg",
+                                        "alt": "Logo",
+                                        "className": "h-10"
+                                    }
+                                },
+                                {
+                                    "name": "Chat Text Input",
+                                    "element": "ChatInputTextArea",
+                                    "props": {
+                                        "type": "search",
+                                        "chatWindow": true,
+                                        "placeholder": "Ask Sunny...",
+                                        "className": "w-full rounded-lg p-2 py-[0.6rem] resize-none outline-none place-content-center placeholder-white text-white bg-transparent"
+                                    }
+                                },
+                                {
+                                    "element": "Box",
+                                    "props": {
+                                        "as": "div",
+                                        "className": "flex items-center gap-4 justify-end"
+                                    },
+                                    "children": [
+                                        {
+                                            "name": "Chat Action",
+                                            "element": "ChatInputActions",
+                                            "props": {
+                                                "type": "search",
+                                                "chatWindow": "true",
+                                                "placeholder": "Ask Sunny..."
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "element": "Box",
+                            "props": {
+                                "as": "div",
+                                "className": "mt-5 mb-5 w-[90%] md:w-[45%] xl:w-[45%]"
+                            },
+                            "children": [
+                                {
+                                    "element": "Text",
+                                    "props": {
+                                        "as": "p",
+                                        "className": "text-md mb-3 text-white"
+                                    },
+                                    "children": [
+                                        {
+                                            "element": "Value",
+                                            "props": {
+                                                "value": "Trending"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "element": "TrendsScroller",
+                                    "props": {
+                                        "className": "overflow-hidden  flex justify-center px-5"
+                                    },
+                                    "children": [
+                                        {
+                                            "element": "Box",
+                                            "props": {
+                                                "as": "div",
+                                                "className": "flex cursor-pointer"
+                                            },
+                                            "children": [
+                                                {
+                                                    "element": "RenderList",
+                                                    "list": "activeTrends",
+                                                    "listFields": [
+                                                        {
+                                                            "key": "trendname",
+                                                            "value": "trendname"
+                                                        },
+                                                        {
+                                                            "key": "id",
+                                                            "value": "id"
+                                                        },
+                                                        {
+                                                            "key": "trendimageicon",
+                                                            "value": "trendimageicon"
+                                                        }
+                                                    ],
+                                                    "render": [
+                                                        {
+                                                            "element": "Box",
+                                                            "props": {
+                                                                "as": "div",
+                                                                "className": "min-w-0 relative px-2 flex-grow-0 flex-shrink-0 "
+                                                            },
+                                                            "children": [
+                                                                {
+                                                                    "element": "TrendClick",
+                                                                    "props": {
+                                                                        "name": "trendname",
+                                                                        "className": "flex flex-col justify-center items-center"
+                                                                    },
+                                                                    "children": [
+                                                                        {
+                                                                            "element": "Image",
+                                                                            "props": {
+                                                                                "className": "rounded-lg h-[150px] w-[110px] md:h-[140px] md:w-[110px]",
+                                                                                "src": "trendimageicon"
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "element": "Text",
+                                                                            "props": {
+                                                                                "as": "p",
+                                                                                "className": "absolute bottom-[10%] text-white md:text-sm text-center"
+                                                                            },
+                                                                            "children": [
+                                                                                {
+                                                                                    "element": "Value",
+                                                                                    "props": {
+                                                                                        "value": "trendname"
+                                                                                    }
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "definitions": {
+        "theme": {
+            "pageLayout": {
+                "gridCols": "grid-cols-8",
+                "gap": "gap-4"
+            }
+        }
+    }
+}

@@ -1,0 +1,1026 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Product Listing Page",
+  "description": "PLP layout converted from TOML to JSON schema style.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "name": "Idle Section",
+      "element": "If",
+      "when": {
+        "operator": "is",
+        "lhs": "loading_status",
+        "rhs": "idle"
+      },
+      "then": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "h-full w-full bg-white p-3"
+          },
+
+          "children": [
+            {
+              "element": "Box",
+              "props": {
+                "as": "div"
+              },
+              "children": [
+                {
+                  "name": "Toggle Chat Window When Closed",
+                  "element": "HideSm",
+                  "children": [
+                    {
+                      "element": "HideWhenChatPanelOpen",
+                      "children": [
+                        {
+                          "element": "ToggleChatWindow",
+                          "children": [
+                            {
+                              "element": "Image",
+                              "props": {
+                                "src": "https://storage.googleapis.com/city-beach-dev/sunny-Ai.png",
+                                "className": "h-14 w-24 cursor-pointer object-contain pl-2"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "h-full w-full flex-1 flex justify-center text-center py-20 px-4 sm:px-6"
+                  },
+                  "children": [
+                    {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "w-full"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "h2",
+                            "className": "text-2xl sm:text-3xl font-medium text-gray-800 mb-3"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Let's style you"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p",
+                            "className": "text-[12px] sm:text-base text-gray-500 max-w-md mx-auto"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Start chatting with our assistant to see personalized product recommendations."
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Toggle Panel Button",
+              "element": "ShowSm",
+              "children": [
+                {
+                  "element": "ToggleChatWindow",
+                  "children": [
+                    {
+                      "element": "Image",
+                      "props": {
+                        "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20260304/Back-to-chat-button.png",
+                        "className": "fixed flex justify-center text-center rounded-b-lg   top-[50%] right-[-3px]  switch-toggle  w-[30px] cursor-pointer tab-switcher z-[100000]"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product Loading",
+      "element": "If",
+      "when": { "operator": "is", "lhs": "loading_status", "rhs": "loading" },
+      "then": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "h-full w-full bg-white p-3 relative"
+          },
+          "children": [
+            {
+              "element": "Box",
+              "props": {
+                "as": "div",
+                "className": "w-full"
+              },
+              "children": [
+                {
+                  "name": "Toggle Chat Window When Closed",
+                  "element": "HideSm",
+                  "children": [
+                    {
+                      "element": "HideWhenChatPanelOpen",
+                      "children": [
+                        {
+                          "element": "ToggleChatWindow",
+                          "children": [
+                            {
+                              "element": "Image",
+                              "props": {
+                                "src": "https://storage.googleapis.com/city-beach-dev/sunny-Ai.png",
+                                "className": "h-14 w-24 cursor-pointer object-contain pl-2"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Toggle Panel Button",
+              "element": "ShowSm",
+              "children": [
+                {
+                  "element": "ToggleChatWindow",
+                  "children": [
+                    {
+                      "element": "Image",
+                      "props": {
+                        "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20260304/Back-to-chat-button.png",
+                        "className": "fixed flex justify-center text-center rounded-b-lg   top-[50%] right-[-3px]  switch-toggle  w-[30px] cursor-pointer tab-switcher z-[100000]"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            { "element": "ShimmerGrid" },
+            {
+              "element": "Text",
+              "props": {
+                "as": "p",
+                "className": "absolute top-[5rem] left-[50%] translate-x-[-50%] text-[3rem] font-bold text-accent"
+              },
+              "children": [
+                { "element": "Value", "props": { "value": "Loading" } }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product List",
+      "element": "If",
+      "when": { "operator": "is", "lhs": "loading_status", "rhs": "success" },
+      "then": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "p-3 w-full h-full max-md:h-screen"
+          },
+          "children": [
+            {
+              "name": "Toggle Panel Button",
+              "element": "ShowSm",
+              "children": [
+                {
+                  "element": "ToggleChatWindow",
+                  "children": [
+                    {
+                      "element": "Image",
+                      "props": {
+                        "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20260304/Back-to-chat-button.png",
+                        "className": "fixed flex justify-center text-center rounded-b-lg   top-[50%] right-[-3px]  switch-toggle  w-[30px] cursor-pointer tab-switcher z-[100000]"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "Box",
+              "props": {
+                "as": "div",
+                "className": "mx-auto mb-6"
+              },
+              "children": [
+                {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "w-full mb-4 space-y-1"
+                  },
+                  "children": [
+                    {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "flex gap-2 cursor-pointer"
+                      },
+                      "children": [
+                        {
+                          "name": "Clear filter",
+                          "element": "ClearFilterButton",
+                          "props": {
+                            "className": "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 bg-gray-500 capitalize"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "flex items-center justify-between gap-2 w-full"
+                      },
+                      "children": [
+                        {
+                          "name": "Chat List",
+                          "element": "HideSm",
+                          "children": [
+                            {
+                              "element": "HideWhenChatPanelOpen",
+                              "children": [
+                                {
+                                  "element": "ToggleChatWindow",
+                                  "children": [
+                                    {
+                                      "element": "Image",
+                                      "props": {
+                                        "src": "https://storage.googleapis.com/city-beach-dev/sunny-Ai.png",
+                                        "className": "h-14 cursor-pointer object-contain"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "SortPopup",
+                          "props": {
+                            "label": "sort",
+                            "selectedFilter": "filterValues"
+                          }
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "md:flex items-center gap-4 hidden w-full justify-end py-5"
+                          },
+                          "children": [
+                            {
+                              "element": "FilterItemRoot",
+                              "props": {
+                                "name": "brand",
+                                "className": "flex gap-2 cursor-pointer",
+                                "selectedFilter": "selectedFilter"
+                              },
+                              "children": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "h1",
+                                    "className": "capitalize font-bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "Brand "
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "element": "FilterItemRoot",
+                              "props": {
+                                "name": "color",
+                                "className": "flex gap-2 cursor-pointer",
+                                "selectedFilter": "selectedFilter"
+                              },
+                              "children": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "h1",
+                                    "className": "capitalize font-bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "Color"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "element": "FilterItemRoot",
+                              "props": {
+                                "name": "price",
+                                "className": "flex gap-2 cursor-pointer",
+                                "selectedFilter": "selectedFilter"
+                              },
+                              "children": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "h1",
+                                    "className": "capitalize font-bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "Price"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "element": "FilterItemRoot",
+                              "props": {
+                                "name": "size",
+                                "className": "flex gap-2 cursor-pointer",
+                                "selectedFilter": "selectedFilter"
+                              },
+                              "children": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "h1",
+                                    "className": "capitalize font-bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "Size"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "element": "FilterItem",
+                      "props": {
+                        "type": "brand",
+                        "filterValues": "filterValues",
+                        "selectedFilter": "selectedFilter"
+                      },
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "w-full flex justify-center "
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "grid grid-cols-12 mb-5"
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-3"
+                                  }
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-6 h-200 flex gap-4  flex-wrap justify-start"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "RenderList",
+                                      "list": "brandFilerList",
+                                      "listFields": [
+                                        {
+                                          "key": "brandName",
+                                          "value": "brandName"
+                                        }
+                                      ],
+                                      "render": [
+                                        {
+                                          "element": "FilterItem",
+                                          "props": {
+                                            "type": "brand",
+                                            "name": "brandName",
+                                            "filterValues": "filterValues",
+                                            "selectedFilter": "selectedFilter"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Box",
+                                              "props": {
+                                                "as": "div",
+                                                "className": "flex gap-2 cursor-pointer items-center"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Box",
+                                                  "props": {
+                                                    "as": "div",
+                                                    "className": "flex gap-2 cursor-pointer"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "element": "Checkbox",
+                                                      "props": {
+                                                        "checked": "filterValues",
+                                                        "value": "brandName",
+                                                        "filterKey": "brand"
+                                                      }
+                                                    },
+                                                    {
+                                                      "element": "Box",
+                                                      "props": {
+                                                        "as": "div"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "element": "Value",
+                                                          "props": {
+                                                            "value": "brandName"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "element": "FilterItem",
+                      "props": {
+                        "className": "flex gap-2 cursor-pointer items-center",
+                        "type": "color",
+                        "filterValues": "filterValues",
+                        "selectedFilter": "selectedFilter"
+                      },
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "w-full flex justify-center "
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "grid grid-cols-12 mb-4"
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-3"
+                                  }
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-6 h-200 flex gap-4  flex-wrap justify-start"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "RenderList",
+                                      "list": "colorFilterList",
+                                      "listFields": [
+                                        {
+                                          "key": "colorName",
+                                          "value": "colorName"
+                                        },
+                                        {
+                                          "key": "src",
+                                          "value": "src"
+                                        }
+                                      ],
+                                      "render": [
+                                        {
+                                          "element": "Box",
+                                          "props": {
+                                            "as": "div",
+                                            "className": "flex gap-2 cursor-pointer items-center"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "FilterItem",
+                                              "props": {
+                                                "className": "flex gap-2 cursor-pointer items-center",
+                                                "type": "color",
+                                                "name": "colorName",
+                                                "filterValues": "filterValues",
+                                                "selectedFilter": "selectedFilter"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Box",
+                                                  "props": {
+                                                    "as": "div",
+                                                    "className": "border border-2 border-white group-data-[state=active]:border-black p-1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "element": "Image",
+                                                      "props": {
+                                                        "src": "src",
+                                                        "alt": "color",
+                                                        "className": "h-5 w-5"
+                                                      }
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "colorName"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "element": "FilterItem",
+                      "props": {
+                        "type": "price",
+                        "filterValues": "filterValues",
+                        "selectedFilter": "selectedFilter"
+                      },
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "mb-8 w-full flex justify-center"
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "w-full flex justify-center "
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "w-[50%]"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "ProductPriceFilter",
+                                      "props": {
+                                        "filterKey": "price",
+                                        "value": "filterValues",
+                                        "priceRange": "priceRange",
+                                        "pirceClass": "flex gap-2 font-light",
+                                        "sliderClass": "relative flex touch-none select-none items-center w-full cursor-grab active:cursor-grabbing"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "element": "FilterItem",
+                      "props": {
+                        "className": "flex gap-2 cursor-pointer items-center",
+                        "type": "size",
+                        "filterValues": "filterValues",
+                        "selectedFilter": "selectedFilter"
+                      },
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": " w-full flex justify-center "
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "grid grid-cols-12 mb-4"
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-3"
+                                  }
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-6 flex gap-4  flex-wrap justify-start"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "RenderList",
+                                      "list": "sizeFilterList",
+                                      "listFields": [
+                                        {
+                                          "key": "name",
+                                          "value": "name"
+                                        }
+                                      ],
+                                      "render": [
+                                        {
+                                          "element": "Box",
+                                          "props": {
+                                            "as": "div",
+                                            "className": "flex gap-2 cursor-pointer items-center"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "FilterItem",
+                                              "props": {
+                                                "className": "flex gap-2 cursor-pointer items-center",
+                                                "type": "size",
+                                                "name": "name",
+                                                "filterValues": "filterValues",
+                                                "selectedFilter": "selectedFilter"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Box",
+                                                  "props": {
+                                                    "as": "div",
+                                                    "className": "flex gap-2 cursor-pointer border border-2 border-white group-data-[state=active]:border-black p-1"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "element": "Box",
+                                                      "props": {
+                                                        "as": "div"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "element": "Value",
+                                                          "props": {
+                                                            "value": "name"
+                                                          }
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "col-span-3"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Product Lists",
+                  "element": "PlpListDiv",
+                  "props": {
+                    "as": "div",
+                    "sidebarExpanded": "sidebarExpanded",
+                    "expandedClassName": "xl:grid-cols-5",
+                    "className": "   grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-6 md:gap-3 xl:grid-cols-4 w-full"
+                  },
+                  "children": [
+                    {
+                      "element": "RenderList",
+                      "list": "products",
+                      "listFields": [
+                        {
+                          "key": "title",
+                          "value": "title"
+                        },
+                        {
+                          "key": "imageUrl",
+                          "value": "imageUrl"
+                        },
+                        {
+                          "key": "price",
+                          "value": "price"
+                        },
+                        {
+                          "key": "brand",
+                          "value": "brand"
+                        },
+                        {
+                          "key": "sku",
+                          "value": "sku"
+                        },
+                        {
+                          "key": "id",
+                          "value": "id"
+                        },
+                        {
+                          "key": "discount_price",
+                          "value": "discount_price"
+                        },
+                        {
+                          "key": "facet_color",
+                          "value": "facet_color"
+                        }
+                      ],
+                      "render": [
+                        {
+                          "element": "ProductWrapper",
+                          "props": {
+                            "skuId": "sku",
+                            "id": "id",
+                            "brand": "brand",
+                            "className": "bg-white overflow-hidden transition-all duration-200 cursor-pointer hover:shadow-md flex flex-col"
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "relative"
+                              },
+                              "children": [
+                                {
+                                  "name": "Add to Wishlist",
+                                  "element": "AddToWishlist",
+                                  "props": {
+                                    "productId": "sku",
+                                    "className": "cursor-pointer right-2 top-2 z-1 rounded-[50%] p-1 absolute",
+                                    "isDefault": [
+                                      {
+                                        "element": "Icon",
+                                        "props": {
+                                          "icon": "heart",
+                                          "className": " text-[#242321] font-light h-[25px] w-[25px]"
+                                        }
+                                      }
+                                    ],
+                                    "isAdded": [
+                                      {
+                                        "element": "Icon",
+                                        "props": {
+                                          "icon": "heart-filled",
+                                          "className": "text-red-500"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "Product Image",
+                                  "element": "Image",
+                                  "props": {
+                                    "className": "w-full h-full transition-transform duration-300",
+                                    "src": "imageUrl",
+                                    "alt": "avatar"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "flex flex-col pt-4 pb-4"
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "text-balance font-bold line-clamp-1 cursor-text px-4 w-fit"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "key": "products",
+                                        "value": "brand"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": " flex font-light text-gray-500 max-lg:line-clamp-2 cursor-text px-4 w-full max-lg:w-fit "
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p",
+                                        "className": "space-x-1 gap-10"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "title"
+                                          }
+                                        },
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": " in "
+                                          }
+                                        },
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "facet_color"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "HasDiscount",
+                                  "props": {
+                                    "discount": "discount_price",
+                                    "type": "withoutDiscount"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Currency",
+                                      "props": {
+                                        "value": "price",
+                                        "className": "font-semibold text-gray-900 text-nowrap cursor-text px-4 w-fit"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "HasDiscount",
+                                  "props": {
+                                    "discount": "discount_price",
+                                    "type": "withDiscount"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Box",
+                                      "props": {
+                                        "as": "div",
+                                        "className": "flex gap-2 w-fit",
+                                        "isLenght": "price"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Currency",
+                                          "props": {
+                                            "value": "price",
+                                            "className": "text-sm font-light text-gray-400 line-through cursor-text pl-4 w-fit"
+                                          }
+                                        },
+                                        {
+                                          "element": "Currency",
+                                          "props": {
+                                            "value": "discount_price",
+                                            "className": "text-xxl font-medium sale-item-color cursor-text w-fit pr-4"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "gridCols": "grid-cols-8",
+        "gap": "gap-4",
+        "idleToggleBtnUrl": "https://storage.googleapis.com/city-beach-dev/sunny-Ai.png"
+      }
+    }
+  }
+}

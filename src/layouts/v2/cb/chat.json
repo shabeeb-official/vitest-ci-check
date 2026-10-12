@@ -1,0 +1,1867 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Chat Interface",
+  "description": "A chat interface layout with header, message list, and input section.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "name": "Chat List Desktop",
+      "element": "HideSm",
+      "children": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "bg-white flex h-full w-full min-h-0 min-w-0 flex-col transition-all duration-300 ease-in-out overflow-hidden"
+          },
+          "children": [
+            {
+              "name": "Sunny Header",
+              "element": "Box",
+              "props": {
+                "as": "div",
+                "className": "flex justify-center items-center mb-2 bg-[#F3F3F3] p-3 flex-row"
+              },
+              "children": [
+                {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "w-[100%] flex items-center justify-between  "
+                  },
+                  "children": [
+                    {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": " flex flex-row space-x-2 items-center"
+                      },
+                      "children": [
+                        {
+                          "name": "Mascot Image",
+                          "element": "Image",
+                          "props": {
+                            "className": "w-[50px] h-[45px]",
+                            "src": "https://storage.googleapis.com/city-beach-prod/sunny-mascot.svg",
+                            "alt": "avatar"
+                          }
+                        },
+                        {
+                          "name": "Label",
+                          "element": "Text",
+                          "props": {
+                            "as": "h2",
+                            "className": "font-bold text-xl text-[#0C3089] "
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Sunny"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "element": "ToggleChatWindow",
+                      "props": {
+                        "className": "bg-[#F8E300] hover:bg-[#F8E300] rounded-[50%] cursor-pointer sm:flex p-1",
+                        "toggleType": "web",
+                        "ariaLabel": "Close chat window"
+                      },
+                      "children": [
+                        {
+                          "element": "Icon",
+                          "props": {
+                            "icon": "chevronsLeft",
+                            "className": "text-black"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "HandleChatboxRef",
+              "element": "HandleChatboxRef",
+              "props": {
+                "messages": "messages"
+              },
+              "children": [
+                {
+                  "name": "Chat List",
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "chat-list flex-1 min-h-0 overflow-y-scroll space-y-2 p-3"
+                  },
+                  "children": [
+                    {
+                      "name": "chat list items",
+                      "element": "RenderList",
+                      "list": "messages",
+                      "listFields": [
+                        {
+                          "key": "content",
+                          "value": "message"
+                        },
+                        {
+                          "key": "type",
+                          "value": "message_type"
+                        },
+                        {
+                          "key": "chips",
+                          "value": "chips"
+                        }
+                      ],
+                      "render": [
+                        {
+                          "element": "ChatBubble",
+                          "props": {
+                            "message": "message",
+                            "message_type": "message_type",
+                            "style": {
+                              "user": {
+                                "foreground": "white",
+                                "background": "#002b7e"
+                              },
+                              "agent": {
+                                "foreground": "black",
+                                "background": "#EAE9E8"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "flex flex-wrap gap-2"
+                          },
+                          "children": [
+                            {
+                              "name": "chat list chips",
+                              "element": "RenderList",
+                              "list": "chips",
+                              "render": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "p",
+                                    "className": "whitespace-nowrap flex justify-between p-2 bg-white rounded-lg border  cursor-pointer text-xs font-medium text-gray-700"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "ChipAction",
+                                      "props": {
+                                        "value": "value"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "value",
+                                            "className": "text-sm"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "Box",
+              "props": {
+                "as": "div",
+                "className": "rounded-lg h-fit p-3 px-5 bg-[#F3F3F3] w-full flex-none "
+              },
+              "children": [
+                {
+                  "name": "Chat Text Input",
+                  "element": "ChatInputTextArea",
+                  "props": {
+                    "chatWindow": true,
+                    "placeholder": "Ask Sunny..."
+                  }
+                },
+                {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "flex items-center gap-4 justify-end"
+                  },
+                  "children": [
+                    {
+                      "name": "Chat Action",
+                      "element": "ChatInputActions",
+                      "props": {
+                        "chatWindow": "true",
+                        "placeholder": "Ask Sunny..."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Toggle Panel Button",
+      "element": "ShowSm",
+      "children": [
+        {
+          "element": "ToggleChatWindow",
+          "children": [
+            {
+              "element": "Image",
+              "props": {
+                "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20260304/Back-to-chat-button.png",
+                "className": "fixed flex justify-center text-center rounded-b-lg   top-[50%] right-[-3px]  switch-toggle  w-[30px] cursor-pointer tab-switcher z-[100000]"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Chat List Mobile",
+      "element": "ShowSm",
+      "children": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "w-full  max-md:h-screen flex flex-col "
+          },
+          "children": [
+            {
+              "name": "Sunny Header",
+              "element": "Box",
+              "props": {
+                "as": "div",
+                "className": "shrink-0 flex justify-center items-center mb-2 flex-row"
+              },
+              "children": [
+                {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "flex items-center w-[100%] justify-center border-b-2 border-t-2 p-1"
+                  },
+                  "children": [
+                    {
+                      "name": "Mascot Image",
+                      "element": "Image",
+                      "props": {
+                        "className": "w-[50px] h-[45px]",
+                        "src": "https://storage.googleapis.com/city-beach-prod/sunny-mascot.svg",
+                        "alt": "avatar"
+                      }
+                    },
+                    {
+                      "name": "Label",
+                      "element": "Text",
+                      "props": {
+                        "as": "h2",
+                        "className": "font-bold text-xl text-[#0C3089]"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": {
+                            "value": "Sunny"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "Box",
+              "props": {
+                "as": "div",
+                "className": "flex-1  flex flex-col overflow-hidden p-0 md:pb-2  "
+              },
+              "children": [
+                {
+                  "name": "HandleChatboxRef",
+                  "element": "HandleChatboxRef",
+                  "props": {
+                    "messages": "messages"
+                  },
+                  "children": [
+                    {
+                      "name": "Chat List",
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "chat-list flex-1 min-h-0 overflow-y-auto space-y-2 p-3"
+                      },
+                      "children": [
+                        {
+                          "name": "chat list items",
+                          "element": "RenderList",
+                          "list": "messages",
+                          "listFields": [
+                            {
+                              "key": "content",
+                              "value": "message"
+                            },
+                            {
+                              "key": "type",
+                              "value": "message_type"
+                            },
+                            {
+                              "key": "chips",
+                              "value": "chips"
+                            }
+                          ],
+                          "render": [
+                            {
+                              "element": "ChatBubble",
+                              "props": {
+                                "message": "message",
+                                "message_type": "message_type",
+                                "style": {
+                                  "user": {
+                                    "foreground": "white",
+                                    "background": "#002b7e"
+                                  },
+                                  "agent": {
+                                    "foreground": "black",
+                                    "background": "#EAE9E8"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "flex flex-wrap gap-2"
+                              },
+                              "children": [
+                                {
+                                  "name": "chat list chips",
+                                  "element": "RenderList",
+                                  "list": "chips",
+                                  "render": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p",
+                                        "className": "whitespace-nowrap flex justify-between mt-2 p-2 bg-white rounded-lg border  cursor-pointer text-xs font-medium text-gray-700"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "ChipAction",
+                                          "props": {
+                                            "value": "value"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "value",
+                                                "className": "text-sm"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "OptionalRendering",
+                          "props": {
+                            "dataToCheck": "products",
+                            "status": "status"
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "w-full mt-5 justify-end  flex gap-1  items-center overflow-hidden capitalize"
+                              },
+                              "children": [
+                                {
+                                  "element": "ToggleChatWindow",
+                                  "children": [
+                                    {
+                                      "element": "Navigate",
+                                      "props": {
+                                        "className": "whitespace-nowrap text-xs bg-black rounded-lg text-white px-2 py-1",
+                                        "to": "/au/sunny/products/"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Text",
+                                          "props": {
+                                            "as": "p"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "View All"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "flex gap-4 overflow-x-scroll relative"
+                              },
+                              "children": [
+                                {
+                                  "element": "RenderList",
+                                  "list": "products",
+                                  "listFields": [
+                                    {
+                                      "key": "title",
+                                      "value": "title"
+                                    },
+                                    {
+                                      "key": "imageUrl",
+                                      "value": "imageUrl"
+                                    },
+                                    {
+                                      "key": "price",
+                                      "value": "price"
+                                    },
+                                    {
+                                      "key": "brand",
+                                      "value": "brand"
+                                    },
+                                    {
+                                      "key": "sku",
+                                      "value": "sku"
+                                    },
+                                    {
+                                      "key": "id",
+                                      "value": "id"
+                                    },
+                                    {
+                                      "key": "discount_price",
+                                      "value": "discount_price"
+                                    }
+                                  ],
+                                  "render": [
+                                    {
+                                      "element": "ProductWrapper",
+                                      "props": {
+                                        "skuId": "sku",
+                                        "id": "id",
+                                        "brand": "brand",
+                                        "className": "flex flex-col flex-shrink-0 cursor-pointer w-[180px]"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Box",
+                                          "props": {
+                                            "as": "div",
+                                            "className": "w-[180px] h-[220px] flex items-center justify-center overflow-hidden gap-4"
+                                          },
+                                          "children": [
+                                            {
+                                              "name": "Product Image",
+                                              "element": "Image",
+                                              "props": {
+                                                "className": "object-cover w-full h-full transform transition-transform duration-300",
+                                                "src": "imageUrl",
+                                                "alt": "avatar"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "Box",
+                                          "props": {
+                                            "as": "div",
+                                            "className": "font-bold"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "key": "products",
+                                                "value": "brand"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "Box",
+                                          "props": {
+                                            "as": "div",
+                                            "className": "text-xs mt-1 overflow-hidden text-ellipsis line-clamp-4"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "key": "products",
+                                                "value": "title"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "HasDiscount",
+                                          "props": {
+                                            "discount": "discount_price",
+                                            "type": "withoutDiscount"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Currency",
+                                              "props": {
+                                                "value": "price",
+                                                "className": "font-semibold text-gray-900 text-nowrap"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "HasDiscount",
+                                          "props": {
+                                            "discount": "discount_price",
+                                            "type": "withDiscount"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Box",
+                                              "props": {
+                                                "as": "div",
+                                                "className": "flex gap-2 w-fit item-bottom",
+                                                "isLenght": "price"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Currency",
+                                                  "props": {
+                                                    "value": "price",
+                                                    "className": "text-sm font-light text-gray-400 line-through"
+                                                  }
+                                                },
+                                                {
+                                                  "element": "Currency",
+                                                  "props": {
+                                                    "value": "discount_price",
+                                                    "className": "text-sm font-medium sale-item-color"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "Box",
+              "props": {
+                "as": "div",
+                "className": "shrink-0 p-3 flex gap-2 items-center w-full bg-white sticky bottom-0 z-10"
+              },
+              "children": [
+                {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "flex gap-2 h-fit p-3 px-5 rounded-2xl w-full bg-[#F3F3F3] [&_textarea]:bg-[#F3F3F3]"
+                  },
+                  "children": [
+                    {
+                      "name": "Chat Text Input",
+                      "element": "ChatInputTextArea",
+                      "props": {
+                        "chatWindow": true,
+                        "placeholder": "Ask Sunny...",
+                        "className": "w-full rounded-lg p-2 py-[0.6rem] resize-none outline-none place-content-center"
+                      }
+                    },
+                    {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "flex items-center gap-4 justify-end"
+                      },
+                      "children": [
+                        {
+                          "name": "Chat Action",
+                          "element": "ChatInputActions",
+                          "props": {
+                            "chatWindow": "true",
+                            "placeholder": "Ask Sunny..."
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "gridCols": "grid-cols-8",
+        "gap": "gap-4"
+      },
+      "stylesd": {
+        "headerWrapper": "flex mb-2 items-center",
+        "backToProductsButton": "capitalize bg-accent font-white hover:bg-accent",
+        "loadingTextStyle": "text-2xl font-medium capitalize",
+        "imageGridStyle": "w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8",
+        "productBrand": "text-xl font-medium text-gray-900 mb-2",
+        "productTitleWrapper": "flex justify-between w-full items-center gap-4",
+        "productTitle": "font-light",
+        "favorite": "cursor-pointer right-2 top-2 z-1 rounded-[50%] p-1",
+        "favoriteIcon": "text-[#242321] font-light h-[25px] w-[25px]",
+        "favoriteIconChecked": "fill-[#242321]",
+        "colorSection": "mb-6 mt-3",
+        "colorLabel": "capitalize font-normal block text-md text-[#1A1A1A] mb-2",
+        "colorLabelBold": "font-bold",
+        "colorWrapper": "flex flex-wrap gap-2 justify-start",
+        "colorPill": "flex justify-center items-center cursor-pointer",
+        "colorPillSelected": "p-[3px] border-black border-2",
+        "colorPillImage": "h-5 w-5",
+        "sizeItem": "rounded-none hover:bg-none col-span-1 text-center cursor-pointer",
+        "sizeItemSelected": "border-black border-b-2",
+        "buyButtonWrapper": "mb-5",
+        "buttonStyle": "capitalize  rounded-full  px-[20px] py-[15px] w-full",
+        "buttonIsPendingStyle": "cursor-progress bg-gray-400 text-gray-500",
+        "buttonNormalStyle": "bg-accent text-white",
+        "infoSection": "mt-5",
+        "infoText": "capitalize font-light text-sm",
+        "recommendedProductsLabel": "text-2xl font-medium mb-6",
+        "buyNowPayLaterLabel": "capitalize font-semibold mb-2",
+        "productDescriptionText": "text-[#585858] text-[0.875rem]",
+        "moreDetails": {
+          "moreDetailsAccordionWrapper": "w-full border-b border-gray-200",
+          "moreDetailsText": "capitalize font-semibold w-full text-left p-3 flex justify-between  !no-underline hover:!no-underline",
+          "moreDetailsItem": "capitalize col-span-6 text-[0.875rem]",
+          "moreDetailsValue": "col-span-6 text-[0.875rem]",
+          "iconType": "chevron"
+        },
+        "additionalDetails": {
+          "accordionWrapperStyle": "w-full border-b border-gray-200",
+          "accordionTriggerStyle": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline",
+          "accordionContentStyle": "p-3 font-light",
+          "iconType": "chevron",
+          "deliveryTableStyle": "w-full max-w-4xl overflow-hidden bg-white border",
+          "deliveryTableRowStyle": "w-full text-left text-gray-700 overflow-scroll",
+          "deliveryTableHeadStyle": "text-xs text-gray-600 capitalize bg-gray-100",
+          "deliveryTableHeaderCellStyle": "font-medium border-r p-2",
+          "deliveryTableDataCellStyle": "p-2"
+        },
+        "productImages": {
+          "mobileCarouselStyle": "",
+          "mobileCarouselWrapperStyle": "flex",
+          "mobileImageContainerStyle": "flex-shrink-0 flex-grow-0 basis-[80%] min-w-0 relative h-full w-full px-2",
+          "mobileImageStyle": "object-contain w-full",
+          "desktopGridStyle": "grid grid-cols-2 gap-2",
+          "desktopImageContainerStyle": "",
+          "desktopImageStyle": "object-contain"
+        }
+      }
+    },
+    "eslements": {
+      "headerBar": {
+        "name": "Header Bar",
+        "element": "HeaderBar",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/headerWrapper"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/elements/expandSunny"
+          },
+          {
+            "$ref": "#/definitions/elements/backToProducts"
+          }
+        ]
+      },
+      "expandSunny": {
+        "name": "Expand Sunny",
+        "element": "ExpandeSunny",
+        "props": {}
+      },
+      "backToProducts": {
+        "name": "Back To Products",
+        "element": "BackToProducts",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/backToProductsButton"
+          }
+        }
+      },
+      "productInformation": {
+        "name": "Main Grid",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "cclassName": "grid grid-cols-12 gap-4",
+          "className": "flex gap-4 flex-col md:flex-row"
+        },
+        "properties": {
+          "isMobileView": {
+            "type": "boolean"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/elements/productImage"
+          },
+          {
+            "$ref": "#/definitions/elements/productDetail"
+          }
+        ]
+      },
+      "productImage": {
+        "name": "Image Grid",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "className": "flex-[7] w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8"
+        },
+        "children": [
+          {
+            "element": "HideSm",
+            "children": [
+              {
+                "element": "FavoriteButton",
+                "props": {
+                  "sku": "sku"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "productDetail": {
+        "name": "Product Detail",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "className": "flex-[3] w-full col-span-12 lg:col-span-6 xl:col-span-4 2xl:col-span-4"
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/elements/productBrand"
+          },
+          {
+            "$ref": "#/definitions/elements/productTitle"
+          },
+          {
+            "$ref": "#/definitions/elements/productPrice"
+          },
+          {
+            "name": "Color Selector",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "mb-6 mt-3"
+            },
+            "children": [
+              {
+                "name": "Color Selector Value",
+                "element": "Text",
+                "props": {
+                  "as": "span",
+                  "className": "capitalize font-normal block text-md text-[#1A1A1A] mb-2"
+                },
+                "children": [
+                  {
+                    "element": "Text",
+                    "props": {
+                      "as": "span",
+                      "className": "font-bold"
+                    },
+                    "children": [
+                      {
+                        "element": "Value",
+                        "props": {
+                          "value": "Colour "
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "element": "Value",
+                    "props": {
+                      "value": "swatchName"
+                    }
+                  }
+                ]
+              },
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "flex flex-wrap gap-2 justify-start"
+                },
+                "children": [
+                  {
+                    "name": "Color Selector",
+                    "element": "ColorSelector",
+                    "props": {
+                      "swatchName": "swatchName",
+                      "sizeObject": "sizeObject",
+                      "label": "Colour",
+                      "colorPillStyle": {
+                        "$ref": "#/definitions/theme/styles/colorPill"
+                      },
+                      "colorPillSelectedStyle": {
+                        "$ref": "#/definitions/theme/styles/colorPillSelected"
+                      },
+                      "colorPillImageStyle": {
+                        "$ref": "#/definitions/theme/styles/colorPillImage"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Size Selector",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "mb-6"
+            },
+            "children": [
+              {
+                "name": "Size Selector Value",
+                "element": "Text",
+                "props": {
+                  "as": "span",
+                  "className": "capitalize font-bold block text-md text-[#1A1A1A] mb-2"
+                },
+                "children": [
+                  {
+                    "element": "Value",
+                    "props": {
+                      "value": "Available Size"
+                    }
+                  }
+                ]
+              },
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "grid grid-cols-4 gap-2 justify-start text-nowrap"
+                },
+                "children": [
+                  {
+                    "element": "SizeSelector",
+                    "props": {
+                      "sizeObject": "sizeObject",
+                      "sizeItemStyle": {
+                        "$ref": "#/definitions/theme/styles/sizeItem"
+                      },
+                      "sizeItemSelectedStyle": {
+                        "$ref": "#/definitions/theme/styles/sizeItemSelected"
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Buy Now Button",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "mb-5"
+            },
+            "children": [
+              {
+                "element": "BuyNowButtonComponent",
+                "props": {
+                  "label": "Add to Bag",
+                  "buttonWrapperStyle": {
+                    "$ref": "#/definitions/theme/styles/buyButtonWrapper"
+                  },
+                  "buttonStyle": {
+                    "$ref": "#/definitions/theme/styles/buttonStyle"
+                  },
+                  "buttonIsPendingStyle": {
+                    "$ref": "#/definitions/theme/styles/buttonIsPendingStyle"
+                  },
+                  "buttonNormalStyle": {
+                    "$ref": "#/definitions/theme/styles/buttonNormalStyle"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "$ref": "#/definitions/elements/pointsAccordion"
+          },
+          {
+            "$ref": "#/definitions/elements/refundidAccordion"
+          },
+          {
+            "name": "Buy Now Pay Later",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "my-3"
+            },
+            "children": [
+              {
+                "element": "Text",
+                "props": {
+                  "as": "p",
+                  "className": "capitalize font-semibold mb-2"
+                },
+                "children": [
+                  {
+                    "element": "Value",
+                    "props": {
+                      "value": "buy now pay later"
+                    }
+                  }
+                ]
+              },
+              {
+                "element": "Box",
+                "props": {
+                  "as": "div",
+                  "className": "w-full flex flex-wrap gap-2"
+                },
+                "children": [
+                  {
+                    "element": "Image",
+                    "props": {
+                      "alt": "Afterpay",
+                      "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw11e6f463/images/contentpages/payment-types/aftrpay_80x35.svg",
+                      "className": "w-[80px] h-[35px]"
+                    }
+                  },
+                  {
+                    "element": "Image",
+                    "props": {
+                      "alt": "Zip",
+                      "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20b2e1a6/images/contentpages/payment-types/zip_80x35.svg",
+                      "className": "w-[80px] h-[35px]"
+                    }
+                  },
+                  {
+                    "element": "Image",
+                    "props": {
+                      "alt": "Klarna",
+                      "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw43a6dfe9/images/contentpages/payment-types/klarna_80x35.svg",
+                      "className": "w-[80px] h-[35px]"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Product Description",
+            "element": "Box",
+            "props": {
+              "as": "div",
+              "className": "inline"
+            },
+            "children": [
+              {
+                "element": "Text",
+                "props": {
+                  "as": "p",
+                  "className": "text-[#585858] text-[0.875rem]"
+                },
+                "children": [
+                  {
+                    "element": "ExpandableText",
+                    "props": {
+                      "openLabel": "less",
+                      "closeLabel": "read more"
+                    },
+                    "children": [
+                      {
+                        "element": "Value",
+                        "props": {
+                          "value": "description"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Product Details",
+            "element": "Accordion",
+            "props": {
+              "type": "single",
+              "collapsible": true,
+              "className": "w-full border-b border-gray-200"
+            },
+            "slots": {
+              "items": [
+                {
+                  "name": "Additional Details",
+                  "element": "AccordionItem",
+                  "props": {
+                    "value": "detail",
+                    "className": "border-b-0 w-full"
+                  },
+                  "slots": {
+                    "trigger": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Details"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "content": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "p-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "grid grid-cols-12 gap-y-3"
+                          },
+                          "children": [
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "brand:"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "brand"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "product:"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "title"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "pattern:"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize col-span-6 text-[0.875rem]"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "pattern"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Size & Fit",
+                  "element": "AccordionItem",
+                  "props": {
+                    "value": "size-fit",
+                    "className": "border-b-0 w-full"
+                  },
+                  "slots": {
+                    "trigger": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "size & fit"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "content": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "p-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p",
+                            "className": "font-light text-sm"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Please refer to our size guide to see what size is right for you! Keep in mind, sizes between brands are likely to vary, so please use the measurements as a guide only."
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Link",
+                          "props": {
+                            "href": "https://www.citybeach.com/au/size-guide-make-selection.html",
+                            "target": "_blank",
+                            "className": "font-light text-sm capitalize underline underline-offset-1 cursor-pointer"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "view size guide"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "Size & Fit",
+                  "element": "AccordionItem",
+                  "props": {
+                    "value": "delivery-return",
+                    "className": "border-b-0 w-full"
+                  },
+                  "slots": {
+                    "trigger": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div",
+                        "className": "capitalize font-semibold w-full text-left p-3 flex justify-between !no-underline hover:!no-underline"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "Delivery & Return"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "content": {
+                      "element": "Box",
+                      "props": {
+                        "as": "div"
+                      },
+                      "children": [
+                        {
+                          "element": "DeliveryAndReturn",
+                          "props": {
+                            "item": {
+                              "tableData": {
+                                "headers": [
+                                  "Shipping Methods",
+                                  "Shipping Times",
+                                  "Cost"
+                                ],
+                                "rows": [
+                                  {
+                                    "method": "Express",
+                                    "times": [
+                                      {
+                                        "region": "Metro",
+                                        "days": "1-4 business days"
+                                      },
+                                      {
+                                        "region": "Regional/Rural",
+                                        "days": "1-7 business days"
+                                      }
+                                    ],
+                                    "cost": "$13.99"
+                                  },
+                                  {
+                                    "method": "Standard",
+                                    "times": [
+                                      {
+                                        "region": "Metro",
+                                        "days": "2-10 business days"
+                                      },
+                                      {
+                                        "region": "Regional/Rural",
+                                        "days": "2-13 business days"
+                                      }
+                                    ],
+                                    "cost": "$10.99 or $2\nFree for orders over $100"
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "font-light text-sm"
+                          },
+                          "children": [
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "For other delivery methods, "
+                                  }
+                                },
+                                {
+                                  "element": "Link",
+                                  "props": {
+                                    "href": "https://www.citybeach.com/au/shipping-and-handling.html?_gl=1*1r191ee*_gcl_au*NDg2MDAwMTA2LjE3NjY5OTkxMTk.",
+                                    "target": "_blank",
+                                    "className": "font-light text-sm capitalize underline underline-offset-1 cursor-pointer"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "click here"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": " for shipping and delivery times."
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "Not 100% happy with your purchase? We offer online and in-store returns within 30 days of delivery*. For more information, please "
+                                  }
+                                },
+                                {
+                                  "element": "Link",
+                                  "props": {
+                                    "href": "https://www.citybeach.com/au/returns-and-exchanges.html?_gl=1*8xhvdp*_gcl_au*NDg2MDAwMTA2LjE3NjY5OTkxMTk.",
+                                    "target": "_blank",
+                                    "className": "font-light text-sm capitalize underline underline-offset-1 cursor-pointer"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "click here"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/definitions/elements/productNumber"
+          }
+        ]
+      },
+      "productBrand": {
+        "name": "Product Brand",
+        "element": "Text",
+        "props": {
+          "as": "h2",
+          "className": {
+            "$ref": "#/definitions/theme/styles/productBrand"
+          }
+        },
+        "children": [
+          {
+            "name": "Product Brand Value",
+            "element": "Value",
+            "props": {
+              "value": "brand"
+            }
+          }
+        ]
+      },
+      "productTitle": {
+        "name": "Product Title",
+        "element": "Box",
+        "props": {
+          "as": "div"
+        },
+        "children": [
+          {
+            "element": "Text",
+            "props": {
+              "as": "h2"
+            },
+            "children": [
+              {
+                "name": "Product Title Value",
+                "element": "Value",
+                "props": {
+                  "value": "title"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "productPrice": {
+        "name": "Product Price",
+        "element": "ProductPriceComponent",
+        "slots": {
+          "salePrice": {},
+          "regularPrice": {
+            "element": "Text",
+            "props": {
+              "as": "p",
+              "className": "text-lg font-light text-gray-900 mb-4"
+            },
+            "children": [
+              {
+                "element": "Currency",
+                "children": [
+                  {
+                    "element": "Value",
+                    "props": {
+                      "value": "price"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "additionalDetails": {
+        "name": "Additional Details",
+        "element": "AdditionalDetailsComponent",
+        "props": {
+          "items": {
+            "$ref": "#/definitions/content/additionalDetailsItems"
+          },
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionWrapperStyle"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionTriggerStyle"
+          },
+          "accordionContentStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionContentStyle"
+          },
+          "iconType": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/iconType"
+          },
+          "deliveryTableStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableStyle"
+          },
+          "deliveryTableRowStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableRowStyle"
+          },
+          "deliveryTableHeadStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeadStyle"
+          },
+          "deliveryTableHeaderCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeaderCellStyle"
+          },
+          "deliveryTableDataCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableDataCellStyle"
+          }
+        }
+      },
+      "productNumber": {
+        "name": "Product Number",
+        "element": "Box",
+        "props": {
+          "as": "div",
+          "className": {
+            "$ref": "#/definitions/theme/styles/infoSection"
+          }
+        },
+        "children": [
+          {
+            "name": "Product Number Text",
+            "element": "Text",
+            "props": {
+              "as": "p",
+              "className": {
+                "$ref": "#/definitions/theme/styles/infoText"
+              }
+            },
+            "children": [
+              {
+                "name": "Product Number Value",
+                "element": "Value",
+                "props": {
+                  "value": "Product Number: "
+                }
+              },
+              {
+                "name": "Product Number SKU",
+                "element": "Value",
+                "props": {
+                  "value": "sku"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "recommendedProducts": {
+        "name": "Recommended Products",
+        "element": "RecommendedProductsComponent",
+        "props": {
+          "sku": "sku",
+          "recommendedProductsLabel": "You might also like",
+          "recommendedProductsLabelStyle": {
+            "$ref": "#/definitions/theme/styles/recommendedProductsLabel"
+          }
+        }
+      },
+      "refundidAccordion": {
+        "name": "Refundid Accordion",
+        "element": "Accordion",
+        "props": {
+          "type": "single",
+          "collapsible": true,
+          "className": "w-full border-b border-gray-200"
+        },
+        "slots": {
+          "items": [
+            {
+              "element": "AccordionItem",
+              "props": {
+                "value": "refundid",
+                "className": "border-b-0 w-full p-4"
+              },
+              "slots": {
+                "trigger": {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "col-span-11"
+                  },
+                  "children": [
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "text-xs md:text-sm lg:text-md flex flex-wrap gap-1"
+                      },
+                      "children": [
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "span",
+                            "className": "font-semibold capitalize"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "instant refunds"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Text",
+                          "props": {
+                            "as": "p"
+                          },
+                          "children": [
+                            {
+                              "element": "Value",
+                              "props": {
+                                "value": "when you return using"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Image",
+                          "props": {
+                            "className": "h-[23px] pl-[5px]",
+                            "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw0e536788/images/homepage/_04-Content_Asset-Assets/Refundid/refundid_logo.png"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "content": {
+                  "element": "Image",
+                  "props": {
+                    "className": "p-3 font-light",
+                    "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dwc601aec8/images/homepage/_04-Content_Asset-Assets/Refundid/refundid_Instant-refunds.png"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "pointsAccordion": {
+        "name": "Points Accordion",
+        "element": "Accordion",
+        "props": {
+          "type": "single",
+          "collapsible": true,
+          "className": "w-full border-b border-gray-200"
+        },
+        "slots": {
+          "items": [
+            {
+              "element": "AccordionItem",
+              "props": {
+                "value": "points",
+                "className": "border-b-0 w-full p-4"
+              },
+              "slots": {
+                "trigger": {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "col-span-11 flex items-center whitespace-nowrap"
+                  },
+                  "children": [
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "span",
+                        "className": "whitespace-nowrap font-semibold capitalize mr-[8px]"
+                      },
+                      "children": [
+                        {
+                          "element": "Image",
+                          "props": {
+                            "className": "w-[35px]",
+                            "src": "https://www.citybeach.com/on/demandware.static/Sites-CityBeachAustralia-Site/-/en_AU/v1755029288227/images/citybeach-rewards_icon.png"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": {
+                            "value": "Earn points on the shop"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "content": {
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "flex flex-col gap-3 mt-[1.5rem]"
+                  },
+                  "children": [
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "font-light flex flex-col gap-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": {
+                            "value": "20% off* on first order"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "font-light flex flex-col gap-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": {
+                            "value": "Earn points while you shop"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "element": "Text",
+                      "props": {
+                        "as": "p",
+                        "className": "font-light flex flex-col gap-3"
+                      },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": {
+                            "value": "$1 = 10 points, 1000 points = $10 voucher"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "content": {
+      "chatList": {
+        "initialMessage": "Hi, I’m Sunny, your personal shopping assistant. Here to help you find what you’re looking for, whether it’s the latest trends, new products or styling tips",
+        "inititalChips": [
+          "Shop Men's Clothing",
+          "Shop Women's Clothing",
+          "Shop Kid's Clothing"
+        ]
+      },
+      "additionalDetailsItems": [
+        {
+          "id": "size-fit",
+          "title": "size & fit",
+          "contentType": "text",
+          "content": "Please refer to our size guide to see what size is right for you! Keep in mind, sizes between brands are likely to vary, so please use the measurements as a guide only.",
+          "linkLabel": "view size guide",
+          "linkURL": "https://www.citybeach.com/au/size-guide-make-selection.html"
+        },
+        {
+          "id": "delivery-return",
+          "title": "delivery & return",
+          "contentType": "table",
+          "tableData": {
+            "headers": ["Shipping Methods", "Shipping Times", "Cost"],
+            "rows": [
+              {
+                "method": "Express",
+                "times": [
+                  {
+                    "region": "Metro",
+                    "days": "1-4 business days"
+                  },
+                  {
+                    "region": "Regional/Rural",
+                    "days": "1-7 business days"
+                  }
+                ],
+                "cost": "$13.99"
+              },
+              {
+                "method": "Standard",
+                "times": [
+                  {
+                    "region": "Metro",
+                    "days": "2-10 business days"
+                  },
+                  {
+                    "region": "Regional/Rural",
+                    "days": "2-13 business days"
+                  }
+                ],
+                "cost": "$10.99 or $2\nFree for orders over $100"
+              }
+            ]
+          },
+          "additionalInfo": [
+            {
+              "text": "For other delivery methods, ",
+              "link": "https://www.citybeach.com/au/shipping-and-handling.html",
+              "linkText": "click here",
+              "suffix": " for shipping and delivery times."
+            },
+            {
+              "text": "Not 100% happy with your purchase? We offer online and in-store returns within 30 days of delivery*. For more information, please ",
+              "link": "https://www.citybeach.com/au/returns-and-exchanges.html",
+              "linkText": "click here"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

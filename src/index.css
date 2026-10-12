@@ -1,0 +1,350 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* :host { */
+  /*   font-family: Copernicus, Poppins, sans-serif; */
+  /* } */
+
+  @font-face {
+    font-family: "Apercu";
+    src: url("https://cdn.shopify.com/s/files/1/0961/2772/files/apercu_medium-webfont.woff?v=1677749443")
+      format("woff");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Apercu";
+    src: url("https://cdn.shopify.com/s/files/1/0961/2772/files/apercu_bold-webfont.woff?v=1677749251")
+      format("woff");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbythin.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbylight.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbyregular.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbymedium.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbysemibold.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbybold.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbyextrabold.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Visby";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url("/src/assets/fonts/visbyheavy.woff2") format("woff2");
+  }
+
+  :host,
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.buttonGradient:active {
+  background-color: rgba(0, 0, 0, 0.05); /* light gray effect */
+  transition: background-color 100ms ease-in-out;
+}
+
+.animate-glow-border {
+  animation: glow-border 2s infinite alternate;
+}
+
+@keyframes glow-border {
+  0% {
+    border-color: #ffffff;
+  }
+  50% {
+    border-color: #e9eff7;
+  }
+  100% {
+    border-color: #5c93e0;
+  }
+}
+
+@keyframes pulseAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulseEffect {
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 550px) {
+  .bg-position-mobile {
+    background-position: 100% 29px !important;
+  }
+}
+
+@keyframes glowAnimation {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes l3 {
+  20% {
+    background-position:
+      0% 0%,
+      50% 50%,
+      100% 50%;
+  }
+  40% {
+    background-position:
+      0% 100%,
+      50% 0%,
+      100% 50%;
+  }
+  60% {
+    background-position:
+      0% 50%,
+      50% 100%,
+      100% 0%;
+  }
+  80% {
+    background-position:
+      0% 50%,
+      50% 50%,
+      100% 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .background-gradient {
+    background: linear-gradient(
+      240deg,
+      #3de6ad 0.49%,
+      #428ee8 34.63%,
+      #4586d0 70.96%
+    );
+  }
+}
+
+body,
+html,
+#root {
+  height: 100vh;
+}
+
+@layer components {
+  .filter-item {
+    @apply capitalize text-[#242321] font-light hover:font-bold cursor-pointer;
+  }
+
+  .filter-item-selected {
+    @apply capitalize text-[#242321] font-bold cursor-pointer;
+  }
+
+  .delivery-table-col-one {
+    @apply align-middle md:text-lg font-semibold text-gray-900 text-xs border-r p-2;
+  }
+
+  .delivery-table-col-two {
+    @apply align-middle border-r p-2;
+  }
+
+  .delivery-table-col-three {
+    @apply align-middle md:text-lg font-medium text-gray-900 text-xs  p-2;
+  }
+
+  .delivery-table-normal-text {
+    @apply text-gray-600 text-xs md:text-sm;
+  }
+
+  .delivery-table-medium-text {
+    @apply delivery-table-normal-text font-medium md:font-bold;
+  }
+
+  .loader {
+    @apply w-[30px] aspect-[2];
+    --_g: no-repeat radial-gradient(circle closest-side, #9ca3af 90%, #0000);
+    background:
+      var(--_g) 0% 50%,
+      var(--_g) 50% 50%,
+      var(--_g) 100% 50%;
+    background-size: calc(100% / 2) 30%;
+    animation: l3 1s infinite linear;
+  }
+}
+
+.sale-item-color {
+  color: rgb(238, 41, 47);
+}
+@keyframes roadandgun-loading-dots {
+  0%,
+  20% {
+    content: "";
+  }
+
+  40% {
+    content: ".";
+  }
+
+  60% {
+    content: "..";
+  }
+
+  80%,
+  100% {
+    content: "...";
+  }
+}
+
+.loading-dots::after {
+  content: "";
+  display: inline-block;
+  width: 1.5em;
+  text-align: left;
+  animation: loadingDots 1.5s steps(1, end) infinite;
+}

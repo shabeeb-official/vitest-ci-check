@@ -1,0 +1,398 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Product Listing Page",
+  "description": "PLP layout converted from TOML to JSON schema style.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "name": "Product Display",
+      "component": "ProductDisplay",
+      "children": [
+        {
+          "$ref": "#/definitions/components/topBar"
+        },
+        {
+          "$ref": "#/definitions/components/productDisplayGrid"
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "sideBarExpanded": true,
+        "direction": "rtl",
+        "leftWidth": "flex-[2.5]",
+        "rightWidth": "flex-[9.5]"
+      },
+      "styles": {
+        "productCard": {
+          "base": "bg-white overflow-hidden transition-all duration-200 cursor-pointer hover:shadow-md flex flex-col",
+          "imageWrap": "relative",
+          "content": "pt-4 pb-4 flex flex-col items-center",
+          "image": "w-full h-full transition-transform duration-300",
+          "details": "p-4 flex flex-col flex-1 justify-between",
+          "brand": "font-copernicus text-balance font-bold line-clamp-1 cursor-text px-4 w-fit",
+          "title": "font-copernicus font-medium text-[#363536] line-clamp-2 cursor-text px-4 w-fit text-[17.5px] text-center pb-1 tracking-[0.06em]",
+          "price": "font-light text-[#363536] text-nowrap cursor-text px-4 w-fit text-[15px]",
+          "sale": "text-sm font-medium sale-item-color cursor-text w-fit pr-4",
+          "strike": "text-sm font-light line-through cursor-text pl-4 w-fit",
+          "favorite": "cursor-pointer right-2 top-2 z-1 rounded-[50%] p-1",
+          "favoriteIcon": "text-[#242321] font-light h-[25px] w-[25px]",
+          "favoriteIconChecked": "fill-[#242321]"
+        },
+        "topBar": {
+          "base": "flex items-center justify-between p-3 bg-white",
+          "label": "text-xs uppercase font-medium text-gray-600",
+          "filterLabel": "uppercase text-sm font-semibold tracking-wide text-gray-600",
+          "filterItem": "cursor-pointer flex items-center justify-between gap-3 border border-gray-300 bg-white px-4 py-2 min-w-[160px]",
+          "filterPanel": "mb-8 w-full flex justify-center",
+          "clearButton": "capitalize bg-black font-white hover:bg-gray-900 rounded-none",
+          "sortFilter": "flex items-center justify-between gap-2 w-full",
+          "topbarWrapper": "fw-full mb-4",
+          "colorWrapper": "flex flex-wrap gap-2 justify-center",
+          "colorPill": "flex justify-center items-center cursor-pointer rounded-full",
+          "colorPillSelected": "p-[3px] border-black border-2 rounded-full",
+          "colorPillImage": "h-5 w-5 rounded-full",
+          "genericFilterItemsSelected": "cursor-pointer border-2 px-2 py-2 text-sm transition-colors text-black border-black",
+          "genericFilterItemsNotSelected" : "cursor-pointer px-4 py-2 text-sm transition-colors bg-white text-gray-700 border-gray-300",
+          "sortPopup": {
+            "sortLabel": "text-sm font-semibold text-gray-600",
+            "sortTrigger": "cursor-pointer flex items-center gap-2 border border-gray-300 px-4 py-2 bg-white text-sm font-semibold uppercase tracking-wide",
+            "sortChevron": "",
+            "sortPopover": "z-[9999]",
+            "sortContent": "bg-white border border-gray-300 shadow-none min-w-[220px]",
+            "sortList": "flex flex-col",
+            "sortItem": "px-4 py-3 text-sm text-gray-900 cursor-pointer hover:bg-[#ebe7dd]",
+            "sortItemSelected": "px-4 py-3 text-sm font-semibold text-gray-900 bg-[#ebe7dd]"
+          },
+          "categoryFilter": {
+            "base": "grid grid-cols-7 gap-2 p-3 bg-white border border-gray-300",
+            "item": "flex items-center justify-between border border-gray-300 px-2 py-1.5",
+            "label": "uppercase text-[12px] text-gray-900",
+            "checkbox": "w-3.5 h-3.5 border border-black accent-black"
+          },
+          "ChatToogleButton": "h-[2.6rem] w-24 cursor-pointer",
+          "TopBarRight": "md:flex flex-wrap items-center gap-4 hidden w-full justify-end py-5"
+        }
+      }
+    },
+    "components": {
+      "topBar": {
+        "name": "Top Bar",
+        "component": "TopBar",
+        "props": {
+          "clearfilterLabel": "clear filter",
+          "brandLabel": "brand",
+          "colorLabel": "color",
+          "priceLabel": "price",
+          "sizeLabel": "size",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/clearFilterButton"
+          },
+          {
+            "$ref": "#/definitions/components/sortFilter"
+          },
+          {
+            "$ref": "#/definitions/components/dynamicFilterPanels"
+          }
+        ]
+      },
+      "sortPopup": {
+        "name": "Sort Popup",
+        "component": "SortPopup",
+        "props": {
+          "sortlabel": "sort",
+          "align": "start",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar/sortPopup"
+          }
+        }
+      },
+      "clearFilterButton": {
+        "name": "Clear Filter Button",
+        "component": "ClearFilterButton",
+        "props": {
+          "label": "clearfilterLabel",
+          "onClick": "clearFilter",
+          "slot": "right",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "expandSunny": {
+        "name": "Expand Sunny",
+        "component": "ExpandeSunny",
+        "props": {
+          "slot": "inner-left",
+          "imageURL": "https://dev-loader-roddandgunn.bayezon.com/sunny-button.png",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar/ChatToogleButton"
+          }
+        }
+      },
+      "sortFilter": {
+        "name": "Sort Filter",
+        "component": "SortFilter",
+        "props": {
+          "onOpenFilter": "onOpenFilter",
+          "onUpdateFilter": "onUpdateFilter",
+          "value": "value",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/expandSunny"
+          },
+          {
+            "$ref": "#/definitions/components/sortPopup"
+          },
+          {
+            "name": "Top Bar Right",
+            "component": "TopBarRight",
+            "props": {
+              "styles": {
+                "$ref": "#/definitions/theme/styles/topBar/TopBarRight"
+              }
+            },
+            "children": [
+              {
+                "$ref": "#/definitions/components/dynamicFilterButtons"
+              }
+            ]
+          }
+        ]
+      },
+      "filterItemBrand": {
+        "name": "Filter Item Brand",
+        "component": "FilterItem",
+        "props": {
+          "label": "Brand",
+          "type": "brand",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "filterItemColor": {
+        "name": "Filter Item Color",
+        "component": "FilterItem",
+        "props": {
+          "label": "Color",
+          "type": "color",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "filterItemPrice": {
+        "name": "Filter Item Price",
+        "component": "FilterItem",
+        "props": {
+          "label": "Price",
+          "type": "price",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "filterItemSize": {
+        "name": "Filter Item Size",
+        "component": "FilterItem",
+        "props": {
+          "label": "Size",
+          "type": "size",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "brandFilterPanel": {
+        "name": "Brand Filter Panel",
+        "component": "BrandFilterItems",
+        "props": {
+          "slot": "panel",
+          "showWhen": "brand",
+          "visible": true,
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "colorFilterPanel": {
+        "name": "Color Filter Panel",
+        "component": "ColorFilterItem",
+        "props": {
+          "slot": "panel",
+          "showWhen": "color",
+          "visible": true,
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "priceFilterPanel": {
+        "name": "Price Filter Panel",
+        "component": "PriceFilterItem",
+        "props": {
+          "slot": "panel",
+          "showWhen": "price",
+          "visible": true,
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "sizeFilterPanel": {
+        "name": "Size Filter Panel",
+        "component": "SizeFilterItem",
+        "props": {
+          "slot": "panel",
+          "showWhen": "size",
+          "visible": true,
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "dynamicFilterButtons": {
+        "name": "Dynamic Filter Buttons",
+        "component": "DynamicFilterButtons",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "dynamicFilterPanels": {
+        "name": "Dynamic Filter Panels",
+        "component": "DynamicFilterPanels",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/topBar"
+          }
+        }
+      },
+      "productDisplayGrid": {
+        "name": "Product Display Grid",
+        "component": "ProductDisplayGrid",
+        "props": {
+          "nodata": "No products found",
+          "nodatacontent": "Try changing your filters"
+        },
+        "nested": [
+          {
+            "$ref": "#/definitions/components/productCard"
+          }
+        ]
+      },
+      "productCard": {
+        "name": "Product Card",
+        "component": "ProductCard",
+        "props": {
+          "product": "product",
+          "navigateToProduct": "navigateToProduct",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productCard"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/imageWrapper"
+          },
+          {
+            "name": "Product Card Details",
+            "component": "ProductCardBody",
+            "props": {
+              "styles": {
+                "$ref": "#/definitions/theme/styles/productCard"
+              }
+            },
+            "children": [
+              {
+                "$ref": "#/definitions/components/productTitle"
+              },
+              {
+                "$ref": "#/definitions/components/productPrice"
+              }
+            ]
+          }
+        ]
+      },
+      "imageWrapper": {
+        "name": "Image Wrapper",
+        "component": "ImageWrapper",
+        "props": {
+          "product": "product",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productCard"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/productImage"
+          }
+        ]
+      },
+      "favoriteButton": {
+        "name": "Favorite Button",
+        "component": "FavoriteButton",
+        "props": {
+          "sku": "product",
+          "position": "absolute",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productCard"
+          }
+        }
+      },
+      "productImage": {
+        "name": "Product Image",
+        "component": "ProductListImage",
+        "props": {
+          "product": "product",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productCard"
+          }
+        }
+      },
+      "productBrand": {
+        "name": "Product Brand",
+        "component": "ProductBrand",
+        "props": {
+          "product": "product",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productCard"
+          }
+        }
+      },
+      "productTitle": {
+        "name": "Product Title",
+        "component": "ProductTitle",
+        "props": {
+          "product": "product",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productCard"
+          }
+        }
+      },
+      "productPrice": {
+        "name": "Product Price",
+        "component": "ProductPrice",
+        "props": {
+          "product": "product",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/productCard"
+          }
+        }
+      }
+    }
+  }
+}

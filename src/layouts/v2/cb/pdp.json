@@ -1,0 +1,1594 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Product Detail Page",
+  "description": "PDP layout converted from TOML to JSON schema style.",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "element": "If",
+      "when": {
+        "operator": "is",
+        "lhs": "loading_status",
+        "rhs": "empty"
+      },
+      "then": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "bg-white flex flex-1 flex-col items-center justify-center h-screen"
+          },
+          "children": [
+            {
+              "element": "Text",
+              "props": {
+                "as": "h2",
+                "className": "text-2xl font-medium mb-4"
+              },
+              "children": [
+                {
+                  "element": "Value",
+                  "props": { "value": "Product details not found" }
+                }
+              ]
+            },
+            {
+              "element": "Navigate",
+              "props": {
+                "to": "/au/sunny/products"
+              },
+              "children": [
+                {
+                  "element": "Button",
+                  "props": {
+                    "variant": "outline"
+                  },
+                  "children": [
+                    {
+                      "element": "Icon",
+                      "props": {
+                        "icon": "arrowLeft",
+                        "className": "mr-2 h-4 w-4"
+                      }
+                    },
+                    {
+                      "element": "Text",
+                      "props": { "as": "span" },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": {
+                            "value": "Back to products"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "If",
+      "when": {
+        "operator": "is",
+        "lhs": "loading_status",
+        "rhs": "loading"
+      },
+      "then": [
+        {
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "flex flex-1 items-center justify-center w-full bg-white h-screen"
+          },
+          "children": [
+            {
+              "element": "Icon",
+              "props": {
+                "icon": "loader",
+                "className": "h-4 w-4 mr-2 animate-spin"
+              }
+            },
+            {
+              "element": "Text",
+              "props": {
+                "as": "h2",
+                "className": "text-2xl font-medium capitalize"
+              },
+              "children": [
+                { "element": "Value", "props": { "value": "loading" } }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "element": "If",
+      "when": {
+        "operator": "is",
+        "lhs": "loading_status",
+        "rhs": "success"
+      },
+      "then": [
+        {
+          "name": "PDP Section",
+          "element": "Box",
+          "props": {
+            "as": "div",
+            "className": "bg-white p-3 w-full h-full min-h-0 max-md:h-screen"
+          },
+          "children": [
+            {
+              "name": "Toggle Mobile Chat Pane",
+              "element": "ShowSm",
+              "children": [
+                {
+                  "element": "ToggleChatWindow",
+                  "children": [
+                    {
+                      "element": "Image",
+                      "props": {
+                        "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20260304/Back-to-chat-button.png",
+                        "className": "fixed flex justify-center text-center rounded-b-lg   top-[50%] right-[-3px]  switch-toggle  w-[30px] cursor-pointer tab-switcher z-[100000]"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "Box",
+              "name": "Details",
+              "props": {
+                "as": "div",
+                "className": "flex mb-2 items-center gap-3"
+              },
+              "children": [
+                {
+                  "name": "Desktop Toggle Chat Panel",
+                  "element": "HideSm",
+                  "children": [
+                    {
+                      "element": "HideWhenChatPanelOpen",
+                      "children": [
+                        {
+                          "element": "ToggleChatWindow",
+                          "children": [
+                            {
+                              "element": "Image",
+                              "props": {
+                                "src": "https://storage.googleapis.com/city-beach-dev/sunny-Ai.png",
+                                "className": "h-12  cursor-pointer object-cover"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "Navigate",
+                  "props": {
+                    "to": "/au/sunny/products",
+                    "className": "cursor-pointer inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary-foreground h-10 px-4 py-2 capitalize bg-accent font-white hover:bg-accent"
+                  },
+                  "children": [
+                    {
+                      "element": "Text",
+                      "props": { "as": "p" },
+                      "children": [
+                        {
+                          "element": "Value",
+                          "props": { "value": "back to products" }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "Box",
+              "name": "Product Detail page",
+              "props": {
+                "as": "div",
+                "className": "grid grid-cols-12 gap-4 "
+              },
+              "children": [
+                {
+                  "name": "Product Image Section",
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "max-lg:w-full max-lg:overflow-hidden lg:relative max-lg:h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8"
+                  },
+                  "children": [
+                    {
+                      "name": "Add to Wishlist",
+                      "element": "AddToWishlist",
+                      "props": {
+                        "productId": "sku",
+                        "className": "absolute top-2 right-2 z-20 rounded-[50%] max-lg:hidden lg:block",
+                        "isDefault": [
+                          {
+                            "element": "Icon",
+                            "props": {
+                              "icon": "heart",
+                              "className": " text-[#242321] font-light h-[25px] w-[25px]"
+                            }
+                          }
+                        ],
+                        "isAdded": [
+                          {
+                            "element": "Icon",
+                            "props": {
+                              "icon": "heart-filled",
+                              "className": "text-red-500"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "element": "ImageCarousel",
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "max-lg:flex lg:grid lg:grid-cols-2 lg:gap-2 "
+                          },
+                          "children": [
+                            {
+                              "element": "RenderList",
+                              "list": "images",
+                              "listFields": [
+                                {
+                                  "key": "url",
+                                  "value": "url"
+                                }
+                              ],
+                              "render": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "max-lg:flex-shrink-0 max-lg:flex-grow-0 max-lg:basis-[80%] max-lg:min-w-0 max-lg:relative max-lg:h-full max-lg:w-full max-lg:px-2 lg:flex-shrink-0 lg:flex-grow-0 lg:basis-full lg:min-w-0 lg:relative lg:h-full lg:w-full lg:px-0 "
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Image",
+                                      "props": {
+                                        "src": "url",
+                                        "alt": "altText",
+                                        "className": "object-contain w-full"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "element": "Product Details Section",
+                  "element": "Box",
+                  "props": {
+                    "as": "div",
+                    "className": "w-full col-span-12 lg:col-span-6 xl:col-span-4 2xl:col-span-4 "
+                  },
+                  "children": [
+                    {
+                      "element": "Box",
+                      "props": {
+                        "as": "div"
+                      },
+                      "children": [
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div"
+                          },
+                          "children": [
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "h2",
+                                "className": "text-xl font-medium text-gray-900 mb-2"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "brand"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "flex justify-between w-full items-center "
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "flex items-center gap-1 whitespace-nowrp"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "h2",
+                                        "className": "font-light"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "title"
+                                          }
+                                        },
+                                        {
+                                          "element": "OptionalRendering",
+                                          "props": {
+                                            "dataToCheck": "selectedColor"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": " in "
+                                              }
+                                            },
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "selectedColor"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Add to Wishlist",
+                                  "element": "AddToWishlist",
+                                  "props": {
+                                    "productId": "sku",
+                                    "className": "cursor-pointer  p-1 block lg:hidden ",
+                                    "isDefault": [
+                                      {
+                                        "element": "Icon",
+                                        "props": {
+                                          "icon": "heart",
+                                          "className": " text-[#242321] font-light h-[25px] w-[25px]"
+                                        }
+                                      }
+                                    ],
+                                    "isAdded": [
+                                      {
+                                        "element": "Icon",
+                                        "props": {
+                                          "icon": "heart-filled",
+                                          "className": "text-red-500"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "HasDiscount",
+                          "props": {
+                            "discount": "sale_price",
+                            "type": "withoutDiscount"
+                          },
+                          "children": [
+                            {
+                              "element": "Currency",
+                              "props": {
+                                "value": "price",
+                                "className": "text-lg font-light text-gray-900 mb-4"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "HasDiscount",
+                          "props": {
+                            "discount": "sale_price",
+                            "type": "withDiscount"
+                          },
+                          "children": [
+                            {
+                              "element": "Currency",
+                              "props": {
+                                "value": "sale_price",
+                                "className": "text-lg font-light sale-item-color mb-2"
+                              }
+                            },
+                            {
+                              "element": "Currency",
+                              "props": {
+                                "value": "price",
+                                "className": "text-sm font-light text-gray-500 mb-2 line-through"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "mb-6 mt-3"
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "label",
+                                "className": "peer-disabled:cursor-not-allowed peer-disabled:opacity-70 capitalize font-normal block text-md text-[#1A1A1A] mb-2 space-x-2"
+                              },
+                              "children": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "font-bold"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "Colour"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "span"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "selectedColor"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Box",
+                                      "props": {
+                                        "as": "div",
+                                        "className": "flex flex-wrap gap-2 justify-start"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "RenderList",
+                                          "list": "colorOption",
+                                          "listFields": [
+                                            {
+                                              "key": "value",
+                                              "value": "value"
+                                            },
+                                            {
+                                              "key": "image",
+                                              "value": "image"
+                                            }
+                                          ],
+                                          "render": [
+                                            {
+                                              "element": "PdpProductSelector",
+                                              "props": {
+                                                "className": "flex justify-center items-center cursor-pointer",
+                                                "type": "colors",
+                                                "name": "value",
+                                                "selectedVariant": "selectedColor",
+                                                "object": "colorOption",
+                                                "isSelectedStyle": "flex justify-center items-center cursor-pointer p-[3px] border-black border-2"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Image",
+                                                  "props": {
+                                                    "src": "image",
+                                                    "alt": "altText",
+                                                    "className": "h-[20px] w-[20px] "
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "mb-6 mt-3"
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "label",
+                                "className": "mb-6"
+                              },
+                              "children": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "span",
+                                    "className": "peer-disabled:cursor-not-allowed peer-disabled:opacity-70 capitalize font-bold block text-md text-[#1A1A1A] mb-2"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "Available Size"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Box",
+                                      "props": {
+                                        "as": "div",
+                                        "className": "grid grid-cols-4 gap-2 justify-start text-nowrap"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "RenderList",
+                                          "list": "sizeOption",
+                                          "listFields": [
+                                            {
+                                              "key": "value",
+                                              "value": "value"
+                                            }
+                                          ],
+                                          "render": [
+                                            {
+                                              "element": "PdpProductSelector",
+                                              "props": {
+                                                "isSelectedStyle": "rounded-none hover:bg-none col-span-1 text-center cursor-pointer border-black border-b-2",
+                                                "selectedVariant": "selectedSize",
+                                                "type": "size",
+                                                "name": "value",
+                                                "className": "rounded-none hover:bg-none col-span-1 text-center cursor-pointer"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Text",
+                                                  "props": {
+                                                    "as": "span"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "element": "Value",
+                                                      "props": {
+                                                        "value": "value"
+                                                      }
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "mb-5"
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "flex gap-2 flex-row max-sm:flex-col cursor-pointer",
+                                "onClick": "handleSubmit"
+                              },
+                              "children": [
+                                {
+                                  "element": "Text",
+                                  "props": {
+                                    "as": "h2",
+                                    "className": "capitalize  rounded-full  px-[20px] py-[15px] w-full bg-accent text-white text-center"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Value",
+                                      "props": {
+                                        "value": "add to bag"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Accordion",
+                          "props": {
+                            "type": "multiple",
+                            "collapsible": true,
+                            "className": "border-b-0 w-full"
+                          },
+                          "children": [
+                            {
+                              "element": "AccordionItem",
+                              "props": {
+                                "value": "earn-points-on-the-shop",
+                                "className": "grid grid-cols-12 justify-between w-full text-left p-3 items-center",
+                                "trigger": [
+                                  {
+                                    "element": "Box",
+                                    "props": {
+                                      "as": "div",
+                                      "className": "col-span-11 flex items-center whitespace-nowrap"
+                                    },
+                                    "children": [
+                                      {
+                                        "element": "Text",
+                                        "props": {
+                                          "as": "span",
+                                          "className": "whitespace-nowrap font-semibold capitalize mr-[8px]"
+                                        },
+                                        "children": [
+                                          {
+                                            "element": "Image",
+                                            "props": {
+                                              "className": "w-[35px]",
+                                              "src": "https://www.citybeach.com/on/demandware.static/Sites-CityBeachAustralia-Site/-/en_AU/v1755029288227/images/citybeach-rewards_icon.png"
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "element": "Value",
+                                        "props": {
+                                          "value": "\u00a0Earn points on the shop"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "p-3 font-light flex flex-col gap-3"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p",
+                                        "className": "font-light text-[16px] text-[#242321]"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "20% off* on first order"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p",
+                                        "className": "font-light text-[16px] text-[#242321]"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "Earn points while you shop"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "element": "Text",
+                                      "props": {
+                                        "as": "p",
+                                        "className": "font-light text-[16px] text-[#242321]"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Value",
+                                          "props": {
+                                            "value": "$1 = 10 points, 1000 points = $10 voucher"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Accordion",
+                          "props": {
+                            "type": "multiple",
+                            "collapsible": true,
+                            "className": "w-full border-b border-gray-200"
+                          },
+                          "children": [
+                            {
+                              "element": "AccordionItem",
+                              "props": {
+                                "value": "instant-refunds",
+                                "className": "grid grid-cols-12 justify-between w-full text-left p-3",
+                                "trigger": [
+                                  {
+                                    "element": "Box",
+                                    "props": {
+                                      "as": "div",
+                                      "className": "col-span-11"
+                                    },
+                                    "children": [
+                                      {
+                                        "element": "Text",
+                                        "props": {
+                                          "as": "p",
+                                          "className": "text-xs md:text-sm lg:text-md flex flex-wrap"
+                                        },
+                                        "children": [
+                                          {
+                                            "element": "Text",
+                                            "props": {
+                                              "as": "span",
+                                              "className": "font-semibold capitalize"
+                                            },
+                                            "children": [
+                                              {
+                                                "element": "Value",
+                                                "props": {
+                                                  "value": "instant refunds"
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "element": "Value",
+                                            "props": {
+                                              "value": "\u00a0when you return using"
+                                            }
+                                          },
+                                          {
+                                            "element": "Image",
+                                            "props": {
+                                              "className": "h-[23px] pl-[5px]",
+                                              "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw0e536788/images/homepage/_04-Content_Asset-Assets/Refundid/refundid_logo.png"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "children": [
+                                {
+                                  "element": "Box",
+                                  "props": {
+                                    "as": "div",
+                                    "className": "p-3 font-light"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Image",
+                                      "props": {
+                                        "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dwc601aec8/images/homepage/_04-Content_Asset-Assets/Refundid/refundid_Instant-refunds.png"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "my-3"
+                          },
+                          "children": [
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize font-semibold mb-2"
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "buy now pay later"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "w-full flex flex-wrap gap-2"
+                              },
+                              "children": [
+                                {
+                                  "element": "Image",
+                                  "props": {
+                                    "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw11e6f463/images/contentpages/payment-types/aftrpay_80x35.svg",
+                                    "className": "w-[80px] h-[35px]"
+                                  }
+                                },
+                                {
+                                  "element": "Image",
+                                  "props": {
+                                    "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw20b2e1a6/images/contentpages/payment-types/zip_80x35.svg",
+                                    "className": "w-[80px] h-[35px]"
+                                  }
+                                },
+                                {
+                                  "element": "Image",
+                                  "props": {
+                                    "src": "https://www.citybeach.com/on/demandware.static/-/Library-Sites-CityBeachSharedLibrary/default/dw43a6dfe9/images/contentpages/payment-types/klarna_80x35.svg",
+                                    "className": "w-[80px] h-[35px]"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "inline"
+                          },
+                          "children": [
+                            {
+                              "element": "ExpandableText",
+                              "props": {
+                                "value": "description",
+                                "className": "text-[#585858] text-[0.875rem]"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Accordion",
+                          "props": {
+                            "type": "multiple",
+                            "collapsible": true,
+                            "className": "border-b-0 w-full border-gray-200"
+                          },
+                          "children": [
+                            {
+                              "element": "Box",
+                              "props": {
+                                "as": "div",
+                                "className": "w-full "
+                              },
+                              "children": [
+                                {
+                                  "element": "AccordionItem",
+                                  "props": {
+                                    "value": "id",
+                                    "className": " capitalize font-semibold w-full text-left p-3 flex justify-between ",
+                                    "trigger": "Details"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Box",
+                                      "props": {
+                                        "as": "div",
+                                        "className": "p-3"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Box",
+                                          "props": {
+                                            "as": "div",
+                                            "className": "grid grid-cols-12 gap-y-3"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Text",
+                                              "props": {
+                                                "as": "p",
+                                                "className": "capitalize col-span-6 text-[0.875rem]"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "brand:"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "element": "Text",
+                                              "props": {
+                                                "as": "p",
+                                                "className": "col-span-6 text-[0.875rem]"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "brand"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "element": "Text",
+                                              "props": {
+                                                "as": "p",
+                                                "className": "capitalize col-span-6 text-[0.875rem]"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "product:"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "element": "Text",
+                                              "props": {
+                                                "as": "p",
+                                                "className": "col-span-6 text-[0.875rem]"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "title"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "element": "Text",
+                                              "props": {
+                                                "as": "p",
+                                                "className": "capitalize col-span-6 text-[0.875rem]"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "pattern:"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "element": "Text",
+                                              "props": {
+                                                "as": "p",
+                                                "className": "col-span-6 text-[0.875rem]"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "pattern"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "AccordionItem",
+                                  "props": {
+                                    "value": "size",
+                                    "className": " capitalize  font-semibold w-full text-left p-3 flex justify-between ",
+                                    "trigger": "size & fit"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Box",
+                                      "props": {
+                                        "as": "div",
+                                        "className": "p-3 font-light text-[0.875rem] "
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Text",
+                                          "props": {
+                                            "as": "p"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "Please refer to our size guide to see what size is right for you! Keep in mind, sizes between brands are likely to vary, so please use the measurements as a guide only. "
+                                              }
+                                            },
+                                            {
+                                              "element": "Link",
+                                              "props": {
+                                                "href": "https://www.citybeach.com/au/size-guide-make-selection.html",
+                                                "className": "capitalize underline underline-offset-1 cursor-pointer",
+                                                "target": "_blank"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "view size guide"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "element": "AccordionItem",
+                                  "props": {
+                                    "value": "delivery",
+                                    "className": " capitalize  font-semibold w-full text-left p-3 flex justify-between",
+                                    "trigger": "delivery & return"
+                                  },
+                                  "children": [
+                                    {
+                                      "element": "Box",
+                                      "props": {
+                                        "as": "div",
+                                        "className": "p-3 font-light"
+                                      },
+                                      "children": [
+                                        {
+                                          "element": "Box",
+                                          "props": {
+                                            "as": "div",
+                                            "className": "flex justify-start"
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Box",
+                                              "props": {
+                                                "as": "div",
+                                                "className": "w-full max-w-4xl overflow-hidden bg-white border"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Box",
+                                                  "props": {
+                                                    "as": "table",
+                                                    "className": "w-full text-left text-gray-700 overflow-scroll"
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "element": "Box",
+                                                      "props": {
+                                                        "as": "thead",
+                                                        "className": "text-xs text-gray-600 capitalize bg-gray-100"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "element": "Box",
+                                                          "props": {
+                                                            "as": "tr"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "th",
+                                                                "className": "font-medium border-r  p-2"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Value",
+                                                                  "props": {
+                                                                    "value": "Shipping Methods"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "th",
+                                                                "className": "font-medium border-r p-2"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Value",
+                                                                  "props": {
+                                                                    "value": "Free Standard Delivery"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "th",
+                                                                "className": "font-medium p-2"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Value",
+                                                                  "props": {
+                                                                    "value": "Cost"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "element": "Box",
+                                                      "props": {
+                                                        "as": "tbody"
+                                                      },
+                                                      "children": [
+                                                        {
+                                                          "element": "Box",
+                                                          "props": {
+                                                            "as": "tr",
+                                                            "className": "border-b"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "td",
+                                                                "className": "delivery-table-col-one"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Value",
+                                                                  "props": {
+                                                                    "value": "Express"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "td",
+                                                                "className": "delivery-table-col-two"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-medium-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "Metro"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-normal-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "1-4 business days"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-medium-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "Regional/Rural"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-normal-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "1-7 business days"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "td",
+                                                                "className": "delivery-table-col-three"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "div",
+                                                                    "className": "delivery-table-normal-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": " $13.99"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        },
+                                                        {
+                                                          "element": "Box",
+                                                          "props": {
+                                                            "as": "tr",
+                                                            "className": "border-b"
+                                                          },
+                                                          "children": [
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "td",
+                                                                "className": "delivery-table-col-one"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Value",
+                                                                  "props": {
+                                                                    "value": "Standard"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "td",
+                                                                "className": "delivery-table-col-two"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-medium-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "Metro"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-normal-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "2-10 business dayss"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-medium-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "Regional/Rural"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "table",
+                                                                    "className": "delivery-table-normal-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "2-13 business days"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            {
+                                                              "element": "Box",
+                                                              "props": {
+                                                                "as": "td",
+                                                                "className": "delivery-table-col-three"
+                                                              },
+                                                              "children": [
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "div",
+                                                                    "className": "delivery-table-normal-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "$10.99 or $2"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                {
+                                                                  "element": "Box",
+                                                                  "props": {
+                                                                    "as": "div",
+                                                                    "className": "delivery-table-normal-text"
+                                                                  },
+                                                                  "children": [
+                                                                    {
+                                                                      "element": "Value",
+                                                                      "props": {
+                                                                        "value": "Free for orders over $100"
+                                                                      }
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "Text",
+                                          "props": {
+                                            "as": "p",
+                                            "className": "leading-[1.5] text-[0.875rem] "
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "For other delivery methods, "
+                                              }
+                                            },
+                                            {
+                                              "element": "Link",
+                                              "props": {
+                                                "href": "https://www.citybeach.com/au/shipping-and-handling.html",
+                                                "className": "underline underline-offset-1r",
+                                                "target": "_blank"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "click here"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "  for shipping and delivery times. "
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "element": "Text",
+                                          "props": {
+                                            "as": "p",
+                                            "className": "leading-[1.5] text-[0.875rem] "
+                                          },
+                                          "children": [
+                                            {
+                                              "element": "Value",
+                                              "props": {
+                                                "value": "Not 100% happy with your purchase? We offer online and in-store returns within 30 days of delivery*. For more information, please "
+                                              }
+                                            },
+                                            {
+                                              "element": "Link",
+                                              "props": {
+                                                "href": "https://www.citybeach.com/au/returns-and-exchanges.html",
+                                                "className": "underline underline-offset-1r",
+                                                "target": "_blank"
+                                              },
+                                              "children": [
+                                                {
+                                                  "element": "Value",
+                                                  "props": {
+                                                    "value": "click here"
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "element": "Box",
+                          "props": {
+                            "as": "div",
+                            "className": "mt-5"
+                          },
+                          "children": [
+                            {
+                              "element": "Text",
+                              "props": {
+                                "as": "p",
+                                "className": "capitalize font-light text-sm "
+                              },
+                              "children": [
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "product number: "
+                                  }
+                                },
+                                {
+                                  "element": "Value",
+                                  "props": {
+                                    "value": "sku"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "element": "RecommendedProductsComponent",
+              "props": {
+                "sku": "sku",
+                "recommendedProductsLabelStyle": "text-2xl font-medium mb-6"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "gridCols": "grid-cols-8",
+        "gap": "gap-4"
+      }
+    }
+  }
+}

@@ -1,0 +1,684 @@
+{
+  "$schema": "./layout-schema.json",
+  "name": "Product Detail Page",
+  "description": "PDP layout with fully modularized components",
+  "version": "1.0.0",
+  "layout": [
+    {
+      "$ref": "#/definitions/components/headerBar"
+    },
+    {
+      "$ref": "#/definitions/components/mainGrid"
+    }
+  ],
+  "definitions": {
+    "theme": {
+      "pageLayout": {
+        "gridCols": "grid-cols-12",
+        "gap": "gap-4"
+      },
+      "styles": {
+        "ChatToogleButton": "h-[2.6rem] w-24 cursor-pointer",
+        "detailSection": "bg-white w-full p-3",
+        "headerWrapper": "flex mb-2 items-center",
+        "backToProductsButton": "capitalize bg-black font-white hover:bg-gray-900 rounded-none",
+        "detailGrid": "grid grid-cols-12 gap-4",
+        "loadingTextStyle": "text-2xl font-medium capitalize",
+        "imageGridStyle": "w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-8 2xl:col-span-8",
+        "detailColumn": "w-full col-span-12 lg:col-span-6 xl:col-span-4 2xl:col-span-4",
+        "productBrand": "font-copernicus text-xl font-medium text-[#363536] mb-2",
+        "productTitleWrapper": "flex justify-between w-full items-center gap-4",
+        "productTitle": "font-copernicus text-[25px] text-[#363536] tracking-[0.08em] pb-2",
+        "favorite": "cursor-pointer right-2 top-2 z-1 rounded-[50%] p-1",
+        "favoriteIcon": "text-[#242321] font-light h-[25px] w-[25px]",
+        "favoriteIconChecked": "fill-[#242321]",
+        "priceWrapper": "text-[22px] font-light text-[#363536]",
+        "priceSale": "sale-item-color mb-2",
+        "priceStrike": "text-sm font-light text-gray-500 mb-2 line-through",
+        "colorSection": "mb-6 mt-3",
+        "colorLabel": "capitalize block mb-2",
+        "colorLabelBold": "uppercase text-[13px] text-[#595454] font-[700] mr-1",
+        "colorValue": "uppercase text-[13px]",
+        "colorWrapper": "flex flex-wrap gap-2 justify-start",
+        "colorPill": "flex justify-center items-center cursor-pointer rounded-full",
+        "colorPillSelected": "p-[3px] border-black border-2 rounded-full",
+        "colorPillImage": "h-5 w-5 rounded-full",
+        "sizeSection": "mb-5",
+        "sizeLabel": "uppercase text-[13px] text-[#595454] font-[700] mb-2",
+        "sizeGrid": "grid grid-cols-4 gap-2 justify-start",
+        "sizeItem": "col-span-1 border border-black text-black text-center py-0 px-0 cursor-pointer transition-all duration-200 hover:bg-black hover:text-white",
+        "sizeItemSelected": "bg-[#363536] text-white border-black text-center",
+        "quantityWrapper": "flex items-center border border-gray-400 w-fit h-[32px]",
+        "quantityButton": "w-10 h-full flex items-center justify-center text-[14px] text-black border-r border-gray-400 last:border-r-0 transition-colors",
+        "quantityInput": "w-10 h-full text-center text-[14px] text-black bg-white border-r border-gray-400 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none m-0",
+        "quantityLabel": "block text-sm font-medium text-gray-700 mb-1",
+        "buyButtonWrapper": "mb-5",
+        "buttonStyle": "uppercase px-[20px] py-[15px] font-[700] w-full hover:bg-[#7B726B] transition-colors duration-200",
+        "buttonIsPendingStyle": "cursor-progress bg-gray-400 text-gray-900",
+        "buttonNormalStyle": "bg-black text-white",
+        "infoSection": "mt-5 text-gray-600",
+        "infoText": "capitalize font-light text-[13px]",
+        "recommendedProductsLabel": "font-copernicus text-2xl font-medium mb-6 text-[#363536] text-center",
+        "accordionWrapper": "w-full border-b border-gray-200",
+        "accordionTrigger": "grid grid-cols-12 justify-between w-full text-left p-3 !no-underline hover:!no-underline",
+        "accordionTriggerContent": "p-3 font-light flex flex-col gap-3 ",
+        "accordionTriggerIcon": "col-span-1",
+        "pointItem": "font-light text-[16px] text-[#242321]",
+        "refundImageLabel": "h-[18.5px] pl-[5px] w-auto object-contain",
+        "buyNowPayLaterLabel": "capitalize font-semibold mb-2",
+        "productDescriptionText": "font-copernicus text-[#585858] text-[0.875rem]",
+        "moreDetails": {
+          "moreDetailsAccordionWrapper": "w-full border-b border-gray-200",
+          "moreDetailsText": "font-copernicus uppercase font-bold w-full text-left text-[1.4rem] leading-[1.2] py-[18px] px-0 m-0 border-t border-[#e7e7e4] text-[#2c180f] cursor-pointer flex justify-between !no-underline hover:!no-underline",
+          "moreDetailsItem": "font-copernicus text-gray-800 capitalize col-span-6",
+          "moreDetailsValue": "font-copernicus col-span-6 text-gray-800",
+          "iconType": "plus"
+        },
+        "additionalDetails": {
+          "accordionWrapperStyle": "w-full border-b border-gray-200",
+          "accordionTriggerStyle": "font-copernicus font-bold uppercase w-full text-left text-[16px] leading-[1.2] py-[18px] px-0 m-0 border-t border-[#e7e7e4] text-[#2c180f] cursor-pointer flex justify-between items-center !no-underline hover:!no-underline",
+          "accordionContentStyle": "font-copernicus pt-0 px-3 pb-3 font-light tracking-[0.04em]",
+          "iconType": "plus",
+          "deliveryTableStyle": "w-full max-w-4xl overflow-hidden bg-white border",
+          "deliveryTableRowStyle": "w-full text-left text-gray-700 overflow-scroll",
+          "deliveryTableHeadStyle": "text-xs text-gray-600 capitalize bg-gray-100",
+          "deliveryTableHeaderCellStyle": "font-medium border-r p-2",
+          "deliveryTableDataCellStyle": "p-2"
+        },
+        "productImages": {
+          "mobileCarouselStyle": "",
+          "mobileCarouselWrapperStyle": "flex",
+          "mobileImageContainerStyle": "flex-shrink-0 flex-grow-0 basis-[80%] min-w-0 relative h-full w-full px-2",
+          "mobileImageStyle": "object-contain w-full",
+          "desktopGridStyle": "grid grid-cols-2 gap-2",
+          "desktopImageContainerStyle": "",
+          "desktopImageStyle": "object-contain"
+        }
+      }
+    },
+    "components": {
+      "headerBar": {
+        "name": "Header Bar",
+        "component": "HeaderBar",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/headerWrapper"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/expandSunny"
+          },
+          {
+            "$ref": "#/definitions/components/backToProducts"
+          }
+        ]
+      },
+      "expandSunny": {
+        "name": "Expand Sunny",
+        "component": "ExpandeSunny",
+        "props": {
+          "imageURL": "https://dev-loader-roddandgunn.bayezon.com/sunny-button.png",
+          "styles": {
+            "$ref": "#/definitions/theme/styles/ChatToogleButton"
+          }
+        }
+      },
+      "backToProducts": {
+        "name": "Back To Products",
+        "component": "BackToProducts",
+        "props": {
+          "styles": {
+            "$ref": "#/definitions/theme/styles/backToProductsButton"
+          }
+        }
+      },
+      "mainGrid": {
+        "name": "Main Grid",
+        "component": "PDPWrapper",
+        "props": {
+          "style": {
+            "$ref": "#/definitions/theme/styles/detailGrid"
+          }
+        },
+        "children": [
+          {
+            "$ref": "#/definitions/components/imageDisplay"
+          },
+          {
+            "$ref": "#/definitions/components/productDetail"
+          }
+        ]
+      },
+      "imageDisplay": {
+        "name": "Image Display",
+        "component": "ImageDisplay",
+        "props": {
+          "showFavorite": false,
+          "loadingText": "Assembling images",
+          "loadingTextStyle": {
+            "$ref": "#/definitions/theme/styles/loadingTextStyle"
+          },
+          "imageGridStyle": {
+            "$ref": "#/definitions/theme/styles/imageGridStyle"
+          },
+          "mobileCarouselStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselStyle"
+          },
+          "mobileCarouselWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselWrapperStyle"
+          },
+          "mobileImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageContainerStyle"
+          },
+          "mobileImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageStyle"
+          },
+          "desktopGridStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopGridStyle"
+          },
+          "desktopImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageContainerStyle"
+          },
+          "desktopImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageStyle"
+          }
+        }
+      },
+      "imageThumbnailCarousel": {
+        "name": "Image Thumbnail Carousel",
+        "component": "ImageThumbnailCarousel",
+        "props": {
+          "thumbnailPosition": "left",
+          "loadingText": "Loading images...",
+          "wrapperStyle": "w-full overflow-hidden relative h-full col-span-12 lg:col-span-6 xl:col-span-7 2xl:col-span-7",
+          "containerStyle": "gap-4 h-full",
+          "mainImageWrapperStyle": "flex-1 flex items-center justify-center h-full",
+          "mainImageStyle": "w-full h-full object-contain",
+          "thumbnailWrapperStyle": "flex items-center",
+          "thumbnailListStyle": "gap-3",
+          "thumbnailItemStyle": "cursor-pointer p-1",
+          "thumbnailActiveStyle": "border-b-2 border-gray-400",
+          "thumbnailImageStyle": "w-full h-20 object-cover",
+          "arrowWrapperStyle": "cursor-pointer p-2 hover:bg-gray-100 rounded-md",
+          "arrowStyle": "w-5 h-5",
+          "imageGridStyle": {
+            "$ref": "#/definitions/theme/styles/imageGridStyle"
+          },
+          "mobileCarouselStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselStyle"
+          },
+          "mobileCarouselWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileCarouselWrapperStyle"
+          },
+          "mobileImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageContainerStyle"
+          },
+          "mobileImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/mobileImageStyle"
+          },
+          "desktopGridStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopGridStyle"
+          },
+          "desktopImageContainerStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageContainerStyle"
+          },
+          "desktopImageStyle": {
+            "$ref": "#/definitions/theme/styles/productImages/desktopImageStyle"
+          }
+        }
+      },
+      "productDetail": {
+        "name": "Product Detail",
+        "component": "ProductDetail",
+        "props": {
+          "detailColumnStyle": {
+            "$ref": "#/definitions/theme/styles/detailColumn"
+          }
+        },
+        "nested": [
+          {
+            "$ref": "#/definitions/components/productTitleWithFav"
+          },
+          {
+            "$ref": "#/definitions/components/productPrice"
+          },
+          {
+            "$ref": "#/definitions/components/dynamicSelector"
+          },
+          {
+            "$ref": "#/definitions/components/quantitySelector"
+          },
+          {
+            "$ref": "#/definitions/components/buyNowButton"
+          },
+          {
+            "$ref": "#/definitions/components/refundidAccordion"
+          },
+          {
+            "$ref": "#/definitions/components/buyNowPayLater"
+          },
+          {
+            "$ref": "#/definitions/components/productDescription"
+          },
+          {
+            "$ref": "#/definitions/components/additionalDetails"
+          },
+          {
+            "$ref": "#/definitions/components/productNumber"
+          }
+        ]
+      },
+      "productBrand": {
+        "name": "Product Brand",
+        "component": "ProductBrandComponent",
+        "props": {
+          "brandStyle": {
+            "$ref": "#/definitions/theme/styles/productBrand"
+          }
+        }
+      },
+      "productTitleWithFav": {
+        "name": "Product Title With Favorite",
+        "component": "ProductTitleWithFav",
+        "props": {
+          "showFavorite": false,
+          "styles": {
+            "titleWrapperStyle": {
+              "$ref": "#/definitions/theme/styles/productTitleWrapper"
+            },
+            "titleStyle": {
+              "$ref": "#/definitions/theme/styles/productTitle"
+            },
+            "favoriteIcon": {
+              "$ref": "#/definitions/theme/styles/favoriteIcon"
+            },
+            "favoriteIconChecked": {
+              "$ref": "#/definitions/theme/styles/favoriteIconChecked"
+            },
+            "favorite": {
+              "$ref": "#/definitions/theme/styles/favorite"
+            }
+          }
+        }
+      },
+      "productPrice": {
+        "name": "Product Price",
+        "component": "ProductPriceComponent",
+        "props": {
+          "priceWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/priceWrapper"
+          },
+          "priceSaleStyle": {
+            "$ref": "#/definitions/theme/styles/priceSale"
+          },
+          "priceStrikeStyle": {
+            "$ref": "#/definitions/theme/styles/priceStrike"
+          }
+        }
+      },
+      "colorSelector": {
+        "name": "Color Selector",
+        "component": "ColorSelector",
+        "props": {
+          "label": "Colour",
+          "colorSectionStyle": {
+            "$ref": "#/definitions/theme/styles/colorSection"
+          },
+          "colorLabelStyle": {
+            "$ref": "#/definitions/theme/styles/colorLabel"
+          },
+          "colorLabelBoldStyle": {
+            "$ref": "#/definitions/theme/styles/colorLabelBold"
+          },
+          "colorValueStyle": {
+            "$ref": "#/definitions/theme/styles/colorValue"
+          },
+          "colorWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/colorWrapper"
+          },
+          "colorPillStyle": {
+            "$ref": "#/definitions/theme/styles/colorPill"
+          },
+          "colorPillSelectedStyle": {
+            "$ref": "#/definitions/theme/styles/colorPillSelected"
+          },
+          "colorPillImageStyle": {
+            "$ref": "#/definitions/theme/styles/colorPillImage"
+          }
+        }
+      },
+      "sizeSelector": {
+        "name": "Size Selector",
+        "component": "SizeSelector",
+        "props": {
+          "sizeLabel": "Size",
+          "showSelectedSize": true,
+          "sizeSectionStyle": {
+            "$ref": "#/definitions/theme/styles/sizeSection"
+          },
+          "sizeLabelStyle": {
+            "$ref": "#/definitions/theme/styles/sizeLabel"
+          },
+          "sizeGridStyle": {
+            "$ref": "#/definitions/theme/styles/sizeGrid"
+          },
+          "sizeItemStyle": {
+            "$ref": "#/definitions/theme/styles/sizeItem"
+          },
+          "sizeItemSelectedStyle": {
+            "$ref": "#/definitions/theme/styles/sizeItemSelected"
+          }
+        }
+      },
+      "quantitySelector": {
+        "name": "Quantity Selector",
+        "component": "QuantitySelector",
+        "props": {
+          "label": "",
+          "styles": {
+            "wrapperStyle": {
+              "$ref": "#/definitions/theme/styles/quantityWrapper"
+            },
+            "buttonStyle": {
+              "$ref": "#/definitions/theme/styles/quantityButton"
+            },
+            "inputStyle": {
+              "$ref": "#/definitions/theme/styles/quantityInput"
+            },
+            "labelStyle": {
+              "$ref": "#/definitions/theme/styles/quantityLabel"
+            }
+          }
+        }
+      },
+      "dynamicSelector": {
+        "name": "Dynamic Variant Selector",
+        "component": "DynamicVariantSelector",
+        "props": {
+          "styles": {
+            "sectionStyle": {
+              "$ref": "#/definitions/theme/styles/colorSection"
+            },
+            "labelStyle": {
+              "$ref": "#/definitions/theme/styles/colorLabel"
+            },
+            "labelBoldStyle": {
+              "$ref": "#/definitions/theme/styles/colorLabelBold"
+            },
+            "valueStyle": {
+              "$ref": "#/definitions/theme/styles/colorValue"
+            },
+            "wrapperStyle": {
+              "$ref": "#/definitions/theme/styles/colorWrapper"
+            },
+            "pillStyle": {
+              "$ref": "#/definitions/theme/styles/colorPill"
+            },
+            "pillSelectedStyle": {
+              "$ref": "#/definitions/theme/styles/colorPillSelected"
+            },
+            "pillImageStyle": {
+              "$ref": "#/definitions/theme/styles/colorPillImage"
+            }
+          },
+          "optionStyles": {
+            "wrapperStyle": {
+              "$ref": "#/definitions/theme/styles/sizeGrid"
+            },
+            "itemStyle": {
+              "$ref": "#/definitions/theme/styles/sizeItem"
+            },
+            "itemSelectedStyle": {
+              "$ref": "#/definitions/theme/styles/sizeItemSelected"
+            },
+            "sectionStyle": {
+              "$ref": "#/definitions/theme/styles/sizeSection"
+            },
+            "labelStyle": {
+              "$ref": "#/definitions/theme/styles/sizeLabel"
+            }
+          }
+        }
+      },
+      "buyNowButton": {
+        "name": "Buy Now Button",
+        "component": "BuyNowButtonComponent",
+        "props": {
+          "label": "Add to Cart",
+          "buttonWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/buyButtonWrapper"
+          },
+          "buttonStyle": {
+            "$ref": "#/definitions/theme/styles/buttonStyle"
+          },
+          "buttonIsPendingStyle": {
+            "$ref": "#/definitions/theme/styles/buttonIsPendingStyle"
+          },
+          "buttonNormalStyle": {
+            "$ref": "#/definitions/theme/styles/buttonNormalStyle"
+          }
+        }
+      },
+      "pointsAccordion": {
+        "name": "Points Accordion",
+        "component": "PointsAccordionComponent",
+        "props": {
+          "imageUrl": "https://www.citybeach.com/on/demandware.static/Sites-CityBeachAustralia-Site/-/en_AU/v1755029288227/images/citybeach-rewards_icon.png",
+          "mainLabel": "Earn points on the shop",
+          "content1": "20% off* on first order",
+          "content2": "Earn points while you shop",
+          "content3": "$1 = 10 points, 1000 points = $10 voucher",
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/accordionWrapper"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/accordionTrigger"
+          },
+          "accordionTriggerContentStyle": {
+            "$ref": "#/definitions/theme/styles/accordionTriggerContent"
+          },
+          "pointItemStyle": {
+            "$ref": "#/definitions/theme/styles/pointItem"
+          },
+          "iconType": "plus"
+        }
+      },
+      "refundidAccordion": {
+        "name": "Refundid Accordion",
+        "component": "RefundidAccordionComponent",
+        "props": {
+          "mainLabel": "",
+          "subLabel": "Or 4 payments of $32.00 with",
+          "imageLabel": "https://content.roddandgunn.com/afterpay/afterpay-logolockup-black-transparent72x15_2x.png",
+          "accordionContentImage": "",
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/accordionWrapper"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/accordionTrigger"
+          },
+          "refundImageLabelStyle": {
+            "$ref": "#/definitions/theme/styles/refundImageLabel"
+          },
+          "iconType": "plus"
+        }
+      },
+      "buyNowPayLater": {
+        "name": "",
+        "component": "BuyNowPayLaterComponent",
+        "props": {
+          "label": "",
+          "buyNowPayLaterLabelStyle": {
+            "$ref": "#/definitions/theme/styles/buyNowPayLaterLabel"
+          },
+          "paymentMethods": {
+            "$ref": "#/definitions/content/paymentMethods"
+          },
+          "wrapperClassName": "w-full flex flex-wrap justify-center items-center gap-20 border border-gray-300"
+        }
+      },
+      "productDescription": {
+        "name": "Product Description",
+        "component": "ProductDescriptionComponent",
+        "props": {
+          "productDescriptionTextStyle": {
+            "$ref": "#/definitions/theme/styles/productDescriptionText"
+          }
+        }
+      },
+      "ProductMoreDetails": {
+        "name": "Product More Details",
+        "component": "ProductMoreDetailsComponent",
+        "props": {
+          "moreDetailsLabel": "details",
+          "moreDetailsStyle": {
+            "$ref": "#/definitions/theme/styles/moreDetails"
+          }
+        }
+      },
+      "additionalDetails": {
+        "name": "Additional Details",
+        "component": "AdditionalDetailsComponent",
+        "props": {
+          "items": {
+            "$ref": "#/definitions/content/additionalDetailsItems"
+          },
+          "accordionWrapperStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionWrapperStyle"
+          },
+          "accordionTriggerStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionTriggerStyle"
+          },
+          "accordionContentStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/accordionContentStyle"
+          },
+          "iconType": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/iconType"
+          },
+          "deliveryTableStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableStyle"
+          },
+          "deliveryTableRowStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableRowStyle"
+          },
+          "deliveryTableHeadStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeadStyle"
+          },
+          "deliveryTableHeaderCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableHeaderCellStyle"
+          },
+          "deliveryTableDataCellStyle": {
+            "$ref": "#/definitions/theme/styles/additionalDetails/deliveryTableDataCellStyle"
+          }
+        }
+      },
+      "productNumber": {
+        "name": "Product Number",
+        "component": "ProductNumberComponent",
+        "props": {
+          "infoSectionStyle": {
+            "$ref": "#/definitions/theme/styles/infoSection"
+          },
+          "infoTextStyle": {
+            "$ref": "#/definitions/theme/styles/infoText"
+          }
+        }
+      },
+      "recommendedProducts": {
+        "name": "Recommended Products",
+        "component": "RecommendedProductsComponent",
+        "props": {
+          "recommendedProductsLabel": "CUSTOMERS ALSO BOUGHT",
+          "recommendedProductsLabelStyle": {
+            "$ref": "#/definitions/theme/styles/recommendedProductsLabel"
+          }
+        }
+      }
+    },
+    "content": {
+      "paymentMethods": [
+        {
+          "name": "Shipping",
+          "src": "https://www.roddandgunn.com/on/demandware.static/-/Library-Sites-rodd-shared-library/default/dwc70b0fd4/02%20GLOBAL/HFH%20Content/Free-shipping-icon.png",
+          "className": "w-[40px] h-[35px]"
+        },
+        {
+          "name": "Return",
+          "src": "https://www.roddandgunn.com/on/demandware.static/-/Library-Sites-rodd-shared-library/default/dw96dc1e12/02%20GLOBAL/HFH%20Content/RG_ICONS_RETURNS_BLACK.png",
+          "className": "w-[40px] h-[35px]"
+        },
+        {
+          "name": "PickInStore",
+          "src": "https://www.roddandgunn.com/on/demandware.static/-/Library-Sites-rodd-shared-library/default/dw65f74969/02%20GLOBAL/HFH%20Content/RG_ICONS_CLICK&COLLECT_BLACK.png",
+          "className": "w-[30px] h-[35px]"
+        }
+      ],
+      "additionalDetailsItems": [
+        {
+          "id": "size-fit",
+          "title": "size & fit",
+          "contentType": "text",
+          "content": "Please refer to our size guide to see what size is right for you! Keep in mind, sizes between brands are likely to vary, so please use the measurements as a guide only.",
+          "linkLabel": "view size guide",
+          "linkURI": {
+            "default": "https://www.roddandgunn.com/au",
+            "us": "https://www.roddandgunn.com/us/sizeguide_full.html",
+            "au": "https://www.roddandgunn.com/au/sizeguide_full.html"
+          }
+        },
+        {
+          "id": "designer-notes",
+          "title": "Designer Notes",
+          "contentType": "list",
+          "apidata": true,
+          "listItems": [
+            "100% Australian Good Earth Cotton: modern regenerative farming techniques bring us climate positive cotton, fully verified with the power of FibreTrace®",
+            "Jersey knit body features a textured melange effect.",
+            "Embroidered with our pointer emblem on the chest",
+            "Premium zip by Japanese company YKK, with a genuine leather puller de-bossed with our logo",
+            "Ribbed funnel neck, cuffs and waist",
+            "Panels are machine knitted separately and then engineered together, providing a superior fit",
+            "Care instructions: Hand wash",
+            "Model is wearing size ME and measures: Chest 106cms/41.5\", Height 187.5cms/6'1\"",
+            "Made in Cambodia",
+            "Stylecode - EP0796"
+          ]
+        },
+        {
+          "id": "pick-in-store",
+          "title": "CLICK & COLLECT",
+          "contentType": "list",
+          "apidata": false,
+          "listItems": [
+            "Need it now? Collect online orders at your local Rodd & Gunn store with our FREE same day Click & Collect service.",
+            "Place your order with Click & Collect and pick up within 2 hours, for styles in-stock at your chosen store. Available at select Rodd & Gunn stores and during store trading hours only."
+          ]
+        },
+        {
+          "id": "delivery-return",
+          "title": "Delivery & Returns",
+          "contentType": "listWithTitle",
+          "apidata": false,
+          "listItems": [
+            "SHIPPING",
+            "Free Standard Shipping for all domestic orders, delivered within Australia.",
+            "We aim to dispatch all orders within 3 business days of the order being placed. Orders that include any 'Personalised' products may take up to 1 day extra to be dispatched.",
+            "ONLINE RETURNS POLICY",
+            "Items must be returned within 30 days of purchase. All items must be in original condition with the tags attached. Place include your packing slip as proof of purchase.",
+            "All returns are assessed in store to determine whether a refund/exchange can be honoured.",
+            "To action your return or exchange, please complete the returns section on the packing slip provided within your order and post to the mentioned address.",
+            "The cost of shipping returns is the responsibility of the customer and is not covered by Rodd & Gunn. Rodd & Gunn is not liable for any parcels lost in transit.",
+            "In the rare occasion that you have received either a faulty or damaged item please contact us at online@roddandgunn.com to arrange a replacement free of charge.",
+            "'Personalised' items cannot be returned or exchanged.",
+            "INSTORE RETURNS & EXCHANGES",
+            "You may return or exchange product purchased from http://www.roddandgunn.com to any of our retail stores (excluding Myer & David Jones concessions) within 30 days of receipt.",
+            "All goods must be returned in original condition with tags attached. Please take a digital or printed copy of your Tax Invoice that was emailed to you when your order was initially dispatched, as proof of purchase.",
+            "For refunds, you will be required to present the same credit card that was used to make the purchase online. If you are not the card holder yourself. you will need to have the card holder present when the item(s) are being returned.",
+            "'Personalised' items cannot be returned or exchanged"
+          ]
+        }
+      ]
+    }
+  }
+}

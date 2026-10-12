@@ -1,0 +1,1 @@
+export { homeRegistry } from "./homeRegistry";
