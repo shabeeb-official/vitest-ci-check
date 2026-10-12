@@ -2,7 +2,7 @@ name: Test & Coverage Gate
  
 on:
   pull_request:
-    branches: [feat/single-code-base]
+    branches: [master]
  
 jobs:
   test:
