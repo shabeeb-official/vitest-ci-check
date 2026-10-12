@@ -24,7 +24,7 @@ export default defineConfig({
       exclude: [
         "**/__tests__/**",
         "**/*.test.{ts,tsx}",
-        "src/utils/api/**", // 8.06% coverage pulling down the average
+        //"src/utils/api/**", // 8.06% coverage pulling down the average
         "src/utils/**/render-ui.*", // 0% coverage UI renderers
         "src/utils/**/gtm_events.*", // 0% analytics
       ],
