@@ -1,0 +1,111 @@
+name: CI/CD Pipeline
+ 
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+ 
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+ 
+      - name: Install dependencies
+        run: npm ci
+ 
+      # 1. Test Stage with Coverage Gate
+      # Fails the job (and skips the build) when a test fails or line
+      # coverage is below the threshold in vitest.config.ts.
+      # VITE_* values come from GitHub Actions Variables
+      # (Settings > Secrets and variables > Actions > Variables).
+      # The fallbacks are test-only values so CI runs before they are set.
+      - name: Run Tests & Check Coverage Gate
+        env:
+          VITE_APP_ENV: test
+          VITE_TEST_MODE: ${{ vars.TEST_VITE_TEST_MODE || 'true' }}
+          VITE_TENANT_NAME: ${{ vars.TEST_VITE_TENANT_NAME || 'citybeach' }}
+          VITE_API_BASE_URL: ${{ vars.TEST_VITE_API_BASE_URL || 'http://localhost:3000/api' }}
+          VITE_SUPABASE_URL: ${{ vars.TEST_VITE_SUPABASE_URL || 'https://mock-test.supabase.co' }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.TEST_VITE_SUPABASE_ANON_KEY || 'mock-anon-key-test-only' }}
+        run: npm run test:ci
+ 
+      # 2. Coverage Artifact
+      - name: Upload Coverage Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage/lcov.info
+            coverage/lcov-report/
+          if-no-files-found: warn
+          retention-days: 14
+ 
+      # 3. Production Build Stage (Fails if test gate fails)
+      - name: Build Application
+        env:
+          VITE_APP_ENV: production
+        run: npm run build
+ 
+      # 4. Upload Dist Artifact
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-build
+          path: build/
+          retention-days: 7
+name: Test & Coverage Gate
+ 
+on:
+  pull_request:
+    branches: [master]
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+ 
+      - name: Install dependencies
+        run: npm ci
+ 
+      # Run tests and validate coverage against vitest.config.ts threshold
+      - name: Run Tests & Check Coverage Gate
+        env:
+          VITE_APP_ENV: test
+          VITE_TEST_MODE: ${{ vars.TEST_VITE_TEST_MODE || 'true' }}
+          VITE_TENANT_NAME: ${{ vars.TEST_VITE_TENANT_NAME || 'citybeach' }}
+          VITE_API_BASE_URL: ${{ vars.TEST_VITE_API_BASE_URL || 'http://localhost:3000/api' }}
+          VITE_SUPABASE_URL: ${{ vars.TEST_VITE_SUPABASE_URL || 'https://mock-test.supabase.co' }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.TEST_VITE_SUPABASE_ANON_KEY || 'mock-anon-key-test-only' }}
+        run: npm run test:ci
+ 
+      # Upload coverage artifacts (runs even if tests fail)
+      - name: Upload Coverage Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage/lcov.info
+            coverage/lcov-report/
+          if-no-files-found: warn
+          retention-days: 14
