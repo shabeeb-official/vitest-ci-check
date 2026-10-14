@@ -10,6 +10,147 @@ describe("generateFilterConfig", () => {
     expect(generateFilterConfig([])).toEqual([]);
   });
 
+  it("handles zero price and skips falsy numeric prices", () => {
+    const result = generateFilterConfig([{ price: 0 }, { price: "0" }, {}]);
+
+    expect(result).toContainEqual({
+      code: "price",
+      label: "Price",
+      type: "range",
+      min: 0,
+      max: 0,
+    });
+  });
+
+  it("handles non-string, non-number attribute values", () => {
+    const result = generateFilterConfig([
+      {
+        attributes: {
+          weight: [null, undefined] as any,
+        },
+      },
+    ]);
+
+    expect(result).toContainEqual({
+      code: "weight",
+      label: "Weight",
+      type: "option",
+    });
+  });
+
+  it("handles an empty numeric attribute array", () => {
+    const result = generateFilterConfig([
+      {
+        attributes: {
+          weight: [],
+        },
+      },
+    ]);
+
+    expect(result).toContainEqual({
+      code: "weight",
+      label: "Weight",
+      type: "option",
+    });
+  });
+
+  it("handles an empty attribute value array", () => {
+    const result = generateFilterConfig([{ attributes: { weight: [] } }]);
+
+    expect(result).toContainEqual({
+      code: "weight",
+      label: "Weight",
+      type: "option",
+    });
+  });
+
+  it("handles invalid string prices as zero", () => {
+    const result = generateFilterConfig([
+      { price: "invalid" },
+      { price: "25.5" },
+    ]);
+
+    expect(result).toContainEqual({
+      code: "price",
+      label: "Price",
+      type: "range",
+      min: 0,
+      max: 26,
+    });
+  });
+
+  it("keeps the price attribute as a range without numeric bounds", () => {
+    expect(generateFilterConfig([{ attributes: { price: "invalid" } }])).toEqual([
+      {
+        code: "price",
+        label: "Price",
+        type: "range",
+      },
+    ]);
+  });
+
+  it("handles empty arrays and mixed numeric attribute values", () => {
+    const result = generateFilterConfig([
+      {
+        attributes: {
+          material: [],
+          weight: ["2", "cotton"],
+        },
+      },
+    ]);
+
+    expect(result).toContainEqual({
+      code: "material",
+      label: "Material",
+      type: "option",
+    });
+
+    expect(result).toContainEqual({
+      code: "weight",
+      label: "Weight",
+      type: "option",
+    });
+  });
+
+  it("handles numeric attribute values supplied as numbers", () => {
+    const result = generateFilterConfig([
+      { attributes: { weight: 2 as any } },
+      { attributes: { weight: 8 as any } },
+    ]);
+
+    expect(result).toContainEqual({
+      code: "weight",
+      label: "Weight",
+      type: "range",
+      min: 2,
+      max: 8,
+    });
+  });
+
+  it("handles numeric strings with trailing characters", () => {
+    const result = generateFilterConfig([
+      { attributes: { measurement: ["10abc", "20"] } },
+    ]);
+
+    expect(result).toContainEqual({
+      code: "measurement",
+      label: "Measurement",
+      type: "option",
+    });
+  });
+
+  it("handles Infinity and NaN attribute strings", () => {
+    const result = generateFilterConfig([
+      { attributes: { measurement: ["Infinity", "NaN"] } },
+    ]);
+
+    expect(result).toContainEqual({
+      code: "measurement",
+      label: "Measurement",
+      type: "option",
+    });
+  });
+
   it("generates a price range from numeric prices", () => {
     const products = [{ price: 10 }, { price: 25.5 }, { price: 99.99 }];
 
@@ -396,6 +537,38 @@ describe("generateFilterConfig", () => {
 describe("prioritizeFilterConfig", () => {
   it("returns an empty array for empty input", () => {
     expect(prioritizeFilterConfig([])).toEqual([]);
+  });
+
+  it("keeps unknown filters in their original order when compared together", () => {
+    const config = [
+      { code: "unknown-a", label: "A", type: "option" as const },
+      { code: "unknown-b", label: "B", type: "option" as const },
+      { code: "price", label: "Price", type: "range" as const },
+    ];
+
+    expect(prioritizeFilterConfig(config).map((item) => item.code)).toEqual([
+      "price",
+      "unknown-a",
+      "unknown-b",
+    ]);
+  });
+
+  it("sorts filters when a known filter is compared against an unknown filter", () => {
+    const config = [
+      { code: "unknown", label: "Unknown", type: "option" as const },
+      {
+        code: "sleeve_length",
+        label: "Sleeve Length",
+        type: "option" as const,
+      },
+      { code: "fit", label: "Fit", type: "option" as const },
+    ];
+
+    expect(prioritizeFilterConfig(config).map((item) => item.code)).toEqual([
+      "fit",
+      "sleeve_length",
+      "unknown",
+    ]);
   });
 
   it("prioritizes filters according to the configured priority order", () => {

@@ -147,16 +147,13 @@ type VerifyArityFunc = (
 ) => void;
 
 const verifyArity: VerifyArityFunc = (arity, childrenLength, node) => {
-  if (childrenLength !== arity) {
-    if (arity === "n") {
-      return;
-    }
-    if (childrenLength !== arity) {
-      throw new Error(
-        `Function node ${node.element} expects ${arity} arguments, but got ${childrenLength}`,
-      );
-    }
+  if (arity === "n" || childrenLength === arity) {
+    return;
   }
+
+  throw new Error(
+    `Function node ${node.element} expects ${arity} arguments, but got ${childrenLength}`,
+  );
 };
 
 type RenderNodeListOptTypes = {

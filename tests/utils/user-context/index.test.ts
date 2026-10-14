@@ -182,6 +182,12 @@ describe("user context", () => {
       );
     });
 
+    it("returns an empty string when userContext is undefined", () => {
+      delete window.userContext;
+
+      expect(generateUserContextMessage()).toBe("");
+    });
+
     it("includes PDP context attributes when available", () => {
       addUserContext(
         {
