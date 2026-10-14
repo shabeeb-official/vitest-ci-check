@@ -31,8 +31,12 @@ export default defineConfig({
       // Line-coverage gate, versioned here. Stair-step plan:
       // 50% -> 60% -> 70% -> 80%. Bump `lines` one step at a time.
       thresholds: {
-        lines: 40,
+        lines: 99,
+        statements: 99,
+        functions: 99,
+        branches: 99,
       },
     },
   },
 });
+
