@@ -1,0 +1,45 @@
+name: Test & Coverage Gate
+ 
+on:
+  pull_request:
+    branches: [master]
+ 
+jobs:
+  test:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+ 
+      - name: Install dependencies
+        run: npm ci
+ 
+      # Run tests and validate coverage against vitest.config.ts threshold
+      - name: Run Tests & Check Coverage Gate
+        env:
+          VITE_APP_ENV: test
+          VITE_TEST_MODE: ${{ vars.TEST_VITE_TEST_MODE || 'true' }}
+          VITE_TENANT_NAME: ${{ vars.TEST_VITE_TENANT_NAME || 'citybeach' }}
+          VITE_API_BASE_URL: ${{ vars.TEST_VITE_API_BASE_URL || 'http://localhost:3000/api' }}
+          VITE_SUPABASE_URL: ${{ vars.TEST_VITE_SUPABASE_URL || 'https://mock-test.supabase.co' }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.TEST_VITE_SUPABASE_ANON_KEY || 'mock-anon-key-test-only' }}
+        run: npm run test:ci
+ 
+      # Upload coverage artifacts (runs even if tests fail)
+      - name: Upload Coverage Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage/lcov.info
+            coverage/lcov-report/
+          if-no-files-found: warn
+          retention-days: 14

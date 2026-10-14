@@ -57,8 +57,6 @@ export function compareSizesDirect(a: string, b: string) {
     case "hybrid":
     case "special":
       return pa.value.localeCompare(pb.value);
-    default:
-      return 0;
   }
 }
 
@@ -79,7 +77,5 @@ export function compareSizes(a: string, b: string) {
     case "hybrid":
     case "special":
       return pa.value.localeCompare(pb.value);
-    default:
-      return 0;
   }
 }

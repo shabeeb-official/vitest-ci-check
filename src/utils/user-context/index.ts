@@ -61,10 +61,7 @@ const parseContext = () => {
 
       return `${context.name} by the brand ${context.brand} of the color ${context.color}`;
     });
-    if (message.length > 0) {
-      return message.join(", ");
-    }
-    return message;
+    return message.join(", ");
   }
 };
 

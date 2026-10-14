@@ -18,7 +18,6 @@ describe("Loader", () => {
     await expectAccessible(container);
   });
 });
-
 describe("ProductLoading", () => {
   it("shows a loading heading", async () => {
     const { container } = render(<ProductLoading />);
